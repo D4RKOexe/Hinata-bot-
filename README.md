@@ -82,12 +82,12 @@ termux-setup-storage
 
 3.  **Clona el Repositorio del Bot**
     ```bash
-    git clone https://github.com/AmilcarGit/Elyssia-Bot-MD.git
+    git clone https://github.com/AmilcarGit/ElyssiaBot-MD.git
     ```
 
 4.  **Accede al Directorio del Proyecto**
     ```bash
-    cd Elyssia-Bot-MD
+    cd ElyssiaBot-MD
     ```
 
 5.  **Instala las Dependencias de Node.js**
