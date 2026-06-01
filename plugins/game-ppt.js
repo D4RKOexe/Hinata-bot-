@@ -12,8 +12,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     { buttonId: `${usedPrefix}${command} tijera`, buttonText: { displayText: '✌️ Tijera' }, type: 1 }
   ]
 
-  // 🔹 Si no hay elección (solo entró al comando), mostramos botones iniciales
-  if (!user || !opciones.includes(user)) {
+  // 🔹 Si no hay elección válida, mostramos menú inicial
+  if (!opciones.includes(user)) {
     return await conn.sendMessage(m.chat, {
       text: '✨ *PIEDRA, PAPEL O TIJERA – ELYSSIA MD* ✨\n💡 Presiona un botón para jugar:',
       footer: '🎮 Elyssia MD • Modo Pro',
@@ -32,14 +32,14 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     (user === 'piedra' && bot === 'tijera') ||
     (user === 'papel' && bot === 'piedra') ||
     (user === 'tijera' && bot === 'papel')
-  ) resultado = '🏆 GANASTE'
-  else resultado = '💀 PERDISTE'
+  ) resultado = '🏆 ¡GANASTE!'
+  else resultado = '💀 ¡PERDISTE!'
 
   // 🔹 Mensaje final con botones para seguir jugando
   const mensaje = `
 ╭━━━〔 🎮 RESULTADO PPT 〕━━━⬣
-┃ 👤 Tú: ${emojis[user]} ${user}
-┃ 🤖 Bot: ${emojis[bot]} ${bot}
+┃ 👤 Tú: ${emojis[user]} ${user.toUpperCase()}
+┃ 🤖 Bot: ${emojis[bot]} ${bot.toUpperCase()}
 ┃
 ┃ 📊 ${resultado}
 ╰━━━━━━━━━━━━━━━━━━━━⬣
