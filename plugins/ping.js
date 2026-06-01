@@ -2,81 +2,113 @@ import speed from 'performance-now'
 import os from 'os'
 import process from 'process'
 
+const formatBytes = bytes => {
+  if (bytes === 0) return '0 B'
+  const k = 1024
+  const sizes = ['B', 'KB', 'MB', 'GB', 'TB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+}
+
+const runtime = seconds => {
+  seconds = Number(seconds)
+
+  const d = Math.floor(seconds / (3600 * 24))
+  const h = Math.floor(seconds % (3600 * 24) / 3600)
+  const m = Math.floor(seconds % 3600 / 60)
+  const s = Math.floor(seconds % 60)
+
+  return `${d}d ${h}h ${m}m ${s}s`
+}
+
 let handler = async (m, { conn, usedPrefix }) => {
-  let timestamp = speed()
+
+  const start = speed()
 
   await m.react('⚡')
 
-  let sentMsg = await m.reply('🤖 *Elyssia MD iniciando diagnóstico del sistema...*')
+  const msg = await m.reply('🔍 Analizando sistema Elyssia MD...')
 
-  let latency = speed() - timestamp
+  const ping = (speed() - start).toFixed(2)
 
-  // Estado según latencia
-  let estado = ''
-  let tecnica = ''
-  let emoji = ''
+  const cpus = os.cpus()
 
-  if (latency < 50) {
-    estado = '⚡ *MODO ULTRA INSTANTE*'
-    tecnica = 'Respuesta cuántica optimizada'
-    emoji = '✨'
-  } else if (latency < 150) {
-    estado = '🚀 *MODO RÁPIDO ESTABLE*'
-    tecnica = 'Procesamiento acelerado IA'
-    emoji = '💫'
-  } else if (latency < 300) {
-    estado = '🔥 *MODO NORMAL ACTIVO*'
-    tecnica = 'Ejecución estándar del sistema'
-    emoji = '🌟'
-  } else if (latency < 500) {
-    estado = '💨 *MODO LENTO ADVERTENCIA*'
-    tecnica = 'Carga alta en servidores'
-    emoji = '☁️'
-  } else {
-    estado = '🐌 *MODO CRÍTICO LENTO*'
-    tecnica = 'Sistema sobrecargado'
+  const cpuModel = cpus[0].model
+  const cpuCores = cpus.length
+  const cpuSpeed = cpus[0].speed
+
+  const totalRam = os.totalmem()
+  const freeRam = os.freemem()
+  const usedRam = totalRam - freeRam
+
+  const ramPercent = ((usedRam / totalRam) * 100).toFixed(1)
+
+  const nodeMemory = process.memoryUsage()
+
+  let estado = '🟢 Excelente'
+  let emoji = '🚀'
+
+  if (ping > 150) {
+    estado = '🟡 Estable'
+    emoji = '⚡'
+  }
+
+  if (ping > 300) {
+    estado = '🟠 Cargado'
+    emoji = '🔥'
+  }
+
+  if (ping > 500) {
+    estado = '🔴 Crítico'
     emoji = '⚠️'
   }
 
-  // Información adicional
-  const uptime = process.uptime() // en segundos
-  const hours = Math.floor(uptime / 3600)
-  const minutes = Math.floor((uptime % 3600) / 60)
-  const seconds = Math.floor(uptime % 60)
+  const txt = `
+╭━━━〔 ${emoji} ELYSSIA MD MONITOR ${emoji} 〕━━━⬣
 
-  const totalMem = os.totalmem() / 1024 / 1024 // MB
-  const usedMem = (os.totalmem() - os.freemem()) / 1024 / 1024 // MB
+⚡ *PING DEL SISTEMA*
+│ ◦ ${ping} ms
+│ ◦ Estado: ${estado}
 
-  const hostname = os.hostname()
-  const platform = os.platform() + ' ' + os.arch()
+🖥️ *SERVIDOR*
+│ ◦ Host: ${os.hostname()}
+│ ◦ OS: ${os.platform()} ${os.arch()}
+│ ◦ Kernel: ${os.release()}
 
-  const result = `
-╭━━━〔 ⚡ ELYSSIA MD SYSTEM ⚡ 〕━━━⬣
+🧠 *CPU*
+│ ◦ Modelo: ${cpuModel}
+│ ◦ Núcleos: ${cpuCores}
+│ ◦ Frecuencia: ${cpuSpeed} MHz
 
-${emoji} ${estado}
+💾 *MEMORIA RAM*
+│ ◦ Uso: ${formatBytes(usedRam)}
+│ ◦ Libre: ${formatBytes(freeRam)}
+│ ◦ Total: ${formatBytes(totalRam)}
+│ ◦ Carga: ${ramPercent}%
 
-📊 *Ping:* ${latency.toFixed(0)} ms
-🧠 *Estado:* ${tecnica}
+📦 *NODE.JS*
+│ ◦ Heap: ${formatBytes(nodeMemory.heapUsed)}
+│ ◦ RSS: ${formatBytes(nodeMemory.rss)}
 
-🖥️ *Servidor:* ${hostname} (${platform})
-⏱️ *Tiempo activo:* ${hours}h ${minutes}m ${seconds}s
-💾 *RAM usada:* ${usedMem.toFixed(0)} MB / ${totalMem.toFixed(0)} MB
-📌 *Prefijo:* ${usedPrefix}
+⏳ *UPTIME*
+│ ◦ ${runtime(process.uptime())}
 
-⬣ Bot: 🤖 Elyssia MD
-⬣ Owner: 👑 AmílcarGit
-⬣ Sistema: Online
+🤖 *BOT*
+│ ◦ Nombre: Elyssia MD
+│ ◦ Owner: AmílcarGit
+│ ◦ Prefijo: ${usedPrefix}
+│ ◦ Estado: Online
 
-╰━━━━━━━━━━━━━━━━━━⬣
+╰━━━━━━━━━━━━━━━━━━━━⬣
 `
 
   try {
     await conn.sendMessage(m.chat, {
-      text: result,
-      edit: sentMsg.key
+      text: txt,
+      edit: msg.key
     })
   } catch {
-    await m.reply(result)
+    await m.reply(txt)
   }
 
   await m.react('✅')
@@ -84,6 +116,6 @@ ${emoji} ${estado}
 
 handler.help = ['ping']
 handler.tags = ['info']
-handler.command = /^(ping|p|velocidad|speed|status)$/i
+handler.command = /^(ping|p|speed|status|velocidad)$/i
 
 export default handler
