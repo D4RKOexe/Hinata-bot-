@@ -1,5 +1,5 @@
 console.clear()
-console.log('🐉⚡ Iniciando Gohan Beast Bot - Modo Bestia Activado ⚡🐉')
+console.log('🌸⚡ ELYSSIABOT-MD - Modo Brillo Activado ⚡🌸')
 
 import { join, dirname } from 'path'
 import { createRequire } from 'module'
@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const require = createRequire(__dirname)
 
 // Banner principal épico de Gohan Bestia
-cfonts.say('🐉 GOHAN BEAST ⚡', {
+cfonts.say('🌸 ELYSSIABOT-MD ⚡', {
   font: 'block',
   align: 'center',
   gradient: ['red', 'yellow', 'blue'],
@@ -26,11 +26,11 @@ cfonts.say('🐉 GOHAN BEAST ⚡', {
 
 // Línea de poder (efecto visual)
 console.log('\x1b[36m%s\x1b[0m', '═' * 60)
-console.log('\x1b[33m%s\x1b[0m', '   ⚡ MODO BESTIA ACTIVADO - PODER MÁXIMO ⚡')
+console.log('\x1b[33m%s\x1b[0m', '   ⚡ MODO BRILLO ACTIVADO - PODER MÁXIMO ⚡')
 console.log('\x1b[36m%s\x1b[0m', '═' * 60)
 
 // Información del creador con estilo
-cfonts.say('👊 CREADO POR: WILKER OFC 👊', {
+cfonts.say('👊 CREADO POR: AMILCARGIT 👊', {
   font: 'console',
   align: 'center',
   gradient: ['cyan', 'white', 'magenta'],
@@ -38,7 +38,7 @@ cfonts.say('👊 CREADO POR: WILKER OFC 👊', {
 })
 
 // Cita épica de Gohan
-console.log('\x1b[32m%s\x1b[0m', '\n"¡Este es mi poder definitivo! ¡GOHAN BESTIA!"')
+console.log('\x1b[32m%s\x1b[0m', '\n"¡Este es mi Brillo definitivo! ¡ELYSSIABOT-MD!"')
 console.log('\x1b[36m%s\x1b[0m', '═' * 60 + '\n')
 
 let isWorking = false
@@ -52,8 +52,8 @@ async function launch(scripts) {
   for (const script of scripts) {
     const args = [join(__dirname, script), ...process.argv.slice(2)]
 
-    console.log('\x1b[35m%s\x1b[0m', `🌀 Despertando el poder Bestia - Intento #${restartCount}`)
-    console.log('\x1b[33m%s\x1b[0m', '⚡ Cargando poder de Gohan... ⚡\n')
+    console.log('\x1b[35m%s\x1b[0m', `🌀 Despertando el poder Del Brillo - Intento #${restartCount}`)
+    console.log('\x1b[33m%s\x1b[0m', '⚡ Cargando poder de Elyssia... ⚡\n')
 
     setupMaster({
       exec: args[0],
@@ -63,18 +63,18 @@ async function launch(scripts) {
     let child = fork()
 
     child.on('exit', (code) => {
-      console.log('\x1b[31m%s\x1b[0m', `\n⚠️ El poder ha disminuido temporalmente (Código: ${code})`)
+      console.log('\x1b[31m%s\x1b[0m', `\n⚠️ El brillo ha disminuido temporalmente (Código: ${code})`)
 
       if (code === 0) {
-        console.log('\x1b[32m%s\x1b[0m', '✅ Gohan Bestia se ha retirado pacíficamente')
+        console.log('\x1b[32m%s\x1b[0m', '✅ ELYSSIABOT-MD se ha retirado pacíficamente')
         return
       }
 
       isWorking = false
 
       // Efecto de transformación Bestia
-      console.log('\x1b[33m%s\x1b[0m', '🔄 Transformación Bestia reiniciándose...')
-      console.log('\x1b[36m%s\x1b[0m', '⚡ ¡El poder está despertando de nuevo! ⚡\n')
+      console.log('\x1b[33m%s\x1b[0m', '🔄 Transformación Super Brillo reiniciándose...')
+      console.log('\x1b[36m%s\x1b[0m', '⚡ ¡El Brillo está despertando de nuevo! ⚡\n')
 
       setTimeout(() => {
         launch(scripts)
@@ -82,22 +82,22 @@ async function launch(scripts) {
 
       watchFile(args[0], () => {
         unwatchFile(args[0])
-        console.log('\x1b[35m%s\x1b[0m', '🔄 ¡Poder Bestia actualizado! Reiniciando transformación...')
+        console.log('\x1b[35m%s\x1b[0m', '🔄 ¡Poder Brillo actualizado! Reiniciando transformación...')
         launch(scripts)
       })
     })
 
     child.on('message', (msg) => {
       if (msg === 'ready') {
-        console.log('\x1b[32m%s\x1b[0m', '✨ GOHAN BESTIA HA DESPERTADO ✨')
-        console.log('\x1b[33m%s\x1b[0m', '⚡ Poder máximo alcanzado ⚡\n')
+        console.log('\x1b[32m%s\x1b[0m', '✨ ELYSSIABOT-MD HA DESPERTADO ✨')
+        console.log('\x1b[33m%s\x1b[0m', '⚡ Brillo máximo alcanzado ⚡\n')
       }
     })
   }
 }
 
 // Iniciar con estilo épico
-console.log('\x1b[36m%s\x1b[0m', '🌟 Invocando a Gohan Bestia... 🌟\n')
+console.log('\x1b[36m%s\x1b[0m', '🌟 Invocando a Elyssia... 🌟\n')
 
 launch(['main.js'])
 
@@ -105,21 +105,21 @@ launch(['main.js'])
 setTimeout(() => {
   console.log('\x1b[35m%s\x1b[0m', `
 ╔════════════════════════════════════╗
-║    ¡GOHAN HA ALCANZADO EL NIVEL    ║
-║         💥 BESTIA 💥               ║
+║    ¡ELYSSIA HA ALCANZADO EL NIVEL    ║
+║         💥 BRILLO 💥               ║
 ╚════════════════════════════════════╝
   `)
 }, 2000)
 
 // Manejo de errores épico
 process.on('uncaughtException', (err) => {
-  console.log('\x1b[31m%s\x1b[0m', '💥 ¡El poder es demasiado intenso! 💥')
-  console.log('\x1b[33m%s\x1b[0m', '🔄 Gohan está controlando su poder...')
+  console.log('\x1b[31m%s\x1b[0m', '💥 ¡El Brillo es demasiado intenso! 💥')
+  console.log('\x1b[33m%s\x1b[0m', '🔄 Elyssia está controlando su brillo...')
   console.error(err)
 })
 
 process.on('unhandledRejection', (err) => {
-  console.log('\x1b[31m%s\x1b[0m', '⚡ ¡El poder Bestia está fluyendo salvajemente! ⚡')
-  console.log('\x1b[33m%s\x1b[0m', '🔄 Gohan está estabilizando su energía...')
+  console.log('\x1b[31m%s\x1b[0m', '⚡ ¡El brillo Elyssia está fluyendo salvajemente! ⚡')
+  console.log('\x1b[33m%s\x1b[0m', '🔄 Elyssia está estabilizando su brillo...')
   console.error(err)
 })
