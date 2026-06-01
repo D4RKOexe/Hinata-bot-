@@ -81,7 +81,7 @@ const handler = async (m, { conn, text }) => {
 👁️ _vistas_: ${vistas}
 ⏳ _duración_: ${durationTimestamp}
 🌐 _enlace_: ${url}
-📚 _api_ https://api-gohan.onrender.com
+📚 _api_ https://dv-yer-api.online
 
      ✧━『 _𝙴𝙻𝚈𝚂𝚂𝙸𝙰 MD_ 』━✧
     🌸 _Powered by AmilcarGit_ 🌸
@@ -123,7 +123,7 @@ const downloadMedia = async (conn, m, url, quotedMsg) => {
       { quoted: m }
     )
 
-    const apiUrl = `https://api-gohan-kz6w.onrender.com/download/ytaudio?url=${encodeURIComponent(url)}`
+    const apiUrl = `https://dv-yer-api.online/ytmp3?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ}`
     const r = await fetch(apiUrl)
 
     if (!r.ok) {
