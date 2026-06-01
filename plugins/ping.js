@@ -1,78 +1,80 @@
-const speed = require('performance-now')
-const os = require('os')
-const process = require('process')
+import speed from 'performance-now'
+import os from 'os'
+import process from 'process'
 
 let handler = async (m, { conn, usedPrefix }) => {
-  const start = speed()
+  let timestamp = speed()
 
   await m.react('⚡')
 
-  let sentMsg = await m.reply('🌸 *Elyssia MD* analizando sistema...')
+  let sentMsg = await m.reply('🤖 *Elyssia MD iniciando diagnóstico del sistema...*')
 
-  const latency = speed() - start
+  let latency = speed() - timestamp
 
-  // 🌸 Estado visual mejorado
-  let status = ''
-  let desc = ''
+  // Estado según latencia
+  let estado = ''
+  let tecnica = ''
   let emoji = ''
 
-  if (latency < 60) {
-    status = '⚡ ULTRA FLUIDO'
-    desc = 'Respuesta cuántica optimizada'
+  if (latency < 50) {
+    estado = '⚡ *MODO ULTRA INSTANTE*'
+    tecnica = 'Respuesta cuántica optimizada'
     emoji = '✨'
   } else if (latency < 150) {
-    status = '🚀 RÁPIDO Y ESTABLE'
-    desc = 'Procesamiento eficiente activo'
+    estado = '🚀 *MODO RÁPIDO ESTABLE*'
+    tecnica = 'Procesamiento acelerado IA'
     emoji = '💫'
   } else if (latency < 300) {
-    status = '🔥 NORMAL'
-    desc = 'Ejecución estándar del sistema'
+    estado = '🔥 *MODO NORMAL ACTIVO*'
+    tecnica = 'Ejecución estándar del sistema'
     emoji = '🌟'
   } else if (latency < 500) {
-    status = '💨 CARGA ALTA'
-    desc = 'Rendimiento afectado temporalmente'
+    estado = '💨 *MODO LENTO ADVERTENCIA*'
+    tecnica = 'Carga alta en servidores'
     emoji = '☁️'
   } else {
-    status = '🐌 CRÍTICO'
-    desc = 'Sistema saturado o inestable'
+    estado = '🐌 *MODO CRÍTICO LENTO*'
+    tecnica = 'Sistema sobrecargado'
     emoji = '⚠️'
   }
 
-  // ⏱ Uptime bonito
-  const uptime = process.uptime()
-  const h = Math.floor(uptime / 3600)
-  const m = Math.floor((uptime % 3600) / 60)
-  const s = Math.floor(uptime % 60)
+  // Información adicional
+  const uptime = process.uptime() // en segundos
+  const hours = Math.floor(uptime / 3600)
+  const minutes = Math.floor((uptime % 3600) / 60)
+  const seconds = Math.floor(uptime % 60)
 
-  // 💾 RAM real mejor calculada
-  const totalMem = os.totalmem() / 1024 / 1024
-  const freeMem = os.freemem() / 1024 / 1024
-  const usedMem = totalMem - freeMem
+  const totalMem = os.totalmem() / 1024 / 1024 // MB
+  const usedMem = (os.totalmem() - os.freemem()) / 1024 / 1024 // MB
 
   const hostname = os.hostname()
-  const platform = `${os.platform()} ${os.arch()}`
+  const platform = os.platform() + ' ' + os.arch()
 
   const result = `
-╭━━━〔 🌸 ELYSSIA MD - SYSTEM PRO 〕━━━⬣
+╭━━━〔 ⚡ ELYSSIA MD SYSTEM ⚡ 〕━━━⬣
 
-${emoji} *Estado:* ${status}
-🧠 *Descripción:* ${desc}
+${emoji} ${estado}
 
-📡 *Ping:* ${latency.toFixed(0)} ms
-⏱️ *Uptime:* ${h}h ${m}m ${s}s
+📊 *Ping:* ${latency.toFixed(0)} ms
+🧠 *Estado:* ${tecnica}
 
-🖥️ *Servidor:* ${hostname}
-💻 *Plataforma:* ${platform}
+🖥️ *Servidor:* ${hostname} (${platform})
+⏱️ *Tiempo activo:* ${hours}h ${minutes}m ${seconds}s
+💾 *RAM usada:* ${usedMem.toFixed(0)} MB / ${totalMem.toFixed(0)} MB
+📌 *Prefijo:* ${usedPrefix}
 
-💾 *RAM:* ${usedMem.toFixed(0)}MB / ${totalMem.toFixed(0)}MB
-⚙️ *Prefijo:* ${usedPrefix}
+⬣ Bot: 🤖 Elyssia MD
+⬣ Owner: 👑 AmílcarGit
+⬣ Sistema: Online
 
-╰━━━━━━━━━━━━━━━━━━━━━━⬣
-🌸 *Elyssia MD Bot • Online & Stable*
+╰━━━━━━━━━━━━━━━━━━⬣
 `
 
   try {
-    await conn.sendMessage(m.chat, { text: result, edit: sentMsg.key })
+    await conn.sendMessage(m.chat, {
+      text: result,
+      edit: sentMsg.key
+    })
   } catch {
     await m.reply(result)
   }
@@ -82,6 +84,6 @@ ${emoji} *Estado:* ${status}
 
 handler.help = ['ping']
 handler.tags = ['info']
-handler.command = /^(ping|p|speed|status|velocidad)$/i
+handler.command = /^(ping|p|velocidad|speed|status)$/i
 
-module.exports = handler
+export default handler
