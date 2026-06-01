@@ -100,5 +100,26 @@ termux-setup-storage
     npm start
     ```
 
-----
+---
 
+# EDITOR DESARROLLADOR Y PROPIETARIO DEL BOT
+
+<p align="center">
+  <img src="URL_DE_LA_IMAGEN" width="250">
+</p>
+
+<p align="center">
+  <a href="https://github.com/AmilcarGit">
+    @AmilcarGit
+  </a>
+</p>
+
+---
+
+# AGRADECIMIENTOS & COLABORADORES
+
+- Gracias a todos los colaboradores del proyecto.
+- Gracias a la comunidad por el apoyo.
+- Gracias a quienes reportan errores y aportan ideas.
+
+---
