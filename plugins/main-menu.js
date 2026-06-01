@@ -36,18 +36,18 @@ const defaultMenu = {
 ║ 🕐 Hora Perú: %time
 ║ ⏱️ Activo: %uptime
 ╠══════════════════╣
-║ 🌀 COMANDOS 𝙴𝙻𝚈𝚂𝚂𝙸𝙰
+║ 👑 COMANDOS 𝙴𝙻𝚈𝚂𝚂𝙸𝙰 MD
 %readmore
 `.trimStart(),
 
   header: '\n╠═ %category ═╣\n',
-  body: '║ 🌀 %cmd %islimit %isPremium',
+  body: '║ 👑 %cmd %islimit %isPremium',
   footer: '',
   after: `
 ╠════════════════╣
 ║👑 * 𝙴𝙻𝚈𝚂𝚂𝙸𝙰 𝙼𝙳 *
 ║⚡ Creado por AmilcarGit~ (◕‿◕✿)
-║🌀 Base: asistente Virtual
+║🌸 Base: asistente Virtual
 ║💫 Domina el chat con poder Saiyan!
 ╚════════════════╝
 
