@@ -9,21 +9,22 @@ const handler = async (m, { conn, text }) => {
   await m.react('🎥')
 
   try {
-    // Buscar los primeros 4 videos
     const search = await yts(text)
     if (!search.videos.length) return m.reply('❌ No encontré resultados.')
 
     const results = search.videos.slice(0, 4)
 
-    // Preparar el mensaje con botones
-    let txt = `╭━━〔 🎬 PLAY2 SEARCH 🎬 〕━━⬣\n\nSelecciona un resultado para descargar:\n\n`
+    let txt = `╭━━〔 🎬 PLAY2 SEARCH 〕━━⬣\n\n`
+    txt += `Selecciona un video para descargar:\n\n`
+
     for (let i = 0; i < results.length; i++) {
       txt += `${i + 1}. ${results[i].title}\n`
     }
-    txt += '\n🌸 ElyssiaMD 🌸'
+
+    txt += `\n🌸 ElyssiaMD 🌸`
 
     const buttons = results.map((v, i) => ({
-      buttonId: `.ytmp4 ${v.url}`,
+      buttonId: `.play2dl ${encodeURIComponent(v.url)}`,
       buttonText: { displayText: `🎥 Video ${i + 1}` },
       type: 1
     }))
@@ -41,30 +42,52 @@ const handler = async (m, { conn, text }) => {
 
   } catch (e) {
     console.error(e)
-    await m.react('❌')
-    m.reply(`Error:\n${e.message}`)
+    m.reply('❌ Error en la búsqueda')
   }
 }
 
-// Función de descarga MP4 reutilizando tu API Key
-export const downloadYtMp4 = async (url, conn, m) => {
+// 🔥 DESCARGA REAL DEL VIDEO
+export const play2dl = async (m, { conn, text }) => {
+  if (!text) return m.reply('❌ URL inválida')
+
+  await m.react('⏳')
+
   try {
-    const msg = await conn.sendMessage(
+    const url = decodeURIComponent(text)
+
+    const wait = await conn.sendMessage(
       m.chat,
       { text: '⏳ Descargando video...' },
       { quoted: m }
     )
 
-    const apiUrl = `https://dv-yer-api.online/ytmp4?url=${encodeURIComponent(url)}&apikey=${API_KEY}`
+    const apiUrl =
+      `https://dv-yer-api.online/ytmp4?url=${encodeURIComponent(url)}&apikey=${API_KEY}`
 
     const res = await fetch(apiUrl)
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+
+    if (!res.ok) {
+      return m.reply(`❌ Error HTTP ${res.status}`)
+    }
 
     const data = await res.json()
-    const videoUrl = data.download || data.url || data.result?.download || data.result?.url || data.result?.download_url
-    if (!videoUrl) throw new Error('No se encontró el enlace del video.')
 
-    const title = (data.title || data.result?.title || 'video').replace(/[^\w\s.-]/g, '').substring(0, 60)
+    const videoUrl =
+      data.download ||
+      data.url ||
+      data.result?.download ||
+      data.result?.url ||
+      data.result?.download_url
+
+    if (!videoUrl) {
+      return m.reply('❌ No se encontró el video en la API')
+    }
+
+    const title = cleanName(
+      data.title ||
+      data.result?.title ||
+      'video'
+    )
 
     await conn.sendMessage(
       m.chat,
@@ -78,26 +101,30 @@ export const downloadYtMp4 = async (url, conn, m) => {
 
     await conn.sendMessage(
       m.chat,
-      { text: `✅ Video enviado\n🎬 ${title}`, edit: msg.key }
+      {
+        text: `✅ Video enviado\n\n🎬 ${title}`,
+        edit: wait.key
+      }
     )
 
     await m.react('✅')
+
   } catch (e) {
     console.error(e)
-    await m.react('❌')
-    m.reply(`Error:\n${e.message}`)
+    m.reply('❌ Error: ' + e.message)
+    await m.react('💀')
   }
 }
 
-// Función auxiliar para extraer ID de YouTube
-function getVideoId(url) {
-  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/)
-  return match ? match[1] : null
+// 🧼 LIMPIAR NOMBRE
+function cleanName(text) {
+  return String(text)
+    .replace(/[^\w\s.-]/g, '')
+    .substring(0, 60)
 }
 
-// Configuración del handler
-handler.command = ['play2', 'ytmp4', 'playvideo']
-handler.help = ['play2 <texto|url>']
+handler.command = ['play2']
 handler.tags = ['descargas']
+handler.help = ['play2 <texto|url>']
 
 export default handler
