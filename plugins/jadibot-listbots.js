@@ -8,9 +8,10 @@ let handler = async (m, { conn }) => {
   const now = Date.now()
 
   for (const connSub of global.conns) {
-    if (connSub.user && connSub.ws?.socket?.readyState !== ws.CLOSED) {
+    if (connSub.user && connSub.ws?.readyState !== ws.CLOSED) {
       const jid = connSub.user.jid
       const numero = jid?.split('@')[0]
+
       let nombre = connSub.user.name
       if (!nombre && typeof conn.getName === 'function') {
         try {
@@ -19,38 +20,52 @@ let handler = async (m, { conn }) => {
           nombre = `Usuario ${numero}`
         }
       }
-      const connectedAt = connSub.connectedAt || now // guarda la hora de conexión
+
+      const connectedAt = connSub.connectedAt || now
       const uptimeSub = clockString(now - connectedAt)
-      uniqueUsers.set(jid, { nombre: nombre || `Usuario ${numero}`, uptime: uptimeSub, numero })
+
+      const fechaConexion = connSub.connectedAt
+        ? new Date(connSub.connectedAt).toLocaleString('es-PE')
+        : 'Desconocida'
+
+      uniqueUsers.set(jid, {
+        nombre: nombre || `Usuario ${numero}`,
+        uptime: uptimeSub,
+        numero,
+        fechaConexion
+      })
     }
   }
 
   const uptimeTotal = clockString(process.uptime() * 1000)
   const totalUsers = uniqueUsers.size
 
-  let txt = `🌸 *SUBS 𝙴𝙻𝚈𝚂𝚂𝙸𝙰 ACTIVOS* 🌸\n\n`
-  txt += `🫣 *Tiempo Activo del Bot:* ${uptimeTotal}\n`
-  txt += `🌸 *Total Conectados:* ${totalUsers}\n`
+  let txt = `🌸 SUBBOTS ELYSSIA ACTIVOS 🌸\n\n`
+  txt += `🤖 Tiempo Activo del Bot: ${uptimeTotal}\n`
+  txt += `🌸 Total Conectados: ${totalUsers}\n`
 
   if (totalUsers > 0) {
-    txt += `\n📋 *LISTA DE SUBS Elyssia MD*\n\n`
+    txt += `\n📋 LISTA DE SUBBOTS\n\n`
+
     let i = 1
-    for (const [jid, { nombre, uptime, numero }] of uniqueUsers) {
-      txt += `🌸 *${i++}.* ${nombre}\n`
-      txt += `⏱️ Conectado: ${uptime}\n`
+    for (const [jid, { nombre, uptime, numero, fechaConexion }] of uniqueUsers) {
+      txt += `🌸 ${i++}. ${nombre}\n`
+      txt += `⏱️ Tiempo activo: ${uptime}\n`
+      txt += `📅 Conectado desde: ${fechaConexion}\n`
       txt += `👑 https://wa.me/${numero}\n\n`
     }
   } else {
-    txt += `\n🌸 *No hay subbots conectados actualmente.*`
+    txt += `\n🌸 No hay subbots conectados actualmente.`
   }
 
-  await conn.reply(m.chat, txt.trim(), m, global.rcanal)
+  await conn.reply(m.chat, txt.trim(), m)
 }
 
 handler.command = ['listjadibot', 'bots']
 handler.help = ['bots']
 handler.tags = ['jadibot']
 handler.register = false
+
 export default handler
 
 function clockString(ms) {
@@ -58,5 +73,6 @@ function clockString(ms) {
   const h = Math.floor(ms / 3600000) % 24
   const m = Math.floor(ms / 60000) % 60
   const s = Math.floor(ms / 1000) % 60
+
   return `${d}d ${h}h ${m}m ${s}s`
 }
