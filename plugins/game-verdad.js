@@ -1,108 +1,71 @@
 import { generateWAMessageFromContent, proto } from '@whiskeysockets/baileys'
 
+let partidas = {}
+
+let verdadesPicantes = [
+    { pregunta: "¿Alguna vez has besado a alguien del mismo sexo?", castigo: "Envía un emoji que represente ese beso 😘" },
+    { pregunta: "¿Has enviado fotos atrevidas a alguien?", castigo: "Cuenta brevemente la historia (sin nombres reales)" },
+    { pregunta: "¿Te han pillado mirando a alguien prohibido?", castigo: "Envía un sticker que represente vergüenza 😳" },
+    { pregunta: "¿Cuál es tu mayor fantasía secreta?", castigo: "Mímala con emojis sin palabras 🔥🍑" },
+    { pregunta: "¿Has fingido un beso o abrazo?", castigo: "Imita ese gesto en tu selfie y mándala" },
+    { pregunta: "¿Has tenido un crush prohibido?", castigo: "Describe con emojis cómo lo ves 😏💌" },
+    { pregunta: "¿Alguna vez has hecho algo travieso en público?", castigo: "Cuenta la anécdota usando solo 3 emojis 🤫" },
+    { pregunta: "¿Has enviado mensajes subidos de tono?", castigo: "Envía solo el emoji que resumiría el mensaje 😈" },
+    { pregunta: "¿Cuál ha sido tu beso más atrevido?", castigo: "Imita la expresión con sticker o GIF 😘💋" },
+    { pregunta: "¿Has coqueteado con alguien sabiendo que era prohibido?", castigo: "Envía un emoji culpable 😅" }
+]
+
 let handler = async (m, { conn }) => {
+    // Elegir pregunta aleatoria
+    const seleccion = verdadesPicantes[Math.floor(Math.random() * verdadesPicantes.length)]
+    const pregunta = seleccion.pregunta
+    const castigo = seleccion.castigo
 
-    const verdades = [
-        "¿Qué es lo más vergonzoso que has hecho?",
-        "¿A quién le tienes más celos?",
-        "¿Cuál es tu mayor secreto?",
-        "¿Has mentido hoy?",
-        "¿Te has enamorado de alguien imposible?",
-        "¿Qué es lo que más miedo te da?",
-        "¿A quién extrañas en secreto?",
-        "¿Cuál ha sido tu peor decisión?",
-"¿Qué es lo más vergonzoso que has hecho en público?",
-"¿A quién stalkeas en secreto?",
-"¿Cuál es tu mayor mentira?",
-"¿Has llorado por alguien que no lo merecía?",
-"¿Qué es lo que más te da inseguridad?",
-"¿A quién extrañas pero no lo dices?",
-"¿Has fingido estar bien cuando no lo estabas?",
-"¿Qué harías si nadie pudiera juzgarte?",
-"¿Cuál es tu mayor arrepentimiento?",
-"¿Te has enamorado de alguien imposible?",
-"¿Qué secreto nunca le contarías a tus amigos?",
-"¿A quién le tienes envidia aunque no lo admitas?",
-"¿Has hablado mal de alguien que quieres?",
-"¿Qué es lo más tóxico que has hecho por amor?",
-"¿Qué es lo peor que te han hecho y aún recuerdas?",
-"¿Has mentido para evitar problemas?",
-"¿Cuál ha sido tu peor decisión en la vida?",
-"¿Qué es lo que más miedo te da perder?",
-"¿Te has ilusionado con alguien que no sentía lo mismo?",
-"¿Qué parte de ti ocultas a los demás?",
-"¿Has fingido querer a alguien?",
-"¿Cuál es tu secreto más oscuro?",
-"¿Qué harías si desaparecieras un día entero?",
-"¿Has revisado el celular de alguien sin permiso?",
-"¿A quién no puedes olvidar?",
-"¿Qué es lo que más te duele recordar?",
-"¿Has sido egoísta con alguien que te quería?",
-"¿Qué es lo que nunca perdonarías?",
-"¿Te has sentido reemplazable alguna vez?",
-"¿Qué es lo que más te avergüenza de ti?",
-"¿Has sentido que no eres suficiente?",
-"¿Qué persona te marcó para siempre?",
-"¿Qué es lo que nunca dirías en voz alta?",
-"¿Has amado en silencio?",
-"¿Qué es lo que más te rompe por dentro?",
-"¿A quién volverías si pudieras?"
-    ]
+    // Guardar partida activa del usuario
+    partidas[m.sender] = { activo: true, castigo }
 
-    const random = verdades[Math.floor(Math.random() * verdades.length)]
-
+    // Crear mensaje interactivo con botones
     const interactiveMessage = proto.Message.InteractiveMessage.create({
-        header: {
-            title: '🌸 ELYSSIA MD - 🎮 VERDAD',
-            subtitle: 'Juego de sinceridad',
-            hasMediaAttachment: false
-        },
-        body: {
-            text: `> 🌸 *VERDAD ACTIVADO* ⸜(｡˃ ᵕ ˂ )⸝♡
-
-❖ *PREGUNTA ::*
-${random}
-
-❖ Responde con sinceridad...`
-        },
-        footer: {
-            text: '⫏⫏ ELYSSIA MD 🌸'
-        },
+        header: { title: '🌸 ELYSSIA MD - 🎮 VERDAD', subtitle: 'Juego de sinceridad', hasMediaAttachment: false },
+        body: { text: `> 🌸 *VERDAD PICANTE* ⸜(｡˃ ᵕ ˂ )⸝♡\n\n❖ Pregunta:\n${pregunta}\n\n❖ Castigo:\n${castigo}\n\n> Responde directamente en el chat o toca un botón:` },
+        footer: { text: '⫏⫏ ELYSSIA MD 🌸' },
         nativeFlowMessage: {
             buttons: [
-                {
-                    name: 'quick_reply',
-                    buttonParamsJson: JSON.stringify({
-                        display_text: '🎲 OTRA VERDAD',
-                        id: 'verdad_nueva'
-                    })
-                },
-                {
-                    name: 'quick_reply',
-                    buttonParamsJson: JSON.stringify({
-                        display_text: '💀 RETO',
-                        id: 'reto_random'
-                    })
-                }
+                { name: 'quick_reply', buttonParamsJson: JSON.stringify({ display_text: '🎲 OTRA VERDAD', id: 'verdad_nueva' }) },
+                { name: 'quick_reply', buttonParamsJson: JSON.stringify({ display_text: '💀 RETO', id: 'reto_random' }) }
             ]
         }
     })
 
     const msg = generateWAMessageFromContent(
         m.chat,
-        {
-            viewOnceMessage: {
-                message: {
-                    messageContextInfo: {},
-                    interactiveMessage
-                }
-            }
-        },
+        { viewOnceMessage: { message: { messageContextInfo: {}, interactiveMessage } } },
         { quoted: m }
     )
 
     await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id })
     await m.react('🌸')
+}
+
+handler.before = async (m, { conn }) => {
+    if (!m.sender) return false
+
+    const partida = partidas[m.sender]
+    if (!partida || !partida.activo) return false
+
+    // Usuario respondió en chat normal
+    const resp = m.text.trim()
+
+    // Confirmar si cumplió el castigo (simplemente comparar emoji incluido)
+    if (resp.includes(partida.castigo.split(' ')[0])) {
+        delete partidas[m.sender]
+        await conn.sendMessage(m.chat, { text: `🌸 *ELYSSIA* 🌸\n\n✔ ¡Cumpliste el castigo correctamente!\n💫 Interesante... 😏` }, { quoted: m })
+        await m.react('🌸')
+    } else {
+        await conn.sendMessage(m.chat, { text: `🌸 *ELYSSIA* 🌸\n\n❌ No era eso...\n💀 El castigo era: ${partida.castigo}` }, { quoted: m })
+    }
+
+    return true
 }
 
 handler.help = ['verdad']
