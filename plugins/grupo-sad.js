@@ -1,44 +1,44 @@
-//--> Hecho por Ado-rgb (github.com/Ado-rgb) MODIFICADO MODO GO-HAN BEAST
+//--> Hecho por Ado-rgb (github.com/Ado-rgb) MODIFICADO MODO ELYSSIABOT-MD 
 // •|• No quites créditos..
 
-// 🐉 Configuración Modo Gohan Beast para SAD
-const BEAST_MODE = true
+// 🌸 Configuración Modo ELYSSIA
+const ELYSSIA_MODE = true
+
 const colors = {
-  red: '\x1b[31m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  blue: '\x1b[34m',
+  pink: '\x1b[95m',
   magenta: '\x1b[35m',
   cyan: '\x1b[36m',
   white: '\x1b[37m',
+  yellow: '\x1b[33m',
+  green: '\x1b[32m',
+  red: '\x1b[31m',
   reset: '\x1b[0m'
 }
 
-// 🐉 Logo Gohan Beast
-const beastLogo = `
+// 🌸 Logo ELYSSIA
+const elyssiaLogo = `
 ${colors.magenta}╔════════════════════════════════════╗
-${colors.magenta}║    🐉 ${colors.cyan}GO-HAN BEAST MODE${colors.magenta} 🐉     ║
-${colors.magenta}║    ${colors.blue}SAD SYSTEM ${colors.yellow}v1.0${colors.magenta}            ║
+${colors.magenta}║      🌸 ${colors.cyan}ELYSSIA SYSTEM${colors.magenta} 🌸      ║
+${colors.magenta}║        ${colors.yellow}EMOTIONAL MODE${colors.magenta}         ║
 ${colors.magenta}╚════════════════════════════════════╝${colors.reset}
 `
 
-// 🐉 Función de log
-function beastLog(message, type = 'info') {
-  if (!BEAST_MODE) return
+// 🌸 Función de log
+function elyssiaLog(message, type = 'info') {
+  if (!ELYSSIA_MODE) return
 
   const icons = {
-    info: `${colors.blue}🔵${colors.reset}`,
-    success: `${colors.green}🟢${colors.reset}`,
-    warning: `${colors.yellow}🟡${colors.reset}`,
-    error: `${colors.red}🔴${colors.reset}`,
-    beast: `${colors.magenta}🐉${colors.reset}`,
-    sad: `${colors.cyan}😢${colors.reset}`
+    info: '🌸',
+    success: '✨',
+    warning: '🌙',
+    error: '💔',
+    sad: '🥀'
   }
 
-  console.log(`${icons[type]} ${colors.cyan}[BEAST-SAD]${colors.reset} ${message}`)
+  console.log(`${icons[type]} [ELYSSIA] ${message}`)
 }
 
-// 🐉 Tus imágenes SAD
+// 🌸 Tus imágenes ELYSSIA SAD
 const sadImages = [
   'https://h.uguu.se/KtHwZdCl.jpeg',
   'https://d.uguu.se/OCgyMbmK.jpeg',
@@ -49,151 +49,95 @@ const sadImages = [
   'https://n.uguu.se/tgTMBdmt.jpeg'
 ]
 
-// 🐉 Mensajes tristes estilo Gohan Beast (cortos y variados)
+// 🌸 Mensajes tristes estilo ELYSSIA
 const sadMessages = [
-  `🌧️ *MOMENTO DE TRISTEZA* 🌧️
+`🥀 *MODO TRISTEZA ACTIVADO* 🥀
 
-*{user}* está pasando por un momento difícil...
+*{user}* se siente diferente hoy...
 
-💫 *"Hasta los guerreros más fuertes lloran"*
+🌸 *ELYSSIA dice:*
+_"Las flores también se marchitan para volver a florecer."_
 
-🐉 *El dolor de hoy, será la fuerza de mañana*`,
+✨ Todo pasará.`,
 
-  `💔 *CORAZÓN ROTO* 💔
+`🌧️ *LLUVIA EN EL CORAZÓN* 🌧️
 
-*{user}* necesita un abrazo...
+*{user}* está atravesando un momento difícil...
 
-🌟 *Recuerda: después de la tormenta, sale el sol*
+🌙 *ELYSSIA susurra:*
+_"No todas las noches duran para siempre."_
 
-🥀 *No estás solo en esta batalla*`,
+💫 Mañana será mejor.`,
 
-  `😢 *LÁGRIMAS DE GUERRERO* 😢
+`💔 *CORAZÓN CANSADO* 💔
 
-*{user}* está triste...
+*{user}* necesita un respiro...
 
-⚡ *El verdadero poder nace del sufrimiento*
+🌸 *ELYSSIA recuerda:*
+_"Está bien descansar cuando el alma pesa."_
 
-🌱 *Todo dolor tiene un propósito*`,
+✨ Sigue adelante.`,
 
-  `🌑 *NOCHE OSCURA DEL ALMA* 🌑
+`🕯️ *LUZ ENTRE LA OSCURIDAD* 🕯️
 
-*{user}* se siente decaído...
+*{user}* está luchando en silencio...
 
-🔥 *Un guerrero no se rinde, se levanta*
+🌺 *ELYSSIA dice:*
+_"Incluso la llama más pequeña puede iluminar la noche."_
 
-✨ *Esto también pasará*`,
-
-  `💧 *GOTAS DE TRISTEZA* 💧
-
-*{user}* no está bien hoy...
-
-🛡️ *Hasta Gohan tuvo sus momentos difíciles*
-
-🌈 *Mañana será un nuevo día*`,
-
-  `🍂 *HOJAS QUE CAEN* 🍂
-
-*{user}* está melancólico...
-
-🌄 *Los guerreros también descansan y sanan*
-
-💪 *Levántate, aún hay batallas por pelear*`,
-
-  `🎭 *MÁSCARA DE FELICIDAD* 🎭
-
-*{user}* oculta su dolor...
-
-🎯 *Está bien no estar bien siempre*
-
-🌞 *Busca apoyo en tus amigos*`,
-
-  `🌊 *MAR DE LÁGRIMAS* 🌊
-
-*{user}* está navegando en aguas turbulentas...
-
-⚓ *Mantén el rumbo, guerrero*
-
-🌟 *Tu fuerza interior te guiará*`,
-
-  `🕯️ *LUZ TENUE* 🕯️
-
-*{user}* siente que todo está oscuro...
-
-💫 *Incluso la luz más pequeña brilla en la oscuridad*
-
-🐉 *Tu poder interior despertará*`,
-
-  `🍃 *VIENTO DE TRISTEZA* 🍃
-
-*{user}* está siendo llevado por el dolor...
-
-🌋 *Del magma nace la roca más fuerte*
-
-⚔️ *Levántate y lucha*`
+💫 No te rindas.`
 ]
 
-// 🐉 Función para obtener imagen aleatoria
+// 🌸 Función para obtener imagen aleatoria
 function getRandomSadImage() {
   return sadImages[Math.floor(Math.random() * sadImages.length)]
 }
 
-// 🐉 Función para obtener mensaje aleatorio
+// 🌸 Función para obtener mensaje aleatorio
 function getRandomSadMessage(userTag) {
   const randomMsg = sadMessages[Math.floor(Math.random() * sadMessages.length)]
   return randomMsg.replace(/{user}/g, userTag)
 }
 
-// �️ Handler principal del comando .sad
+// 🌸 Handler principal del comando .sad
 const handler = async (m, { conn, args, command }) => {
   try {
-    // Verificar si se menciona a alguien
     let userToSad = m.sender
     let mentionedUser = null
 
-    // Si hay menciones en el mensaje
     if (m.mentionedJid && m.mentionedJid.length > 0) {
       mentionedUser = m.mentionedJid[0]
-    } 
-    // Si hay quoted message (responde a un mensaje)
-    else if (m.quoted && m.quoted.sender) {
+    } else if (m.quoted && m.quoted.sender) {
       mentionedUser = m.quoted.sender
-    }
-    // Si hay argumentos (número)
-    else if (args[0]) {
+    } else if (args[0]) {
       let number = args[0].replace(/[^0-9]/g, '') + '@s.whatsapp.net'
       mentionedUser = number
     }
 
-    // Si se mencionó a alguien, usar ese usuario
     if (mentionedUser) {
       userToSad = mentionedUser
     }
 
     const userTag = `@${userToSad.split('@')[0]}`
-    
-    // Obtener imagen y mensaje aleatorio
     const sadImage = getRandomSadImage()
     const sadMessage = getRandomSadMessage(userTag)
 
-    // Log en consola con estilo
-    if (BEAST_MODE) {
-      console.log(beastLogo)
-      beastLog(`Usuario solicitó .sad: @${m.sender.split('@')[0]}`, 'info')
-      if (mentionedUser) {
-        beastLog(`Mencionando a: ${userTag}`, 'warning')
-      }
-      beastLog(`Usando imagen SAD #${sadImages.indexOf(sadImage) + 1}`, 'sad')
+    // Logs en consola
+    if (ELYSSIA_MODE) {
+      console.log(elyssiaLogo)
+      elyssiaLog(`Comando .sad ejecutado por: @${m.sender.split('@')[0]}`, 'info')
+      if (mentionedUser) elyssiaLog(`Mencionando a: ${userTag}`, 'warning')
+      elyssiaLog(`Imagen SAD #${sadImages.indexOf(sadImage) + 1} seleccionada`, 'sad')
     }
 
     // Animación de "cargando" en consola
-    if (BEAST_MODE) {
+    if (ELYSSIA_MODE) {
       const sadAnim = [
-        "😢 Cargando tristeza...",
+        "🥀 Cargando tristeza...",
         "💧 Preparando lágrimas...",
         "🌧️ Activando modo melancólico...",
         "🕯️ Enviando mensaje emotivo..."
       ]
-      
       for (let i = 0; i < sadAnim.length; i++) {
         process.stdout.write(`\r${colors.cyan}${sadAnim[i]}${colors.reset}`)
         await new Promise(resolve => setTimeout(resolve, 200))
@@ -208,7 +152,7 @@ const handler = async (m, { conn, args, command }) => {
       mentions: [userToSad],
       contextInfo: {
         externalAdReply: {
-          title: `😢 MODO SAD - GOHAN BEAST`,
+          title: `🥀 ELYSSIA SAD MODE`,
           body: `Para ${userTag}`,
           thumbnail: await conn.getFile(sadImage).catch(() => null),
           mediaType: 1,
@@ -220,35 +164,32 @@ const handler = async (m, { conn, args, command }) => {
     // Reacción al mensaje original
     try {
       await conn.sendMessage(m.chat, {
-        react: {
-          text: '😢',
-          key: m.key
-        }
+        react: { text: '🥀', key: m.key }
       })
     } catch (e) {}
 
-    beastLog(`Mensaje sad enviado exitosamente`, 'success')
+    elyssiaLog(`Mensaje sad enviado exitosamente`, 'success')
 
   } catch (error) {
-    beastLog(`Error: ${error.message}`, 'error')
+    elyssiaLog(`Error: ${error.message}`, 'error')
     m.reply(`❌ *ERROR EN MODO SAD*
 
-${colors.red}Ocurrió un error al enviar el mensaje.${colors.reset}
+Ocurrió un error al enviar el mensaje.
 
 Intenta de nuevo más tarde.`)
   }
 }
 
-// 🐉 Configuración del handler
+// 🌸 Configuración del handler
 handler.command = ['sad', 'triste', 'melancolico', 'depre']
-handler.tags = ['beast', 'efectos']
+handler.tags = ['elyssia', 'efectos']
 handler.help = [
   '.sad - Expresa tu tristeza',
   '.sad @usuario - Hacer sad a alguien',
   '.sad (respondiendo a mensaje) - Hacer sad a quien respondiste'
 ]
 
-// 🐉 Descripción para el menú
-handler.description = '😢 *MODO SAD* - Expresa tu tristeza con estilo Gohan Beast'
+// 🌸 Descripción para el menú
+handler.description = '🥀 *ELYSSIA SAD MODE* - Expresa tu tristeza con estilo ELYSSIA'
 
 export default handler
