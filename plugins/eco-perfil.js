@@ -1,47 +1,74 @@
 const handler = async (m, { conn }) => {
+
+  // Crear estructura si no existe
+  global.db = global.db || { data: { users: {} } }
+  global.db.data.users = global.db.data.users || {}
+
+  // Crear usuario automáticamente
+  if (!global.db.data.users[m.sender]) {
+    global.db.data.users[m.sender] = {
+      level: 1,
+      exp: 0,
+      money: 500,
+      gems: 0,
+      piedra: 0,
+      hierro: 0,
+      plata: 0,
+      oro: 0,
+      diamante: 0,
+      registrado: Date.now()
+    }
+  }
+
   let user = global.db.data.users[m.sender]
 
-  // Asegúrate que existan los datos
-  user.money = user.money || 0
-  user.exp = user.exp || 0
-  user.level = user.level || 1
-  user.piedra = user.piedra || 0
-  user.hierro = user.hierro || 0
-  user.plata = user.plata || 0
-  user.oro = user.oro || 0
-  user.diamante = user.diamante || 0
+  let nombre = await conn.getName(m.sender)
 
-  // Calcula el progreso de nivel (simple)
-  let expParaNivel = user.level * 500
-  let progreso = Math.floor((user.exp / expParaNivel) * 10)
-  let barra = '█'.repeat(progreso) + '░'.repeat(10 - progreso)
+  let perfil = `
+╭━━━〔 🌸 PERFIL ELYSSIA 🌸 〕━━━⬣
 
-  // Mensaje estilo Elyssia 🌸
-  let texto = `
-🌸 *PERFIL DE MINERA* 🌸
+👤 Nombre
+│ ${nombre}
 
-👤 Nombre: @${m.sender.split('@')[0]}
-🌷 Nivel: ${user.level}
-✨ Experiencia: ${user.exp} / ${expParaNivel}
-📊 Progreso: [${barra}]
+🌷 Estadísticas
+│ ⭐ Nivel: ${user.level}
+│ ✨ XP: ${user.exp}
+│ 💰 Coins: ${user.money}
+│ 💎 Gems: ${user.gems}
 
-💰 Coins: ${user.money}
-⛏️ Minerales:
-  🪨 Piedra: ${user.piedra}
-  ⛓️ Hierro: ${user.hierro}
-  🥈 Plata: ${user.plata}
-  🥇 Oro: ${user.oro}
-  💎 Diamante: ${user.diamante}
+⛏️ Minería
+│ 🪨 Piedra: ${user.piedra}
+│ ⛓️ Hierro: ${user.hierro}
+│ 🥈 Plata: ${user.plata}
+│ 🥇 Oro: ${user.oro}
+│ 💎 Diamante: ${user.diamante}
 
-🌟 ¡Sigue explorando para conseguir tesoros más raros!
-💖 Elyssia te acompaña en cada aventura~
+🏆 Rango
+│ ${
+  user.level >= 50 ? '👑 Reina Elyssia' :
+  user.level >= 30 ? '🌟 Leyenda' :
+  user.level >= 15 ? '⚔️ Aventurera' :
+  '🌱 Novata'
+}
+
+╰━━━━━━━━━━━━━━━━⬣
+
+🌸 Sigue explorando para subir de nivel.
+💖 Elyssia siempre te acompaña.
 `
 
-  conn.sendMessage(m.chat, { text: texto, mentions: [m.sender] }, { quoted: m })
+  await conn.sendMessage(
+    m.chat,
+    {
+      text: perfil,
+      mentions: [m.sender]
+    },
+    { quoted: m }
+  )
 }
 
 handler.help = ['perfil']
 handler.tags = ['eco']
-handler.command = ['perfil', 'profile']
+handler.command = /^(perfil|profile|me)$/i
 
 export default handler
