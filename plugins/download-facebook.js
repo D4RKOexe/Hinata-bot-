@@ -1,49 +1,71 @@
 import axios from 'axios'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-    // Obtener enlace del mensaje o texto citado
     let query = text ? text.trim() : (m.quoted?.text || null)
-    if (!query) 
-        return conn.reply(m.chat, `🌸 *Ingresa un enlace de Facebook para descargar*\n\n> *Ejemplo:* ${usedPrefix + command} https://facebook.com/...`, m)
 
-    await m.react('🌀') // Emoji de “procesando”
+    if (!query)
+        return conn.reply(
+            m.chat,
+            `🌸 *Ingresa un enlace de Facebook para descargar*\n\n> *Ejemplo:* ${usedPrefix + command} https://facebook.com/...`,
+            m
+        )
+
+    await m.react('🌀')
 
     try {
-        // API DVYER con API key
-        const apiUrl = `https://dv-yer-api.online/api/facebook?apikey=dvyer079708280996&url=${encodeURIComponent(query)}`
+        const apiKey = 'dwk-NhZym8RK-IeYezUMe'
+        const apiUrl =
+            `https://dvwilkerofc-v1.onrender.com/api/download/facebook?url=${encodeURIComponent(query)}&apiKey=${apiKey}`
 
         const { data } = await axios.get(apiUrl)
 
-        if (!data || !data.result || !data.result.url) {
+        if (!data) {
             await m.react('❌')
-            return m.reply('⚠️ *No se pudo obtener el video. Verifica el enlace.*', m)
+            return m.reply('⚠️ *No se pudo obtener el video.*', m)
         }
 
-        const downloadUrl = data.result.url
-        const quality = data.result.quality || 'HD'
+        const downloadUrl =
+            data.result?.url ||
+            data.url ||
+            data.download ||
+            data.video
 
-        // Mensaje con estilo Elyssia
+        if (!downloadUrl) {
+            await m.react('❌')
+            return m.reply('⚠️ *La API no devolvió ningún enlace de descarga.*', m)
+        }
+
+        const quality =
+            data.result?.quality ||
+            data.quality ||
+            'HD'
+
         const ui = `
-╭━━━〔 📥 DESCARGADOR 〕━━━⬣
-┃ 🌸 Facebook Video
+╭━━━〔 📥 FACEBOOK DL 〕━━━⬣
+┃ 🌸 Elyssia Downloader
 ┃
-┃ 📝 Calidad: ${quality}
-┃ 🌐 Elyssia MD
+┃ 🎬 Calidad: ${quality}
+┃ 🔗 Facebook Video
+┃ ✨ Elyssia MD
 ╰━━━━━━━━━━━━━━━━━━⬣
-        `
+`
 
-        await conn.sendMessage(m.chat, { 
-            video: { url: downloadUrl }, 
-            caption: ui,
-            mimetype: 'video/mp4'
-        }, { quoted: m })
+        await conn.sendMessage(
+            m.chat,
+            {
+                video: { url: downloadUrl },
+                caption: ui,
+                mimetype: 'video/mp4'
+            },
+            { quoted: m }
+        )
 
-        await m.react('🌸') // Emoji de “listo”
+        await m.react('🌸')
 
     } catch (e) {
         console.error(e)
         await m.react('❌')
-        m.reply('⚠️ *Error al conectar con la API. Verifica el enlace o intenta más tarde.*', m)
+        m.reply('⚠️ *Error al conectar con la API. Inténtalo más tarde.*', m)
     }
 }
 
