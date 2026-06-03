@@ -49,7 +49,7 @@ handler.command = ['on', 'off']
 handler.group = true
 handler.register = false
 handler.tags = ['group']
-handler.help = ['on antilink', 'off antilink', 'on antiarabe', 'off antiarabe', 'on modoadmin', 'off modoadmin']
+handler.help = ['on modoadmin', 'off modoadmin']
 
 handler.before = async (m, { conn }) => {
   if (!m.isGroup) return
