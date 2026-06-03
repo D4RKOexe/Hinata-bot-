@@ -1,50 +1,75 @@
+import ws from 'ws'
+
 let handler = async (m, { conn }) => {
-  const subBots = [...new Set([...global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== require('ws').CLOSED).map((conn) => conn)])]
+  let uniqueUsers = new Map()
 
-  if (subBots.length === 0) {
-    return conn.sendMessage(m.chat, {
-      image: { url: 'https://files.catbox.moe/r60c8l.jpg' },
-      caption: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA SUB-BOTS ㅤ֢ㅤׄㅤׅ\n\n❥ 🤖 No hay Sub-Bots activos\n\n> Usa #qr o #code para crear uno\n\n⫏⫏ HINATA BOT ✿'
-    }, { quoted: m })
+  if (!global.conns || !Array.isArray(global.conns)) global.conns = []
+
+  const now = Date.now()
+
+  for (const connSub of global.conns) {
+    if (connSub.user && connSub.ws?.readyState !== ws.CLOSED) {
+      const jid = connSub.user.jid
+      const numero = jid?.split('@')[0]
+
+      let nombre = connSub.user.name
+      if (!nombre && typeof conn.getName === 'function') {
+        try {
+          nombre = await conn.getName(jid)
+        } catch {
+          nombre = `Usuario ${numero}`
+        }
+      }
+
+      const connectedAt = connSub.connectedAt || now
+      const uptimeSub = clockString(now - connectedAt)
+
+      uniqueUsers.set(jid, {
+        nombre: nombre || `Usuario ${numero}`,
+        uptime: uptimeSub,
+        numero
+      })
+    }
   }
 
-  let fotosSubBot = [
-    'https://files.catbox.moe/r60c8l.jpg',
-    'https://files.catbox.moe/zthq3s.jpeg',
-    'https://files.catbox.moe/qyjtab.jpeg',
-    'https://files.catbox.moe/xjn6am.jpeg',
-    'https://files.catbox.moe/ug1ecw.jpeg',
-    'https://files.catbox.moe/ap5nos.jpeg',
-    'https://files.catbox.moe/j3z3eo.jpeg',
-    'https://files.catbox.moe/r60c8l.jpg',
-    'https://files.catbox.moe/zthq3s.jpeg',
-    'https://files.catbox.moe/qyjtab.jpeg'
-  ]
+  const uptimeTotal = clockString(process.uptime() * 1000)
+  const totalUsers = uniqueUsers.size
 
-  let texto = '🤖 「 HINATA SUB-BOTS 」 🤖\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n'
+  let txt = `╭━━━〔 🌸 SUBBOTS HINATA 🌸 〕━━⬣\n`
+  txt += `┃ 🤖 Bot activo: ${uptimeTotal}\n`
+  txt += `┃ 👥 Subbots conectados: ${totalUsers}\n`
+  txt += `╰━━━━━━━━━━━━━━━━⬣\n`
 
-  for (let i = 0; i < subBots.length; i++) {
-    let bot = subBots[i]
-    let name = bot.authState?.creds?.me?.name || bot.user?.name || 'Hinata Sub-Bot ' + (bot.numero || (i + 1))
-    let jid = bot.user?.jid || 'Desconocido'
-    texto += '🤖 » ' + name + '\n'
-    texto += '   🆔 ' + jid.split('@')[0] + '\n\n'
+  if (totalUsers > 0) {
+    txt += `\n📋 LISTA DE SUBBOTS ACTIVOS\n\n`
+
+    let i = 1
+    for (const [jid, { nombre, uptime, numero }] of uniqueUsers) {
+      txt += `┌─⊷ ${i++}\n`
+      txt += `│ 🌸 Nombre: ${nombre}\n`
+      txt += `│ ⏱️ Tiempo activo: ${uptime}\n`
+      txt += `│ 👑 wa.me/${numero}\n`
+      txt += `└──────────────⊷\n\n`
+    }
+  } else {
+    txt += `\n❌ No hay subbots conectados actualmente.`
   }
 
-  texto += '▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n'
-  texto += '> Total: ' + subBots.length + '/10 Sub-Bots activos'
-
-  let fotoIndex = Math.floor(Math.random() * subBots.length) % fotosSubBot.length
-
-  await conn.sendMessage(m.chat, {
-    image: { url: fotosSubBot[fotoIndex] },
-    caption: texto
-  }, { quoted: m })
+  await conn.reply(m.chat, txt.trim(), m)
 }
 
-handler.help = ['listbots']
+handler.command = ['listjadibot', 'bots']
+handler.help = ['bots']
 handler.tags = ['serbot']
-handler.command = /^(listbots|subbots|botslist)$/i
-handler.desc = 'Muestra los Sub-Bots activos'
+handler.register = false
 
 export default handler
+
+function clockString(ms) {
+  const d = Math.floor(ms / 86400000)
+  const h = Math.floor(ms / 3600000) % 24
+  const m = Math.floor(ms / 60000) % 60
+  const s = Math.floor(ms / 1000) % 60
+
+  return `${d}d ${h}h ${m}m ${s}s`
+}
