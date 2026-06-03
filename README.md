@@ -1,125 +1,157 @@
-*🌸 ElyssiaBot-MD 👑*
+<div align="center">
 
-  <a href='https://postimages.org/' target='_blank'><img src='https://i.postimg.cc/pddbZTv0/1000519692.png' border='0' alt='1000519692'></a>"
+<img src="https://files.catbox.moe/r60c8l.jpg" width="280">
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/TU-USUARIO/Elyssia-Bot-MD/main/src/Elyssia.jpg" width="350"></p><p align="center">
-<a href="#"><img title="Author" src="https://img.shields.io/badge/Author-Elyssia%20Team-purple?style=for-the-badge&logo=github"></a>
-<a href="#"><img title="Version" src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge"></a>
-<a href="#"><img title="NodeJS" src="https://img.shields.io/badge/NodeJS-20+-green?style=for-the-badge&logo=node.js"></a>
-</p>🌸 Descripción
+# ✦ ──「 🌸 HINATA BOT 🌸 」── ✦
 
-Elyssia-Bot-MD es un bot multipropósito para WhatsApp Multi Device desarrollado para ofrecer una experiencia rápida, elegante y moderna.
+### 𓆩♡𓆪 Bot Multifunción de WhatsApp inspirado en Hinata Hyuga 𓆩♡𓆪
 
-Incluye funciones de administración, inteligencia artificial, entretenimiento, descargas, multimedia y mucho más.
+<p>
+Un bot moderno, rápido y elegante diseñado para ofrecer
+entretenimiento, administración, descargas y herramientas avanzadas
+para tu comunidad de WhatsApp.
+</p>
 
-«💜 La elegancia y el poder en un solo bot.»
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/TUNUMERO)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ElvigilanteDv)
+[![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 
----
-
-✨ Características
-
-- 🤖 Inteligencia Artificial
-- 🎮 Juegos
-- 📥 Descargas
-- 🎵 Multimedia
-- 🛡️ Administración de grupos
-- 🚫 Anti-Spam
-- 👑 Comandos Owner
-- ⚡ Alto rendimiento
-- 🌙 Diseño elegante
+</div>
 
 ---
 
-👑 Comandos Principales
+# 🌸 SOBRE HINATA BOT
 
-Comando| Función
-.menu| Menú principal
-.ping| Velocidad del bot
-.owner| Información del creador
-.play| Descargar música
-.sticker| Crear sticker
-.ai| Chat IA
-.grupo| Herramientas de grupo
+**Hinata Bot** es un bot de WhatsApp multipropósito inspirado en la dulzura y fortaleza de **Hinata Hyuga**. Integra sistemas de entretenimiento, administración de grupos, descargas multimedia, economía RPG y herramientas avanzadas para usuarios y administradores.
+
+> Diseñado para brindar una experiencia fluida, rápida y completa dentro de WhatsApp.
 
 ---
 
-🛡️ Solo Owner
+# 👑 DESARROLLADORES
 
-Comando| Función
-.restart| Reiniciar bot
-.update| Actualizar
-.ban| Banear usuario
-.unban| Desbanear usuario
-.autoadmin| Administración automática
+<div align="center">
 
----
+| 👑 EL VIGILANTE | 👑 BRAYANRK |
+|:---:|:---:|
+| Desarrollador Principal | Desarrollador Principal |
+| Sistemas • APIs • Base Principal | Plugins • Mejoras • Soporte |
 
-⭐ Apóyanos
-
-Si te gusta el proyecto deja una estrella ⭐ en GitHub.
-
-✨ Elyssia MD ✨
-
-Más que un bot, una compañera digital.
+</div>
 
 ---
 
-## 💻 𝗚𝘂𝗶𝗮 𝗱𝗲 𝗜𝗻𝘀𝘁𝗮𝗹𝗮𝗰𝗶𝗼𝗻 𝗲𝗻 𝗧𝗲𝗿𝗺𝘂𝘅
+# ✨ FUNCIONES DESTACADAS
 
-Sigue estos pasos para instalar y ejecutar **ELYSSIA BOT MD** en tu dispositivo.
+### 📥 Descargas
+- TikTok sin marca de agua
+- YouTube MP3 y MP4
+- Instagram Videos y Reels
+- Facebook Videos
+- Pinterest Imágenes
+- MediaFire
 
-1. **Concede Permisos de Almacenamiento**
+### 🎮 Entretenimiento
+- Juegos multijugador
+- Trivia
+- Adivinanzas
+- Retos y diversión
+- Sistema de logros
+
+### ⚔️ RPG
+- Niveles automáticos
+- Experiencia (XP)
+- Economía virtual
+- Tienda RPG
+- Misiones y recompensas
+
+### 👥 Administración
+- Anti-link
+- Anti-spam
+- Anti-fake
+- Bienvenidas personalizadas
+- Gestión completa de grupos
+
+### 🤖 Inteligencia Artificial
+- Chat IA
+- Generación de textos
+- Respuestas automáticas
+- Herramientas inteligentes
+
+### 👑 Owner
+- Control total del bot
+- Gestión de usuarios
+- Broadcast global
+- Comandos exclusivos
+
+---
+
+# 🚀 INSTALACIÓN
+
+### Clonar repositorio
+
 ```bash
-termux-setup-storage
+git clone https://github.com/ElvigilanteDv/HinataBot.git
 ```
 
-2.  **Actualiza y Prepara el Entorno**
-    ```bash
-    apt update && apt upgrade -y
-    pkg install -y git nodejs ffmpeg imagemagick
-    ```
+### Entrar a la carpeta
 
-3.  **Clona el Repositorio del Bot**
-    ```bash
-    git clone https://github.com/AmilcarGit/ElyssiaBot-MD.git
-    ```
+```bash
+cd HinataBot
+```
 
-4.  **Accede al Directorio del Proyecto**
-    ```bash
-    cd ElyssiaBot-MD
-    ```
+### Instalar dependencias
 
-5.  **Instala las Dependencias de Node.js**
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
-6.  **Inicia el Bot**
-    ```bash
-    npm start
-    ```
+### Iniciar el bot
+
+```bash
+npm start
+```
 
 ---
 
-# EDITOR DESARROLLADOR Y PROPIETARIO DEL BOT
+# 📋 REQUISITOS
 
-<p align="center">
-  <img src="https://i.postimg.cc/Mpgw4vDH/1000515694.png"250">
-</p>
-
-<p align="center">
-  <a href="https://github.com/AmilcarGit">
-    @AmilcarGit
-  </a>
-</p>
+- Node.js 21 o superior
+- Git instalado
+- Conexión a Internet
+- WhatsApp para vincular
 
 ---
 
-# AGRADECIMIENTOS & COLABORADORES
+# 🌷 CONTRIBUCIONES
 
-- Gracias a todos los colaboradores del proyecto.
-- Gracias a la comunidad por el apoyo.
-- Gracias a quienes reportan errores y aportan ideas.
+Las contribuciones son bienvenidas.
+
+Si deseas mejorar el proyecto:
+
+```bash
+Fork 🍴
+Clone 📥
+Edita ✏️
+Pull Request 🚀
+```
 
 ---
+
+# ⭐ APOYA EL PROYECTO
+
+Si te gusta **HINATA BOT**, considera dejar una estrella en GitHub.
+
+```txt
+🌸 Gracias por utilizar HINATA BOT 🌸
+Hecho con dedicación por EL VIGILANTE y BRAYANRK
+```
+
+<div align="center">
+
+### 𓆩🌸𓆪 HINATA BOT 𓆩🌸𓆪
+
+"El poder no está solo en la fuerza,
+sino en la determinación de seguir adelante."
+
+</div>
