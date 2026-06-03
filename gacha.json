@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Sakura Haruno",
+    "rarity": "SR",
+    "attack": 75,
+    "defense": 65,
+    "health": 85,
+    "image": "https://files.catbox.moe/uhdhug.jpg"
+  },
+  {
+    "name": "Monkey D. Luffy",
+    "rarity": "SSR",
+    "attack": 95,
+    "defense": 80,
+    "health": 100,
+    "image": "https://files.catbox.moe/vnpmpc.jpg"
+  },
+  {
+    "name": "Naruto Uzumaki",
+    "rarity": "SSR",
+    "attack": 98,
+    "defense": 75,
+    "health": 100,
+    "image": "https://files.catbox.moe/97jxxj.jpg"
+  },
+  {
+    "name": "Sasuke Uchiha",
+    "rarity": "SSR",
+    "attack": 96,
+    "defense": 70,
+    "health": 90,
+    "image": "https://files.catbox.moe/kmex7w.jpg"
+  },
+  {
+    "name": "Kakashi Hatake",
+    "rarity": "SR",
+    "attack": 85,
+    "defense": 75,
+    "health": 88,
+    "image": "https://files.catbox.moe/m0d9kj.jpg"
+  },
+  {
+    "name": "Itachi Uchiha",
+    "rarity": "SSR",
+    "attack": 99,
+    "defense": 85,
+    "health": 80,
+    "image": "https://files.catbox.moe/j13ew6.jpg"
+  },
+  {
+    "name": "Sai",
+    "rarity": "R",
+    "attack": 60,
+    "defense": 50,
+    "health": 70,
+    "image": "https://files.catbox.moe/rkv6ry.jpg"
+  }
+]
