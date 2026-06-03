@@ -4,7 +4,7 @@ let handler = async (m, { conn }) => {
   let who = m.sender
   let user = global.db.data.users[who]
   if (!user) {
-    global.db.data.users[who] = { diamantes: 0, bank: 0, exp: 0, level: 0 }
+    global.db.data.users[who] = { diamantes: 0, diamond: 0, bank: 0, exp: 0, level: 0 }
     user = global.db.data.users[who]
   }
 
@@ -26,15 +26,15 @@ let handler = async (m, { conn }) => {
 
   let victim = global.db.data.users[target]
   if (!victim) {
-    global.db.data.users[target] = { diamantes: 0, bank: 0 }
+    global.db.data.users[target] = { diamantes: 0, diamond: 0, bank: 0 }
     victim = global.db.data.users[target]
   }
 
-  let victimDiamantes = victim.diamantes || 0
+  let victimDiamantes = victim.diamantes || victim.diamond || 0
 
   if (victimDiamantes <= 0) {
     return conn.sendMessage(m.chat, {
-      text: '🥷 「 HINATA STEAL 」 🥷\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » @' + target.split('@')[0] + ' no tiene diamantes en la cartera\n💡 » Los del banco están seguros\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦',
+      text: '🥷 「 HINATA STEAL 」 🥷\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » @' + target.split('@')[0] + ' no tiene diamantes\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦',
       mentions: [target]
     }, { quoted: m })
   }
@@ -45,8 +45,13 @@ let handler = async (m, { conn }) => {
     let maxRobo = Math.floor(victimDiamantes * 0.6)
     let robado = Math.floor(Math.random() * maxRobo) + 1
 
-    victim.diamantes = victimDiamantes - robado
-    user.diamantes = (user.diamantes || 0) + robado
+    if (victim.diamantes !== undefined) {
+      victim.diamantes = victimDiamantes - robado
+    } else {
+      victim.diamond = victimDiamantes - robado
+    }
+
+    user.diamantes = (user.diamantes || user.diamond || 0) + robado
     user.exp = (user.exp || 0) + Math.floor(Math.random() * 15) + 5
 
     let mensajes = [
@@ -58,12 +63,19 @@ let handler = async (m, { conn }) => {
     ]
 
     await conn.sendMessage(m.chat, {
-      text: '🥷 「 HINATA STEAL 」 🥷\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » ROBO EXITOSO\n\n🎯 » @' + target.split('@')[0] + '\n💎 » Robaste: ' + robado + ' diamantes\n💰 » Tu total: ' + user.diamantes + ' 💎\n\n' + mensajes[Math.floor(Math.random() * mensajes.length)] + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n> ⏳ 45 minutos',
+      text: '🥷 「 HINATA STEAL 」 🥷\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » ROBO EXITOSO\n\n🎯 » @' + target.split('@')[0] + '\n💎 » Robaste: ' + robado + ' diamantes\n💰 » Tu total: ' + (user.diamantes || user.diamond || 0) + ' 💎\n\n' + mensajes[Math.floor(Math.random() * mensajes.length)] + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n> ⏳ 45 minutos',
       mentions: [target]
     }, { quoted: m })
   } else {
     let multa = Math.floor(Math.random() * 8) + 3
-    user.diamantes = Math.max(0, (user.diamantes || 0) - multa)
+    let misDiamantes = user.diamantes || user.diamond || 0
+    misDiamantes = Math.max(0, misDiamantes - multa)
+    if (user.diamantes !== undefined) {
+      user.diamantes = misDiamantes
+    } else {
+      user.diamond = misDiamantes
+    }
+
     let mensajes = [
       '🚔 Activaste la alarma. La policía llegó en segundos. Multa: ' + multa + ' 💎.',
       '🚔 Era un policía encubierto. Te esposó. Fianza: ' + multa + ' 💎.',
@@ -73,7 +85,7 @@ let handler = async (m, { conn }) => {
     ]
 
     await conn.sendMessage(m.chat, {
-      text: '🥷 「 HINATA STEAL 」 🥷\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » TE ATRAPARON\n\n🎯 » @' + target.split('@')[0] + '\n💸 » Multa: ' + multa + ' diamantes\n💰 » Tu total: ' + user.diamantes + ' 💎\n\n' + mensajes[Math.floor(Math.random() * mensajes.length)] + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n> ⏳ 45 minutos',
+      text: '🥷 「 HINATA STEAL 」 🥷\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » TE ATRAPARON\n\n🎯 » @' + target.split('@')[0] + '\n💸 » Multa: ' + multa + ' diamantes\n💰 » Tu total: ' + (user.diamantes || user.diamond || 0) + ' 💎\n\n' + mensajes[Math.floor(Math.random() * mensajes.length)] + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n> ⏳ 45 minutos',
       mentions: [target]
     }, { quoted: m })
   }
