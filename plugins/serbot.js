@@ -131,7 +131,7 @@ export async function yukiJadiBot(options) {
       }, { quoted: m })
       codeBot = await conn.sendMessage(m.chat, {
         image: { url: 'https://files.catbox.moe/r60c8l.jpg' },
-        caption: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA SUB-BOT ' + numero + ' ㅤ֢ㅤׄㅤׅ\n\n❥ CÓDIGO: ' + secret + '\n\n> Expira en 30 segundos\n\n⫏⫏ HINATA BOT ✿'
+        caption: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA SUB-BOT ' + numero + ' ㅤ֢ㅤׄㅤׅ\n\n❥ CÓDIGO: ' + secret + '\n\n> Expira en 60 segundos\n\n⫏⫏ HINATA BOT ✿'
       }, { quoted: m })
     }
     if (txtCode && txtCode.key) {
