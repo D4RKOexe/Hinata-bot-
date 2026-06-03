@@ -21,17 +21,17 @@ let handler = async (m, { conn }) => {
     'https://files.catbox.moe/qyjtab.jpeg'
   ]
 
-  let texto = '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA SUB-BOTS ㅤ֢ㅤׄㅤׅ\n\n'
+  let texto = '🤖 「 HINATA SUB-BOTS 」 🤖\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n'
 
   for (let i = 0; i < subBots.length; i++) {
     let bot = subBots[i]
     let name = bot.authState?.creds?.me?.name || bot.user?.name || 'Hinata Sub-Bot ' + (bot.numero || (i + 1))
     let jid = bot.user?.jid || 'Desconocido'
-    texto += '🤖 » *' + name + '*\n'
-    texto += '   🆔 » ' + jid.split('@')[0] + '\n\n'
+    texto += '🤖 » ' + name + '\n'
+    texto += '   🆔 ' + jid.split('@')[0] + '\n\n'
   }
 
-  texto += '⫏⫏ HINATA BOT ✿\n\n'
+  texto += '▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n'
   texto += '> Total: ' + subBots.length + '/10 Sub-Bots activos'
 
   let fotoIndex = Math.floor(Math.random() * subBots.length) % fotosSubBot.length
