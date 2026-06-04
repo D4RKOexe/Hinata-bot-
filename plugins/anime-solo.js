@@ -26,9 +26,9 @@ let handler = async (m, { conn }) => {
   }
 }
 
-handler.help = ['solo')
+handler.help = ['solo']
 handler.tags = ['anime']
-handler.command = ['solo']
-handler.desc = 'usuario está solo'
+handler.command = /^(solo|alone)$/i
+handler.desc = '@usuario está solo'
 
 export default handler
