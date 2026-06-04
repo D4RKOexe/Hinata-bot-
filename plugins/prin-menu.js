@@ -29,21 +29,23 @@ const bannerCategory = {
 
 const defaultMenu = {
   before: `
-𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ
+࿇ ══━━━✥◈✥━━━══ ࿇
+    𝕳𝖎𝖓𝖆𝖙𝖆 𝕭𝖔𝖙
+࿇ ══━━━✥◈✥━━━══ ࿇
+ ✦%totalreg ᴜꜱᴇʀꜱ ✦ %totalcmd ᴄᴍᴅꜱ ✦
 
-> ¡Hola! ⸜(｡˃ ᵕ ˂ )⸝♡ Soy 𓆩⚝𓆪 HINATA BOT 𓍯 𓆩⚝𓆪
-
-𑁍𓂃 𓈒𓏸 *HORA ::* %time
-𑁍𓂃 𓈒𓏸 *USUARIOS ::* %totalreg
-𑁍𓂃 𓈒𓏸 *COMANDOS ::* %totalcmd
-𑁍𓂃 𓈒𓏸 *ACTIVA ::* %uptime
+> ⏱️ %uptime activa
 
 %readmore
 `,
-  header: '\n%emoji %category (%count cmd)\n',
-  body: '❥ %cmd %desc',
+  header: '\n𖣔 %category ˚ʚ♡ɞ˚\n',
+  body: '❧ %cmd → %desc',
   footer: '',
-  after: ''
+  after: `
+
+࿇ ══━━━✥◈✥━━━══ ࿇
+ᵉˡ ᵛⁱᵍⁱˡᵃⁿᵗᵉ ✦ ᵇʳᵃʸᵃⁿʳᵏ
+࿇ ══━━━✥◈✥━━━══ ࿇`
 }
 
 let handler = async (m, { conn, usedPrefix: _p, command }) => {
@@ -77,13 +79,12 @@ let handler = async (m, { conn, usedPrefix: _p, command }) => {
     let bannerFinal = tagSeleccionada ? bannerCategory[tagSeleccionada] : 'https://files.catbox.moe/r60c8l.jpg'
 
     let textoMenu = defaultMenu.before
-      .replace(/%time/g, new Date().toLocaleString())
       .replace(/%totalreg/g, Object.keys(global.db.data.users).length)
       .replace(/%totalcmd/g, Object.keys(global.plugins).length)
       .replace(/%uptime/g, Math.floor(process.uptime() / 60) + 'm ' + Math.floor(process.uptime() % 60) + 's')
 
     if (tagSeleccionada) {
-      textoMenu = textoMenu.replace('HINATA BOT', 'HINATA BOT - ' + tags[tagSeleccionada].replace(/[⭐👥⚔️🎮🎰🤖👑📥ℹ️]/g, '').trim())
+      textoMenu = textoMenu.replace('𝕳𝖎𝖓𝖆𝖙𝖆 𝕭𝖔𝖙', '𝕳𝖎𝖓𝖆𝖙𝖆 𝕭𝖔𝖙 ✦ ' + tags[tagSeleccionada].replace(/[⭐👥⚔️🎮🎰🤖👑📥ℹ️]/g, '').trim())
     }
 
     for (let tag of Object.keys(tags)) {
@@ -91,28 +92,21 @@ let handler = async (m, { conn, usedPrefix: _p, command }) => {
 
       const cmds = help
         .filter(menu => menu.tags?.includes(tag))
-        .map(menu => menu.help.map(h =>
+        .map(menu => menu.help.map(h => 
           defaultMenu.body
             .replace(/%cmd/g, menu.prefix ? h : `${_p}${h}`)
-            .replace(/%desc/g, menu.desc ? `\n   ↳ ${menu.desc}` : '')
+            .replace(/%desc/g, menu.desc || '')
         ).join('\n')).join('\n')
 
       if (cmds) {
-        let count = help.filter(menu => menu.tags?.includes(tag)).length
-        let emoji = tags[tag].split(' ')[0]
-        textoMenu += defaultMenu.header.replace(/%category/g, tags[tag].replace(emoji + ' ', '')).replace(/%count/g, count).replace(/%emoji/g, emoji)
-        textoMenu += cmds + '\n\n'
+        textoMenu += defaultMenu.header.replace(/%category/g, tags[tag])
+        textoMenu += cmds + '\n'
       }
     }
 
-    if (!tagSeleccionada) {
-      textoMenu += '> *HINATA BOT | EL VIGILANTE & BRAYANRK*'
-    }
+    textoMenu += defaultMenu.after
 
-    const replace = {
-      readmore: readMore
-    }
-
+    const replace = { readmore: readMore }
     let texto = textoMenu
     for (let key of Object.keys(replace)) {
       texto = texto.replace(new RegExp(`%${key}`, 'g'), replace[key])
@@ -129,7 +123,7 @@ let handler = async (m, { conn, usedPrefix: _p, command }) => {
   }
 }
 
-handler.help = ['menu']
+handler.help = ['menu', 'menú', 'help']
 handler.tags = ['main']
 handler.command = /^(menu|menú|help)(rpg|group|game|gacha|serbot|owner|downloader|info|main)?$/i
 handler.register = false
