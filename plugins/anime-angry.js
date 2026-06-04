@@ -1,6 +1,9 @@
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
+  let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
+  let name = '@' + who.split('@')[0]
+
   try {
     let apiUrl = 'https://api.delirius.store/reactions/angry'
     let res = await fetch(apiUrl)
@@ -12,8 +15,9 @@ let handler = async (m, { conn }) => {
 
     await conn.sendMessage(m.chat, {
       video: { url: json.data.url },
-      caption: '😡 「 HINATA ANGRY 」 😡',
-      gifPlayback: true
+      caption: name + ' está enojado 😡',
+      gifPlayback: true,
+      mentions: [who]
     }, { quoted: m })
 
   } catch (e) {
@@ -24,7 +28,7 @@ let handler = async (m, { conn }) => {
 
 handler.help = ['angry']
 handler.tags = ['anime']
-handler.command = /^(angry|enojado)$/i
-handler.desc = 'Reacción anime angry'
+handler.command = /^(angry|enojado|enojo)$/i
+handler.desc = '@usuario está enojado'
 
 export default handler
