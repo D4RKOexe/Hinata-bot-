@@ -9,6 +9,7 @@ const tags = {
   rpg: '⚔️ яρg',
   game: '🎮 gαмє',
   gacha: '🎰 gα¢нα',
+  diversion: '🎪 ∂ινєяѕιση',
   serbot: '🤖 ѕєявσт',
   owner: '👑 σωηєя',
   downloader: '📥 ∂σωηℓσα∂єя',
@@ -24,7 +25,8 @@ const bannerCategory = {
   serbot: 'https://files.catbox.moe/r60c8l.jpg',
   owner: 'https://files.catbox.moe/r60c8l.jpg',
   downloader: 'https://files.catbox.moe/xjn6am.jpeg',
-  info: 'https://files.catbox.moe/ap5nos.jpeg'
+  info: 'https://files.catbox.moe/ap5nos.jpeg',
+  diversion: 'https://files.catbox.moe/r60c8l.jpg'
 }
 
 const defaultMenu = {
