@@ -249,7 +249,7 @@ handler.before = async (m, { conn }) => {
       await conn.sendMessage(m.chat, { text: '⏳ Descargando ' + (isAudio ? 'audio' : 'video') + '...\n💎 -2 diamantes' }, { quoted: m })
 
       const apiUrl = isAudio
-        ? `https://api-gohan-v1.onrender.com/download/ytaudio?url=${encodeURIComponent(videoUrl)}`
+        ? `https://api.delirius.store/download/ytmp3?url=${encodeURIComponent(videoUrl)}`
         : `https://api-de-el-vigilante-8jnf.onrender.com/download/ytvideo?url=${encodeURIComponent(videoUrl)}`
 
       const response = await fetch(apiUrl)
