@@ -1,4 +1,3 @@
-import { lastRoll } from './gacha-rw.js'
 import fs from 'fs'
 import path from 'path'
 
@@ -10,13 +9,13 @@ let handler = async (m, { conn }) => {
     user = global.db.data.users[who]
   }
 
-  if (!lastRoll[who]) {
+  if (!global.lastRoll || !global.lastRoll[who]) {
     return conn.sendMessage(m.chat, {
       text: '𖣔 「 HINATA CLAIM 」 ˚ʚ♡ɞ˚\n\n💫 » No tienes personaje pendiente\n\n> Usa #rw primero'
     }, { quoted: m })
   }
 
-  let char = lastRoll[who]
+  let char = global.lastRoll[who]
 
   if (!user.inventory) user.inventory = []
 
@@ -42,7 +41,7 @@ let handler = async (m, { conn }) => {
   texto += '  💰 Total: ' + total + ' 💎\n'
   texto += '  🎒 Guardado en inventario'
 
-  delete lastRoll[who]
+  delete global.lastRoll[who]
 
   await conn.sendMessage(m.chat, {
     image: { url: char.image },
@@ -52,7 +51,7 @@ let handler = async (m, { conn }) => {
 
 handler.help = ['claim']
 handler.tags = ['gacha']
-handler.command = /^(claim|c)$/i
+handler.command = /^(claim|reclamar)$/i
 handler.desc = 'Reclama tu último personaje de #rw'
 
 export default handler
