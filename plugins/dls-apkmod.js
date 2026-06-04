@@ -10,7 +10,7 @@ let handler = async (m, { conn, text }) => {
   await m.react('🔍')
 
   try {
-    let apiUrl = `https://dv-yer-api.online/apkmodsearch?q=${encodeURIComponent(text)}&key=dvyer829163227334`
+    let apiUrl = `https://dv-yer-api.online/apkmoddl?q=${encodeURIComponent(text)}&key=dvyer829163227334`
     let res = await fetch(apiUrl)
     let json = await res.json()
 
