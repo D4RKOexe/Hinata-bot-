@@ -10,6 +10,7 @@ const tags = {
   game: '🎮 gαмє',
   gacha: '🎰 gα¢нα',
   diversion: '🎪 ∂ινєяѕιση',
+  anime: '🌸 αηιмє',
   serbot: '🤖 ѕєявσт',
   owner: '👑 σωηєя',
   downloader: '📥 ∂σωηℓσα∂єя',
@@ -26,7 +27,8 @@ const bannerCategory = {
   owner: 'https://files.catbox.moe/52nm0t.png',
   downloader: 'https://files.catbox.moe/ow6st7.png',
   info: 'https://files.catbox.moe/42tsa2.png',
-  diversion: 'https://files.catbox.moe/2t7d69.png'
+  diversion: 'https://files.catbox.moe/2t7d69.png',
+  anime: 'https://files.catbox.moe/2t7d69.png'
 }
 
 const defaultMenu = {
