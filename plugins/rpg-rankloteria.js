@@ -1,6 +1,16 @@
-import { loteria } from './rpg-loteria.js'
+import fs from 'fs'
+import path from 'path'
 
 let handler = async (m, { conn }) => {
+  let lotoPath = path.join(process.cwd(), 'loteria.json')
+  let loteria
+
+  if (fs.existsSync(lotoPath)) {
+    loteria = JSON.parse(fs.readFileSync(lotoPath, 'utf8'))
+  } else {
+    return conn.sendMessage(m.chat, { text: '🎫 」\n\n💫 » No hay lotería activa' }, { quoted: m })
+  }
+
   let sorted = Object.entries(loteria.boletos).sort((a, b) => b[1] - a[1]).slice(0, 10)
 
   if (sorted.length === 0) {
