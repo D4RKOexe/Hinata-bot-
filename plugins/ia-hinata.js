@@ -1,6 +1,5 @@
 
 const GROQ_KEY = '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'
-
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 
 const SYSTEM_PROMPT = `
@@ -82,7 +81,7 @@ let handler = async (m, { conn, text }) => {
   }
 }
 
-let botLidCache = null
+const botLidMap = new Map()
 
 handler.all = async function (m, { conn }) {
   if (!m.text)  return
@@ -92,31 +91,36 @@ handler.all = async function (m, { conn }) {
   const botJid  = connRef?.user?.id || connRef?.user?.jid || ''
   const botNum  = botJid.split('@')[0].split(':')[0]
 
-  console.log('[LID DEBUG]', {
-    botJid,
-    botNum,
-    botLidCache,
-    mentionedJid: m.mentionedJid
-  })
-
-
-  if (!botLidCache && m.isGroup) {
+  // Obtener LID del bot buscando en participantes del grupo
+  // Se guarda por chat para no repetir la búsqueda
+  if (m.isGroup && !botLidMap.has(m.chat)) {
     try {
       const meta = await connRef.groupMetadata(m.chat)
-      const me = meta.participants.find(p => {
-        const pid = p.id.split('@')[0].split(':')[0]
-        const ppn = (p.phoneNumber || '').replace(/\D/g, '')
-        return pid === botNum || ppn === botNum
-      })
-      if (me?.id) botLidCache = me.id
+      // Buscar el participante que sea el bot por número O por onWhatsApp
+      const botLids = await connRef.onWhatsApp(botNum).catch(() => [])
+      const botLidJid = botLids?.[0]?.lid
+
+      // Intentar con onWhatsApp primero
+      if (botLidJid) {
+        botLidMap.set(m.chat, botLidJid)
+      } else {
+        // Buscar en participantes por número
+        const me = meta.participants.find(p =>
+          p.id.split('@')[0].split(':')[0] === botNum ||
+          (p.phoneNumber || '').replace(/\D/g, '') === botNum
+        )
+        if (me?.id) botLidMap.set(m.chat, me.id)
+      }
     } catch {}
   }
+
+  const botLid = botLidMap.get(m.chat) || null
 
   const isReplyToBot = !!(m.quoted && (
     m.quoted.fromMe === true ||
     (m.quoted.sender && (
       m.quoted.sender.split('@')[0].split(':')[0] === botNum ||
-      (botLidCache && m.quoted.sender === botLidCache)
+      (botLid && m.quoted.sender === botLid)
     ))
   ))
 
@@ -125,24 +129,23 @@ handler.all = async function (m, { conn }) {
     const menciones = m.mentionedJid || []
     if (menciones.length) {
       isMention = menciones.some(jid => {
-        const jidNum = jid.split('@')[0].split(':')[0]
-        if (jidNum === botNum) return true
-        if (botLidCache && jid === botLidCache) return true
-        if (jid.endsWith('@lid') && jidNum === botNum) return true
+        if (jid.split('@')[0].split(':')[0] === botNum) return true
+        if (botLid && jid === botLid) return true
         return false
       })
 
-      if (!isMention && m.isGroup && menciones.some(j => j.endsWith('@lid'))) {
+      // Si sigue sin match y hay @lid, forzar búsqueda en participantes ahora
+      if (!isMention && menciones.some(j => j.endsWith('@lid'))) {
         try {
           const meta = await connRef.groupMetadata(m.chat)
-          const me = meta.participants.find(p => {
+          for (const p of meta.participants) {
             const pid = p.id.split('@')[0].split(':')[0]
             const ppn = (p.phoneNumber || '').replace(/\D/g, '')
-            return pid === botNum || ppn === botNum
-          })
-          if (me?.id) {
-            botLidCache = me.id
-            isMention = menciones.some(jid => jid === me.id)
+            if (pid === botNum || ppn === botNum) {
+              botLidMap.set(m.chat, p.id)
+              isMention = menciones.some(jid => jid === p.id)
+              break
+            }
           }
         } catch {}
       }
