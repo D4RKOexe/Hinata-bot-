@@ -87,7 +87,15 @@ let handler = async (m, { conn, text }) => {
 // Se ejecuta ANTES de if (m.isBaileys) en el handler.js
 // Por eso puede capturar respuestas al bot y @menciones sin problemas
 handler.all = async function (m, { conn }) {
-  // Filtros básicos
+  console.log('[MITSURI]', {
+    text: m.text?.slice(0,30),
+    fromMe: m.fromMe,
+    isBaileys: m.isBaileys,
+    quoted: !!m.quoted,
+    quotedFromMe: m.quoted?.fromMe,
+    mentionedJid: m.mentionedJid
+  })
+  // ... resto del código
   if (!m.text)   return
   if (m.fromMe)  return
   if (!GROQ_KEY) return
