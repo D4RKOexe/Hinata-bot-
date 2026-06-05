@@ -5,7 +5,7 @@ import {
   proto
 } from '@whiskeysockets/baileys'
 
-const VIDEO_QUALITY = '720p'
+const VIDEO_QUALITY = '360p'
 const GOHAN_API = 'https://api-gohan-v1.onrender.com'
 
 const _processing = new Set()
