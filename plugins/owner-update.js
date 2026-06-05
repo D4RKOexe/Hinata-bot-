@@ -43,7 +43,6 @@ const handler = async (m, { conn }) => {
 
     let filesCreados = creados.map(c => c.split(' ').pop())
     let filesEliminados = eliminados.map(c => c.split(' ').pop())
-    let filesCambiados = stdout.match(/\| (\d+) .*/g) || []
 
     let texto = '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ACTUALIZADA ㅤ֢ㅤׄㅤׅ\n\n'
     texto += '🌸 Hinata se ha renovado\n\n'
@@ -56,10 +55,10 @@ const handler = async (m, { conn }) => {
       texto += '\n'
     }
 
-    if (filesCambiados.length > 0) {
+    let changedMatch = stdout.match(/(\d+) files? changed/)
+    if (changedMatch) {
       texto += '📝 *Archivos modificados:*\n'
-      let count = filesCambiados.length
-      texto += '  ❀ ' + count + ' archivo(s) actualizado(s)\n\n'
+      texto += '  ❀ ' + changedMatch[1] + ' archivo(s)\n\n'
     }
 
     if (filesEliminados.length > 0) {
@@ -72,15 +71,13 @@ const handler = async (m, { conn }) => {
 
     let summary = stdout.match(/\d+ files? changed, \d+ insertions?\(\+\), \d+ deletions?\(-\)/)
     if (summary) {
-      let [changed, inserted, deleted] = summary[0].match(/\d+/g)
+      let nums = summary[0].match(/\d+/g)
       texto += '📊 *Resumen:*\n'
-      texto += '  ❀ ' + changed + ' archivo(s) cambiado(s)\n'
-      texto += '  ❀ +' + inserted + ' línea(s) agregada(s)\n'
-      texto += '  ❀ -' + deleted + ' línea(s) eliminada(s)\n\n'
+      texto += '  ❀ ' + nums[1] + ' línea(s) agregada(s)\n'
+      texto += '  ❀ -' + nums[2] + ' línea(s) eliminada(s)\n\n'
     }
 
-    texto += '> Actualizado por @' + who.split('@')[0] + '\n'
-    texto += '> Reinicia la bot para aplicar cambios'
+    texto += '> Actualizado por @' + who.split('@')[0]
 
     await conn.sendMessage(m.chat, {
       image: { url: 'https://files.catbox.moe/5tegkb.png' },
