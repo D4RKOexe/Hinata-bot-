@@ -60,7 +60,7 @@ const handler = async (m, { conn, command, args, isAdmin }) => {
 handler.command = ['on', 'off']
 handler.group = true
 handler.admin = true
-handler.tags = ['tools']
+handler.tags = ['group']
 handler.help = ['on <función>', 'off <función>']
 
 // === MIDDLEWARE ===
