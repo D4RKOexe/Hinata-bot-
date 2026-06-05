@@ -5,7 +5,7 @@ import {
   proto
 } from '@whiskeysockets/baileys'
 
-const YOSOYYO_API = 'https://yosoyyo-api-ofc.onrender.com/api/youtube'
+const YOSOYYO_API = 'https://yosoyyo-api-ofc.onrender.com'
 const API_KEY = 'yosoyyo_sk_04ly3dm7'
 
 function safeFileName(name) {
