@@ -51,5 +51,7 @@ handler.tags = ['group']
 handler.command = /^setphoto$/i
 handler.desc = 'Cambia la foto del grupo'
 handler.group = true
+handler.botAdmin = true
+
 
 export default handler
