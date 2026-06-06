@@ -116,7 +116,11 @@ async function preguntarHinata(pregunta, senderJid) {
   const historial = getHistorial(senderNum)
   if (historial.length > MAX_HISTORIAL * 2) historial.splice(0, 2)
 
-  const systemPrompt = vigilante ? SYSTEM_PROMPT_VIGILANTE : SYSTEM_PROMPT_OTROS
+  const systemPrompt = vigilante
+   ? SYSTEM_PROMPT_VIGILANTE
+   : esBrayanRK(senderJid)
+     ? SYSTEM_PROMPT_BRAYANRK
+     : SYSTEM_PROMPT_OTROS
 
   const response = await fetch(GROQ_URL, {
     method: 'POST',
