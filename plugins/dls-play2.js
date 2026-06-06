@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 
 const ryze_api = 'https://ryzecodes.xyz/api/scrapers/36/run'
 const ryze_key = 'ryzk0cdn'
-const ryze_format = '480p'
+const ryze_format = '360p'
 const ryze_attempts = 6
 const ryze_interval_ms = 1100
 
