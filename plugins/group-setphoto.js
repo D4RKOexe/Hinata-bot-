@@ -1,22 +1,55 @@
-let handler = async (m, { conn, isAdmin, isBotAdmin }) => {
-  if (!m.isGroup) return conn.sendMessage(m.chat, { text: '👥 「 HINATA SETPHOTO 」 👥\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n❥ Solo para grupos\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
-  if (!isAdmin) return conn.sendMessage(m.chat, { text: '👥 「 HINATA SETPHOTO 」 👥\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n❥ Solo administradores\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
-  if (!isBotAdmin) return conn.sendMessage(m.chat, { text: '👥 「 HINATA SETPHOTO 」 👥\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n❥ La bot necesita ser admin\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+let handler = async (m, { conn }) => {
+  let who = m.sender
+  const groupMetadata = await conn.groupMetadata(m.chat)
+  const botId = conn.user.id.split(':')[0] + '@s.whatsapp.net'
+  const botAdmin = groupMetadata.participants.find(p => p.id === botId)
+  const senderAdmin = groupMetadata.participants.find(p => p.id === who)
 
-  let q = m.quoted ? m.quoted : m
-  let mime = (q.msg || q).mimetype || ''
-  if (!/image/.test(mime)) return conn.sendMessage(m.chat, { text: '👥 「 HINATA SETPHOTO 」 👥\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n❥ Responde a una imagen\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+  if (!botAdmin?.admin) {
+    return conn.sendMessage(m.chat, {
+      text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Necesito ser administrador\n\n> Dame permisos de admin para usar este comando'
+    }, { quoted: m })
+  }
 
-  let img = await q.download()
-  await conn.updateProfilePicture(m.chat, img)
-  await conn.sendMessage(m.chat, { text: '👥 「 HINATA SETPHOTO 」 👥\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n✅ » Foto del grupo actualizada\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+  if (!senderAdmin?.admin) {
+    return conn.sendMessage(m.chat, {
+      text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Solo administradores\n\n> No tienes permisos para usar este comando'
+    }, { quoted: m })
+  }
+
+  const quoted = m.quoted || m
+  const mime = quoted?.mimetype || ''
+
+  if (!mime.startsWith('image/')) {
+    return conn.sendMessage(m.chat, {
+      text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Envía o responde una imagen\n\n> Úsalo respondiendo a una foto'
+    }, { quoted: m })
+  }
+
+  await m.react('⏳')
+
+  try {
+    const media = await quoted.download()
+    await conn.updateProfilePicture(m.chat, media)
+
+    await conn.sendMessage(m.chat, {
+      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Foto del grupo actualizada\n\n> Solicitado por @${who.split('@')[0]}`,
+      mentions: [who]
+    }, { quoted: m })
+
+    await m.react('✅')
+  } catch (e) {
+    await m.react('❌')
+    await conn.sendMessage(m.chat, {
+      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se pudo cambiar la foto\n\n> ${e.message}`
+    }, { quoted: m })
+  }
 }
 
 handler.help = ['setphoto']
 handler.tags = ['group']
-handler.command = /^(setphoto|setfoto|fotogrupo)$/i
+handler.command = /^setphoto$/i
 handler.desc = 'Cambia la foto del grupo'
-handler.admin = true
-handler.botAdmin = true
+handler.group = true
 
 export default handler
