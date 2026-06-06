@@ -1,157 +1,181 @@
+```markdown
+<div align="center">
+  <img src="https://files.catbox.moe/yp1tti.png" width="300">
+  
+  # 𓆩⚝𓆪 HINATA BOT 𓍯 𓆩⚝𓆪
+
+  *La kunoichi del Clan Hyuga ahora en tu WhatsApp*
+
+  [![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/59177474230)
+  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ElvigilanteDv/Hinata-Bot)
+  [![Versión](https://img.shields.io/badge/versión-2.2.0-blue?style=for-the-badge)](https://github.com/ElvigilanteDv/Hinata-Bot)
+  [![Comandos](https://img.shields.io/badge/comandos-100+-purple?style=for-the-badge)](https://github.com/ElvigilanteDv/Hinata-Bot)
+</div>
+
+---
+
 <div align="center">
 
-<img src="https://files.catbox.moe/r60c8l.jpg" width="280">
-
-# ✦ ──「 🌸 HINATA BOT 🌸 」── ✦
-
-### 𓆩♡𓆪 Bot Multifunción de WhatsApp inspirado en Hinata Hyuga 𓆩♡𓆪
-
-<p>
-Un bot moderno, rápido y elegante diseñado para ofrecer
-entretenimiento, administración, descargas y herramientas avanzadas
-para tu comunidad de WhatsApp.
-</p>
-
-[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/TUNUMERO)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ElvigilanteDv)
-[![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
+### 🧑‍💻 EL VIGILANTE &nbsp;&nbsp;|&nbsp;&nbsp; 🧑‍💻 BRAYANRK
+*Honduras 🇭🇳 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Colombia 🇨🇴*
 
 </div>
 
 ---
 
-# 🌸 SOBRE HINATA BOT
+## ✦ SOBRE HINATA BOT
 
-**Hinata Bot** es un bot de WhatsApp multipropósito inspirado en la dulzura y fortaleza de **Hinata Hyuga**. Integra sistemas de entretenimiento, administración de grupos, descargas multimedia, economía RPG y herramientas avanzadas para usuarios y administradores.
-
-> Diseñado para brindar una experiencia fluida, rápida y completa dentro de WhatsApp.
+Hinata Bot es mucho más que un bot. Es **Hinata Hyuga** en persona: tímida con desconocidos, cariñosa con su creador, y siempre lista para ayudar. Con más de **100 comandos** distribuidos en **11 categorías**, ofrece una experiencia completa que combina **RPG**, **economía**, **gacha**, **juegos**, **descargas** y una **IA conversacional** que responde por mención.
 
 ---
 
-# 👑 DESARROLLADORES
+## ✦ CARACTERÍSTICAS DESTACADAS
 
-<div align="center">
+<table>
+<tr><td width="50%">
 
-| 👑 EL VIGILANTE | 👑 BRAYANRK |
-|:---:|:---:|
-| Desarrollador Principal | Desarrollador Principal |
-| Sistemas • APIs • Base Principal | Plugins • Mejoras • Soporte |
+### ⚔️ RPG COMPLETO
+Sistema de niveles, experiencia, clases (Novato a Samurái), peleas contra bestias y bosses, trabajos, crímenes, pesca, caza, minería, aventuras y más.
 
-</div>
+### 💎 ECONOMÍA VIRTUAL
+Diamantes, banco protegido, robos PvP, casino, ruleta, lotería con +200 boletos, transferencias entre usuarios.
 
----
+### 🎰 DOBLE GACHA
+Gacha 1 con +90 personajes de anime (SSR/SR/R) y Gacha 2 con personajes de anime real. Colecciona, vende, intercambia.
 
-# ✨ FUNCIONES DESTACADAS
+</td><td width="50%">
 
-### 📥 Descargas
-- TikTok sin marca de agua
-- YouTube MP3 y MP4
-- Instagram Videos y Reels
-- Facebook Videos
-- Pinterest Imágenes
-- MediaFire
+### 🧠 IA DE HINATA
+Personalidad completa de Hinata Hyuga. Responde por comando, mención o respondiendo a sus mensajes. Diferente con El Vigilante (amorosa) y con extraños (seria). Memoria por usuario.
 
-### 🎮 Entretenimiento
-- Juegos multijugador
-- Trivia
-- Adivinanzas
-- Retos y diversión
-- Sistema de logros
+### 🎮 JUEGOS INTERACTIVOS
+Ahorcado, 3 en raya, trivia (50 preguntas), PPT contra la bot. Todos con botones y premios en diamantes.
 
-### ⚔️ RPG
-- Niveles automáticos
-- Experiencia (XP)
-- Economía virtual
-- Tienda RPG
-- Misiones y recompensas
+### 📥 MULTIDESCARGAS
+YouTube (MP3/MP4), Spotify, TikTok, Instagram, APKs, stickers, MediaFire. Todo desde un solo comando.
 
-### 👥 Administración
-- Anti-link
-- Anti-spam
-- Anti-fake
-- Bienvenidas personalizadas
-- Gestión completa de grupos
-
-### 🤖 Inteligencia Artificial
-- Chat IA
-- Generación de textos
-- Respuestas automáticas
-- Herramientas inteligentes
-
-### 👑 Owner
-- Control total del bot
-- Gestión de usuarios
-- Broadcast global
-- Comandos exclusivos
+</td></tr>
+</table>
 
 ---
 
-# 🚀 INSTALACIÓN
+## ✦ TODOS LOS COMANDOS
 
-### Clonar repositorio
+<details open>
+<summary><b>⚔️ RPG</b> — 22 comandos</summary>
+
+`work` `work2` `daily` `weekly` `monthly` `fish` `crime` `cazar` `minar` `cofre` `aventura` `slut` `casino` `ruleta` `loteria` `steal` `pelear` `curar` `levelup` `clase` `perfil` `banco` `dep` `ret` `pay` `top`
+
+</details>
+
+<details>
+<summary><b>🎰 GACHA</b> — 10 comandos</summary>
+
+`rw` `claim` `rw2` `inventario` `inventario2` `coleccion` `vender` `mercado` `regalar` `suertegacha`
+
+</details>
+
+<details>
+<summary><b>🎮 JUEGOS</b> — 4 comandos</summary>
+
+`ahorcado` `tictactoe` `trivia` `ppt`
+
+</details>
+
+<details>
+<summary><b>👥 GRUPOS</b> — 18 comandos</summary>
+
+`antilink` `close` `open` `delete` `demote` `promote` `kick` `infogrupo` `resetlink` `setdesc` `setname` `setphoto` `setwelcome` `welcome` `tagall` `admins` `confesar` `link` `top`
+
+</details>
+
+<details>
+<summary><b>📥 DESCARGAS</b> — 8 comandos</summary>
+
+`play` `tiktok` `spotify` `instagram` `apk` `mediafire` `stickerly` `tenor`
+
+</details>
+
+<details>
+<summary><b>🎪 DIVERSIÓN</b> — 6 comandos</summary>
+
+`quien` `reto` `ship` `gay` `pp` `facto`
+
+</details>
+
+<details>
+<summary><b>🌸 ANIME</b> — 15 comandos</summary>
+
+`angry` `solo` `sad` `kiss` `hug` `kick` `happy` `bite` `bonk` `bully` `smile` `smug` `tickle` `cringe` `slap`
+
+</details>
+
+<details>
+<summary><b>🤖 IA</b> — 1 comando</summary>
+
+`ia` `hinata` — También responde por mención o respondiendo a sus mensajes
+
+</details>
+
+<details>
+<summary><b>👑 OWNER</b> — 10 comandos</summary>
+
+`dardiamantes` `darxp` `gachafull` `resetgacha` `join` `update` `getplugin` `bc` `spam` `exec`
+
+</details>
+
+<details>
+<summary><b>ℹ️ INFO</b> — 8 comandos</summary>
+
+`owner` `ping` `botinfo` `totalcmd` `inforpg` `infogacha` `infogroup` `infobot`
+
+</details>
+
+---
+
+## ✦ INSTALACIÓN RÁPIDA
 
 ```bash
-git clone https://github.com/ElvigilanteDv/HinataBot.git
-```
-
-### Entrar a la carpeta
-
-```bash
-cd HinataBot
-```
-
-### Instalar dependencias
-
-```bash
+git clone https://github.com/ElvigilanteDv/Hinata-Bot.git
+cd Hinata-Bot
 npm install
-```
-
-### Iniciar el bot
-
-```bash
 npm start
 ```
 
 ---
 
-# 📋 REQUISITOS
+✦ REQUISITOS
 
-- Node.js 21 o superior
-- Git instalado
-- Conexión a Internet
-- WhatsApp para vincular
-
----
-
-# 🌷 CONTRIBUCIONES
-
-Las contribuciones son bienvenidas.
-
-Si deseas mejorar el proyecto:
-
-```bash
-Fork 🍴
-Clone 📥
-Edita ✏️
-Pull Request 🚀
-```
+· Node.js 18+
+· npm
+· 2GB+ RAM recomendado
+· API Key de Groq (opcional, para IA)
 
 ---
 
-# ⭐ APOYA EL PROYECTO
+⚠️ LICENCIA Y DERECHOS DE AUTOR
 
-Si te gusta **HINATA BOT**, considera dejar una estrella en GitHub.
+HINATA BOT es propiedad intelectual de EL VIGILANTE y BRAYANRK.
 
-```txt
-🌸 Gracias por utilizar HINATA BOT 🌸
-Hecho con dedicación por EL VIGILANTE y BRAYANRK
-```
+· ✅ Permitido: Usar, modificar y compartir el bot sin fines comerciales
+· ✅ Permitido: Crear contenido (videos, tutoriales) usando la bot dando crédito
+· ❌ Prohibido: Vender este bot o cualquier derivado sin autorización
+· ❌ Prohibido: Remover créditos de los creadores
+· ❌ Prohibido: Afirmar que es de tu autoría
+
+El uso comercial, venta o distribución sin autorización expresa de los creadores será considerado violación de derechos de autor.
+
+© 2026 EL VIGILANTE & BRAYANRK — Todos los derechos reservados
+
+---
 
 <div align="center">
 
-### 𓆩🌸𓆪 HINATA BOT 𓆩🌸𓆪
+⭐ Dale estrella al repositorio | 💬 Únete al grupo oficial
 
-"El poder no está solo en la fuerza,
-sino en la determinación de seguir adelante."
+"No me rendiré, porque quiero ser fuerte como Naruto-kun" — Hinata Hyuga 🌸
+
+EL VIGILANTE & BRAYANRK © 2026
 
 </div>
+```
