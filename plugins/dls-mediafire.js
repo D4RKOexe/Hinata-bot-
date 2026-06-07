@@ -1,160 +1,213 @@
 import fetch from 'node-fetch'
-import * as cheerio from 'cheerio'
-import { createWriteStream, unlinkSync, statSync, readFileSync, mkdirSync } from 'fs'
+import fs from 'fs'
+import path from 'path'
+import os from 'os'
 import { pipeline } from 'stream/promises'
 
-const getMimeFromFilename = (filename) => {
-  const ext = filename.split('.').pop()?.toLowerCase()
-  const map = {
-    apk: 'application/vnd.android.package-archive',
-    zip: 'application/zip',
-    rar: 'application/x-rar-compressed',
-    '7z': 'application/x-7z-compressed',
-    mp4: 'video/mp4',
-    mkv: 'video/x-matroska',
-    mp3: 'audio/mpeg',
-    pdf: 'application/pdf',
-    jpg: 'image/jpeg',
-    jpeg: 'image/jpeg',
-    png: 'image/png',
-    exe: 'application/x-msdownload',
-    iso: 'application/x-iso9660-image',
-  }
-  return map[ext] || 'application/octet-stream'
+// ─── CONFIG ───────────────────────────────────────────────
+const API_BASE     = process.env.DV_API_URL || 'https://dv-yer-api.online'
+const API_KEY      = process.env.DV_API_KEY || ''
+const MAX_BYTES    = 1024 * 1024 * 1024   // 1 GB
+const REQ_TIMEOUT  = 120_000
+const TMP_DIR      = path.join(os.tmpdir(), 'hinata-mediafire')
+
+// ─── HELPERS ──────────────────────────────────────────────
+function ensureTmpDir() {
+  try { fs.mkdirSync(TMP_DIR, { recursive: true }) } catch {}
+}
+ensureTmpDir()
+
+function deleteFileSafe(filePath) {
+  try { if (filePath && fs.existsSync(filePath)) fs.unlinkSync(filePath) } catch {}
 }
 
-const scrapeMediafire = async (pageUrl) => {
-  const headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language': 'en-US,en;q=0.9',
+function mimeFromFileName(fileName) {
+  const lower = String(fileName || '').toLowerCase()
+  if (lower.endsWith('.apk'))              return 'application/vnd.android.package-archive'
+  if (lower.endsWith('.xapk'))             return 'application/xapk-package-archive'
+  if (lower.endsWith('.zip'))              return 'application/zip'
+  if (lower.endsWith('.rar'))              return 'application/vnd.rar'
+  if (lower.endsWith('.7z'))               return 'application/x-7z-compressed'
+  if (lower.endsWith('.mp3'))              return 'audio/mpeg'
+  if (lower.endsWith('.mp4'))              return 'video/mp4'
+  if (lower.endsWith('.mkv'))              return 'video/x-matroska'
+  if (lower.endsWith('.pdf'))              return 'application/pdf'
+  if (lower.endsWith('.txt'))              return 'text/plain'
+  if (lower.endsWith('.jpg') || lower.endsWith('.jpeg')) return 'image/jpeg'
+  if (lower.endsWith('.png'))              return 'image/png'
+  if (lower.endsWith('.exe'))              return 'application/x-msdownload'
+  if (lower.endsWith('.iso'))              return 'application/x-iso9660-image'
+  if (lower.endsWith('.mcpack') || lower.endsWith('.mcaddon') || lower.endsWith('.mcworld')) return 'application/octet-stream'
+  return 'application/octet-stream'
+}
+
+function humanBytes(bytes) {
+  const size = Number(bytes || 0)
+  if (!size) return null
+  const units = ['B', 'KB', 'MB', 'GB']
+  let value = size, index = 0
+  while (value >= 1024 && index < units.length - 1) { value /= 1024; index++ }
+  return `${value >= 100 || index === 0 ? value.toFixed(0) : value.toFixed(1)} ${units[index]}`
+}
+
+function safeFileName(name) {
+  return String(name || 'mediafire-file')
+    .replace(/[\\/:*?"<>|]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 120) || 'mediafire-file'
+}
+
+function normalizeFileName(name) {
+  const raw = String(name || 'mediafire-file').trim()
+  const extMatch = raw.match(/(\.[a-z0-9]{1,10})$/i)
+  const ext  = extMatch ? extMatch[1] : ''
+  const base = safeFileName(raw.replace(/\.[^.]+$/i, '') || 'mediafire-file')
+  return `${base}${ext}`
+}
+
+function buildParams(extra = {}) {
+  const params = new URLSearchParams({ ...extra })
+  if (API_KEY) params.set('api_key', API_KEY)
+  return params.toString()
+}
+
+// ─── API ──────────────────────────────────────────────────
+async function getMediafireMeta(fileUrl) {
+  const url = `${API_BASE}/mediafire?${buildParams({ mode: 'link', url: fileUrl })}`
+  const res  = await fetch(url, { timeout: 45_000 })
+  const data = await res.json()
+
+  if (!data?.ok) throw new Error(data?.detail || data?.message || 'No se pudo obtener info del archivo')
+
+  return {
+    title:    safeFileName(data.title || data.filename || 'MediaFire File'),
+    fileName: normalizeFileName(data.filename || 'mediafire-file'),
+    fileSize: String(data.filesize || '').trim() || null,
+    format:   String(data.format   || '').trim() || null,
+    streamUrl: data.stream_url || data.download_url || null,
   }
+}
 
-  const res = await fetch(pageUrl, { headers, redirect: 'follow', timeout: 30000 })
-  const html = await res.text()
-  const $ = cheerio.load(html)
+async function downloadFromStream(streamUrl, outputPath) {
+  ensureTmpDir()
 
-  let directLink = null
-
-  const btn = $('a#downloadButton')
-  if (btn.length) directLink = btn.first().attr('href')
-
-  if (!directLink) {
-    $('script').each((_, el) => {
-      const src = $(el).html() || ''
-      const match = src.match(/https:\/\/download\d+\.mediafire\.com\/[^"'\s]+/)
-      if (match) directLink = match[0]
-    })
-  }
-
-  if (!directLink) {
-    const match = html.match(/https:\/\/download\d+\.mediafire\.com\/[^"'\s<>]+/)
-    if (match) directLink = match[0]
-  }
-
-  if (!directLink) throw new Error('No se encontró link (archivo eliminado o captcha)')
-
-  directLink = directLink.replace(/&amp;/g, '&').trim()
-
-  const rawName = directLink.split('/').pop().split('?')[0]
-  const filename = decodeURIComponent(rawName.replace(/\+/g, ' ')).trim() || 'archivo'
-
-  let sizeText = '?'
-  $('ul.details li').each((_, el) => {
-    const txt = $(el).text()
-    if (/MB|GB|KB/i.test(txt)) sizeText = txt.replace(/[^0-9.,MGKB ]/gi, '').trim()
+  const res = await fetch(streamUrl, {
+    timeout: REQ_TIMEOUT,
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/122 Safari/537.36',
+      'Accept': '*/*',
+    },
+    redirect: 'follow',
   })
-  if (sizeText === '?') sizeText = $('div.dl-btn-data').first().text().trim() || '?'
 
-  return { link: directLink, filename, sizeText }
+  if (!res.ok) throw new Error(`HTTP ${res.status} al descargar`)
+
+  const ct = res.headers.get('content-type') || ''
+  if (ct.includes('text/html')) throw new Error('La API bloqueó la descarga')
+
+  const contentLength = Number(res.headers.get('content-length') || 0)
+  if (contentLength && contentLength > MAX_BYTES) throw new Error('Archivo demasiado grande')
+
+  let downloaded = 0
+  res.body.on('data', (chunk) => {
+    downloaded += chunk.length
+    if (downloaded > MAX_BYTES) res.body.destroy(new Error('Archivo demasiado grande'))
+  })
+
+  try {
+    await pipeline(res.body, fs.createWriteStream(outputPath))
+  } catch (e) {
+    deleteFileSafe(outputPath)
+    throw e
+  }
+
+  if (!fs.existsSync(outputPath)) throw new Error('No se pudo guardar el archivo')
+
+  const size = fs.statSync(outputPath).size
+  if (!size || size < 1) { deleteFileSafe(outputPath); throw new Error('El archivo descargado es inválido') }
+  if (size > MAX_BYTES)  { deleteFileSafe(outputPath); throw new Error('Archivo demasiado grande') }
+
+  return size
 }
 
+// ─── HANDLER ──────────────────────────────────────────────
 let handler = async (m, { conn, text }) => {
-  if (!text) {
+  if (!text || !text.includes('mediafire.com')) {
     return conn.sendMessage(m.chat, {
       text: '📥 「 HINATA MEDIAFIRE 」 📥\n\n💫 » Descarga archivos de MediaFire\n\n> #mediafire <link>\n> #mf <link>'
     }, { quoted: m })
   }
 
-  if (!text.includes('mediafire.com')) {
-    return conn.sendMessage(m.chat, {
-      text: '📥 「 HINATA MEDIAFIRE 」 📥\n\n💫 » Solo links de MediaFire'
-    }, { quoted: m })
-  }
-
   await m.react('⏳')
 
-  let tmpPath = null
+  let tempPath = null
 
   try {
-    // ✅ Crear directorio si no existe
-    mkdirSync('/home/container/tmp', { recursive: true })
+    ensureTmpDir()
 
-    const { link, filename, sizeText } = await scrapeMediafire(text)
-    const ext = filename.split('.').pop() || '?'
-    const mimetype = getMimeFromFilename(filename)
+    // 1. Obtener metadata
+    const info = await getMediafireMeta(text.trim())
 
-    tmpPath = `/home/container/tmp/mf_${Date.now()}.tmp`
+    if (!info.streamUrl) throw new Error('La API no devolvió URL de descarga')
 
-    let texto = '📥 「 HINATA MEDIAFIRE 」 📥\n\n'
-    texto += '📁 » *' + filename + '*\n'
-    texto += '📦 » Tamaño: ' + sizeText + '\n'
-    texto += '📄 » Formato: .' + ext + '\n\n'
-    texto += '> Descargando al servidor...'
+    tempPath = path.join(TMP_DIR, `${Date.now()}-${normalizeFileName(info.fileName)}`)
 
-    await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
+    // 2. Notificar
+    await conn.sendMessage(m.chat, {
+      text: [
+        '📥 「 HINATA MEDIAFIRE 」 📥',
+        '',
+        `📁 » *${info.title}*`,
+        `📦 » Tamaño: ${info.fileSize || 'Calculando...'}`,
+        `📄 » Formato: ${info.format || info.fileName.split('.').pop()?.toUpperCase() || '?'}`,
+        '',
+        '> 🚀 Descargando archivo...'
+      ].join('\n')
+    }, { quoted: m })
 
-    const dlHeaders = {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-      'Referer': 'https://www.mediafire.com/',
-    }
+    // 3. Descargar con stream a disco
+    const size = await downloadFromStream(info.streamUrl, tempPath)
 
-    const fileRes = await fetch(link, { headers: dlHeaders, redirect: 'follow', timeout: 300000 })
-    if (!fileRes.ok) throw new Error(`HTTP ${fileRes.status}`)
-
-    const ct = fileRes.headers.get('content-type')
-    if (ct?.includes('text/html')) throw new Error('Mediafire bloqueó la descarga')
-
-    // Stream directo a disco
-    const writer = createWriteStream(tmpPath)
-    await pipeline(fileRes.body, writer)
-
-    const stat = statSync(tmpPath)
-    console.log(`[MF] Guardado: ${tmpPath} | ${stat.size} bytes`)
-    if (stat.size < 1024) throw new Error('Archivo descargado muy pequeño')
-
+    // 4. Notificar envío
     await conn.sendMessage(m.chat, {
       text: '📥 「 HINATA MEDIAFIRE 」 📥\n\n💫 » Enviando a WhatsApp...'
     }, { quoted: m })
 
-    // ✅ Leer el archivo como buffer y enviarlo (NO usar file://)
-    const fileBuffer = readFileSync(tmpPath)
-
+    // 5. Enviar con stream desde disco (sin cargar en RAM)
+    const fileName = normalizeFileName(info.fileName)
     await conn.sendMessage(m.chat, {
-      document: fileBuffer,
-      fileName: filename,
-      mimetype: mimetype
-    }, { quoted: m })
+      document: { stream: fs.createReadStream(tempPath) },
+      fileName,
+      mimetype: mimeFromFileName(fileName),
+      fileLength: size,
+      caption: [
+        '╭━━〔 *📦 MEDIAFIRE DOWNLOAD* 〕━━⬣',
+        `┃ 📄 *Archivo:* ${info.title}`,
+        `┃ 💾 *Tamaño:* ${info.fileSize || humanBytes(size) || 'Desconocido'}`,
+        `┃ 🧩 *Formato:* ${info.format || fileName.split('.').pop()?.toUpperCase() || 'FILE'}`,
+        '┃',
+        '┃ ✅ *Descarga completada correctamente*',
+        '╰━━━━━━━━━━━━━━━━━━⬣',
+      ].join('\n')
+    }, { quoted: m, timeout: 600_000 })
 
     await m.react('✅')
 
   } catch (e) {
-    console.log('[MF ERROR]', e)
+    console.error('[MF ERROR]', e?.message || e)
     await m.react('❌')
-    conn.sendMessage(m.chat, {
-      text: '📥 「 HINATA MEDIAFIRE 」 📥\n\n💫 » Error al descargar\n\n> ' + e.message
+    await conn.sendMessage(m.chat, {
+      text: `📥 「 HINATA MEDIAFIRE 」 📥\n\n❌ » Error al descargar\n\n> ${e.message}`
     }, { quoted: m })
   } finally {
-    // Borrar siempre el temporal
-    if (tmpPath) {
-      try { unlinkSync(tmpPath) } catch {}
-    }
+    deleteFileSafe(tempPath)
   }
 }
 
-handler.help = ['mediafire']
-handler.tags = ['downloader']
+handler.help    = ['mediafire']
+handler.tags    = ['downloader']
 handler.command = /^(mediafire|mf)$/i
-handler.desc = 'Descarga archivos de MediaFire'
+handler.desc    = 'Descarga archivos de MediaFire'
 
 export default handler
