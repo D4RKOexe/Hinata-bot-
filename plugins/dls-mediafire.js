@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 import * as cheerio from 'cheerio'
 import { tmpdir } from 'os'
 import { join } from 'path'
-import { createWriteStream, unlinkSync } from 'fs'
+import { createWriteStream, unlinkSync, createReadStream } from 'fs'
 import { pipeline } from 'stream/promises'
 
 const getMimeFromFilename = (filename) => {
@@ -38,7 +38,7 @@ const scrapeMediafire = async (pageUrl) => {
 
   let directLink = null
 
-  const btn = $('a#downloadButton, a.input.btn.btn-skyblue[href*="download"]')
+  const btn = $('a#downloadButton')
   if (btn.length) directLink = btn.first().attr('href')
 
   if (!directLink) {
@@ -58,10 +58,17 @@ const scrapeMediafire = async (pageUrl) => {
 
   directLink = directLink.replace(/&amp;/g, '&').trim()
 
-  const filename = $('div.filename, .dl-btn-label, #filename').first().text().trim()
-    || directLink.split('/').pop().replace(/\+/g, ' ') || 'archivo'
+  // Nombre real desde el link directo (más confiable que el HTML)
+  const rawName = directLink.split('/').pop().split('?')[0]
+  const filename = decodeURIComponent(rawName.replace(/\+/g, ' ')).trim() || 'archivo'
 
-  const sizeText = $('ul.details li:nth-child(2) span, .dl-btn-data').first().text().trim() || '?'
+  // Tamaño desde el li correcto
+  let sizeText = '?'
+  $('ul.details li').each((_, el) => {
+    const txt = $(el).text()
+    if (/MB|GB|KB/i.test(txt)) sizeText = txt.replace(/[^0-9.,MGKB ]/gi, '').trim()
+  })
+  if (sizeText === '?') sizeText = $('div.dl-btn-data').first().text().trim() || '?'
 
   return { link: directLink, filename, sizeText }
 }
@@ -88,6 +95,10 @@ let handler = async (m, { conn, text }) => {
     const ext = filename.split('.').pop() || '?'
     const mimetype = getMimeFromFilename(filename)
 
+    // Nombre de archivo temporal sin espacios para evitar ENOENT
+    const safeName = `mf_${Date.now()}.tmp`
+    tmpPath = join(tmpdir(), safeName)
+
     let texto = '📥 「 HINATA MEDIAFIRE 」 📥\n\n'
     texto += '📁 » *' + filename + '*\n'
     texto += '📦 » Tamaño: ' + sizeText + '\n'
@@ -107,8 +118,7 @@ let handler = async (m, { conn, text }) => {
     const ct = fileRes.headers.get('content-type')
     if (ct?.includes('text/html')) throw new Error('Mediafire bloqueó la descarga')
 
-    // Guardar en disco en streaming
-    tmpPath = join(tmpdir(), `mf_${Date.now()}_${filename}`)
+    // Stream directo a disco
     const writer = createWriteStream(tmpPath)
     await pipeline(fileRes.body, writer)
 
@@ -116,9 +126,9 @@ let handler = async (m, { conn, text }) => {
       text: '📥 「 HINATA MEDIAFIRE 」 📥\n\n💫 » Enviando a WhatsApp...'
     }, { quoted: m })
 
-    // Enviar leyendo desde disco sin cargar en RAM
+    // Enviar como stream desde disco (sin cargar en RAM)
     await conn.sendMessage(m.chat, {
-      document: { url: 'file://' + tmpPath },
+      document: createReadStream(tmpPath),
       fileName: filename,
       mimetype: mimetype
     }, { quoted: m })
