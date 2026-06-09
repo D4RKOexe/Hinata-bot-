@@ -140,7 +140,7 @@ Actualmente cuenta con más de **113 comandos**, organizados en múltiples categ
 ## 🚀 INSTALACIÓN
 
 ```bash
-git clone https://github.com/ElvigilanteDv/Hinata-Bot.git
+git clone https://github.com/D4RKOexe/Hinata-bot-
 cd Hinata-Bot
 npm install
 npm start
