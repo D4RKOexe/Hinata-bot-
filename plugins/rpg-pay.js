@@ -2,7 +2,7 @@ let handler = async (m, { conn, args }) => {
   let who = m.sender
   let user = global.db.data.users[who]
   if (!user) {
-    global.db.data.users[who] = { diamantes: 0, diamond: 0, bank: 0 }
+    global.db.data.users[who] = { darkcoinss: 0, darkcoin: 0, bank: 0 }
     user = global.db.data.users[who]
   }
 
@@ -11,28 +11,28 @@ let handler = async (m, { conn, args }) => {
 
   if (!target || isNaN(cantidad) || cantidad <= 0) {
     return conn.sendMessage(m.chat, {
-      text: '💸 「 HINATA PAY 」 💸\n\n💫 » Transfiere diamantes\n\n> #pay @usuario <cantidad>'
+      text: '💸 「 DARKO PAY 」 💸\n\n💫 » Transfiere darkcoins\n\n> #pay @usuario <cantidad>'
     }, { quoted: m })
   }
 
   if (target === who) {
     return conn.sendMessage(m.chat, {
-      text: '💸 「 HINATA PAY 」 💸\n\n💫 » No te puedes pagar a ti mismo'
+      text: '💸 「 DARK PAY 」 💸\n\n💫 » No te puedes pagar a ti mismo'
     }, { quoted: m })
   }
 
-  let misDiamantes = user.diamantes || user.diamond || 0
+  let misDarkcoins = user.darkcoins || user.darcoin || 0
 
-  if (misDiamantes < cantidad) {
+  if (misDarkcoins < cantidad) {
     return conn.sendMessage(m.chat, {
-      text: '💸 「 HINATA PAY 」 💸\n\n💫 » No tienes suficientes diamantes\n💰 » Tienes: ' + misDiamantes + ' 💎'
+      text: '💸 「 DARKO PAY 」 💸\n\n💫 » No tienes suficientes darkcoins\n💰 » Tienes: ' + misDarkcoins + ' 💵'
     }, { quoted: m })
   }
 
-  if (user.diamantes !== undefined) {
-    user.diamantes = misDiamantes - cantidad
+  if (user.darkcoins !== undefined) {
+    user.diamantes = misDarkcoins - cantidad
   } else {
-    user.diamond = misDiamantes - cantidad
+    user.darkcoin = misDarkcoins - cantidad
   }
 
   let targetUser = global.db.data.users[target]
@@ -41,21 +41,21 @@ let handler = async (m, { conn, args }) => {
     targetUser = global.db.data.users[target]
   }
 
-  if (targetUser.diamantes !== undefined) {
-    targetUser.diamantes = (targetUser.diamantes || 0) + cantidad
+  if (targetUser.darkcoins !== undefined) {
+    targetUser.darkcoins = (targetUser.diamantes || 0) + cantidad
   } else {
-    targetUser.diamond = (targetUser.diamond || 0) + cantidad
+    targetUser.darkcoin = (targetUser.darkcoin || 0) + cantidad
   }
 
-  let miTotal = user.diamantes || user.diamond || 0
-  let suTotal = targetUser.diamantes || targetUser.diamond || 0
+  let miTotal = user.darkcoins || user.dqrkcoin || 0
+  let suTotal = targetUser.darkcoins || targetUser.darkcoin || 0
 
-  let texto = '💸 「 HINATA PAY 」 💸\n\n'
+  let texto = '💸 「 DARKO PAY 」 💸\n\n'
   texto += '✅ » Transferencia exitosa\n\n'
   texto += '📤 » @' + who.split('@')[0] + '\n'
   texto += '📥 » @' + target.split('@')[0] + '\n'
-  texto += '💎 » ' + cantidad + ' diamantes\n\n'
-  texto += '💰 Tu saldo: ' + miTotal + ' 💎'
+  texto += '💵 » ' + cantidad + ' diamantes\n\n'
+  texto += '💰 Tu saldo: ' + miTotal + ' 💵'
 
   await conn.sendMessage(m.chat, { text: texto, mentions: [who, target] }, { quoted: m })
 }
@@ -63,6 +63,6 @@ let handler = async (m, { conn, args }) => {
 handler.help = ['pay']
 handler.tags = ['rpg']
 handler.command = /^(pay|pagar|transferir)$/i
-handler.desc = 'Transfiere diamantes a otro usuario'
+handler.desc = 'Transfiere darkcoins a otro usuario'
 
 export default handler
