@@ -16,7 +16,7 @@ let handler = async (m, { conn }) => {
     let minutos = Math.floor(tiempoRestante / 60)
     let segundos = tiempoRestante % 60
     return conn.sendMessage(m.chat, {
-      text: '⚔️ 「 HINATA WORK 」 ⚔️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n⏳ » Descansando...\n🕐 » ' + minutos + 'm ' + segundos + 's\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔'
+      text: '⚔️ 「 DARKO WORK 」 ⚔️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n⏳ » Descansando...\n🕐 » ' + minutos + 'm ' + segundos + 's\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔'
     }, { quoted: m })
   }
 
@@ -66,11 +66,11 @@ let handler = async (m, { conn }) => {
   user.exp = (user.exp || 0) + exp
   cooldownsWork[who] = now + 120000
 
-  let texto = '⚔️ 「 HINATA WORK 」 ⚔️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n'
+  let texto = '⚔️ 「 DARKO WORK 」 ⚔️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n'
   texto += '📋 » ' + trabajo.texto + '\n'
-  texto += '💎 » Diamantes: ' + (cambio > 0 ? '+' : '') + cambio + ' ' + rareza + '\n'
+  texto += '💵 » Diamantes: ' + (cambio > 0 ? '+' : '') + cambio + ' ' + rareza + '\n'
   texto += '✨ » Experiencia: +' + exp + '\n'
-  texto += '💰 » Total: ' + user.diamantes + ' 💎\n\n'
+  texto += '💰 » Total: ' + user.darkcoins + ' 💵\n\n'
   texto += '▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n> ⏳ 2 minutos'
 
   await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
@@ -79,6 +79,6 @@ let handler = async (m, { conn }) => {
 handler.help = ['work']
 handler.tags = ['rpg']
 handler.command = /^(work|trabajar|chamba)$/i
-handler.desc = 'Trabaja para ganar diamantes y exp'
+handler.desc = 'Trabaja para ganar darkcoins y exp'
 
 export default handler
