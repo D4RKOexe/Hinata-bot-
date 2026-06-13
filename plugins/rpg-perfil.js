@@ -3,7 +3,7 @@ let handler = async (m, { conn }) => {
   let user = global.db.data.users[who]
   if (!user) {
     global.db.data.users[who] = {
-      exp: 0, level: 0, diamantes: 0, bank: 0,
+      exp: 0, level: 0, darkcoins: 0, bank: 0,
       health: 100, maxHealth: 100, attack: 10, defense: 5,
       mana: 50, maxMana: 50, class: 'Novato', inventory: [],
       equipment: { weapon: null, armor: null, accessory: null }
