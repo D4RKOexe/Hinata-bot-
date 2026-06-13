@@ -8,7 +8,7 @@ let handler = async (m, { conn, args }) => {
 
   if (!args[0]) {
     return conn.sendMessage(m.chat, {
-      text: '🎡 「 HINATA RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Apuesta y gira la ruleta\n\n🎯 » #ruleta <cantidad> <color>\n🔴 » Red = x2\n⚫ » Black = x2\n🟢 » Green = x10\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n> #ruleta 10 red'
+      text: '🎡 「 DARKO RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Apuesta y gira la ruleta\n\n🎯 » #ruleta <cantidad> <color>\n🔴 » Red = x2\n⚫ » Black = x2\n🟢 » Green = x10\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n> #ruleta 10 red'
     }, { quoted: m })
   }
 
@@ -17,20 +17,20 @@ let handler = async (m, { conn, args }) => {
 
   if (isNaN(apuesta) || apuesta <= 0) {
     return conn.sendMessage(m.chat, {
-      text: '🎡 「 HINATA RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Cantidad inválida\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
+      text: '🎡 「 DARKO RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Cantidad inválida\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
     }, { quoted: m })
   }
 
   if (!color || !['red', 'black', 'green'].includes(color)) {
     return conn.sendMessage(m.chat, {
-      text: '🎡 「 HINATA RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Elige un color\n🔴 red | ⚫ black | 🟢 green\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
+      text: '🎡 「 DARKO RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Elige un color\n🔴 red | ⚫ black | 🟢 green\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
     }, { quoted: m })
   }
 
-  let misDiamantes = user.diamantes || user.diamond || 0
-  if (misDiamantes < apuesta) {
+  let misDarkcoins = user.darkcoins || user.diamond || 0
+  if (misDarkcoins < apuesta) {
     return conn.sendMessage(m.chat, {
-      text: '🎡 「 HINATA RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » No tienes tantos diamantes\n💰 » Tienes: ' + misDiamantes + ' 💎\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
+      text: '🎡 「 DARKO RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » No tienes tantos darkcoins\n💰 » Tienes: ' + misDarkcoins + ' 💵\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
     }, { quoted: m })
   }
 
@@ -47,28 +47,28 @@ let handler = async (m, { conn, args }) => {
   let multiplicador = color === 'green' ? 10 : 2
   let ganancia = gano ? apuesta * multiplicador : 0
 
-  if (user.diamantes !== undefined) {
-    user.diamantes = misDiamantes - apuesta + ganancia
+  if (user.darkcoinss !== undefined) {
+    user.diamantes = misDarkcoins - apuesta + ganancia
   } else {
-    user.diamond = misDiamantes - apuesta + ganancia
+    user.darkcoin = misDarkcoins - apuesta + ganancia
   }
 
   let emojis = { red: '🔴', black: '⚫', green: '🟢' }
 
-  let texto = '🎡 「 HINATA RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n'
-  texto += '💫 » Apostaste ' + apuesta + ' 💎 a ' + emojis[color] + '\n'
+  let texto = '🎡 「 DARKO RULETA 」 🎡\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n'
+  texto += '💫 » Apostaste ' + apuesta + ' 💵 a ' + emojis[color] + '\n'
   texto += '🎡 » Girando... ¡Salió ' + emojis[resultado] + ' ' + resultado.toUpperCase() + '!\n\n'
 
   if (gano) {
     texto += '🏆 » ¡GANASTE!\n'
-    texto += '💎 » +' + ganancia + ' diamantes\n'
+    texto += '💵 » +' + ganancia + ' darkcoins\n'
   } else {
     texto += '💀 » PERDISTE\n'
-    texto += '💎 » -' + apuesta + ' diamantes\n'
+    texto += '💵 » -' + apuesta + ' darkcoins\n'
   }
 
-  let total = user.diamantes || user.diamond || 0
-  texto += '💰 » Total: ' + total + ' 💎\n\n'
+  let total = user.darkcoinss || user.darkcoin || 0
+  texto += '💰 » Total: ' + total + ' 💵\n\n'
   texto += '✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
 
   await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
