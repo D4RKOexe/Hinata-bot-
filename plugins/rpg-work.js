@@ -21,15 +21,15 @@ let handler = async (m, { conn }) => {
   }
 
   let random = Math.random()
-  let diamantes = 1
+  let darkcoins = 1
   let exp = Math.floor(Math.random() * 20) + 5
   let rareza = '⭐'
 
   if (random < 0.15) {
-    diamantes = 2
+    darkcoins = 2
     rareza = '🌟🌟'
   } else if (random < 0.05) {
-    diamantes = 3
+    darkcoins = 3
     rareza = '🌟🌟🌟'
   }
 
@@ -45,9 +45,9 @@ let handler = async (m, { conn }) => {
   ]
 
   let perdidas = [
-    { texto: '💔 Te estafaron con un trabajo falso', diamantes: -1 },
-    { texto: '🎰 Apostaste tu pago y perdiste', diamantes: -1 },
-    { texto: '🦝 Te robaron el dinero del día', diamantes: -1 }
+    { texto: '💔 Te estafaron con un trabajo falso', darkcoins: -1 },
+    { texto: '🎰 Apostaste tu pago y perdiste', darkcoins: -1 },
+    { texto: '🦝 Te robaron el dinero del día', datrkcoins: -1 }
   ]
 
   let esPerdida = random < 0.10
