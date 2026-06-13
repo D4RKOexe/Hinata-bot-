@@ -98,7 +98,7 @@ Actualmente cuenta con más de **113 comandos**, organizados en múltiples categ
 
 ## 🤖 COMANDOS IA (2)
 
-`ia` `hinata`
+`ia` `darko`
 
 ---
 
