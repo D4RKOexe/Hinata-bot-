@@ -25,9 +25,9 @@ let handler = async (m, { conn }) => {
     }]
 
     const interactiveMessage = proto.Message.InteractiveMessage.create({
-      header: { title: '⚔️ HINATA BATTLE ⚔️', subtitle: pelea.oponente.name, hasMediaAttachment: false },
-      body: { text: '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n👹 » ' + pelea.oponente.name + '\n❤️ » Vida: ' + pelea.saludOponente + '/' + pelea.oponente.health + '\n⚔️ » Ataque: ' + pelea.oponente.attack + '\n\n👤 » Tú\n❤️ » Vida: ' + pelea.saludUsuario + '/' + (user.maxHealth || 100) + '\n⚔️ » Ataque: ' + (user.attack || 10) + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' },
-      footer: { text: '⫏⫏ HINATA BATTLE ✿' },
+      header: { title: '⚔️ DARKO BATTLE ⚔️', subtitle: pelea.oponente.name, hasMediaAttachment: false },
+      body: { text: '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n👹 » ' + pelea.oponente.name + '\n❤️ » Vida: ' + pelea.saludOponente + '/' + pelea.oponente.health + '\n⚔️ » Ataque: ' + pelea.oponente.attack + '\n\n👤 » Tú\n❤️ » Vida: ' + pelea.saludUsuario + '/' + (user.maxHealth || 100) + '\n⚔️ » Ataque: ' + (user.attack || 10) + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' },
+      footer: { text: '⫏⫏ DARKO BATTLE ⚡' },
       nativeFlowMessage: {
         buttons: [{
           name: 'single_select',
@@ -57,9 +57,9 @@ let handler = async (m, { conn }) => {
   }]
 
   const interactiveMessage = proto.Message.InteractiveMessage.create({
-    header: { title: '⚔️ HINATA BATTLE ⚔️', subtitle: 'Elige tu oponente', hasMediaAttachment: false },
-    body: { text: '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Elige contra quién pelear\n\n👤 » Tu fuerza: ' + (user.attack || 10) + ' ⚔️\n❤️ » Tu vida: ' + (user.health || 100) + '/' + (user.maxHealth || 100) + '\n⭐ » Tu nivel: ' + (user.level || 0) + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' },
-    footer: { text: '⫏⫏ HINATA BATTLE ✿' },
+    header: { title: '⚔️ DARKO BATTLE ⚔️', subtitle: 'Elige tu oponente', hasMediaAttachment: false },
+    body: { text: '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Elige contra quién pelear\n\n👤 » Tu fuerza: ' + (user.attack || 10) + ' ⚔️\n❤️ » Tu vida: ' + (user.health || 100) + '/' + (user.maxHealth || 100) + '\n⭐ » Tu nivel: ' + (user.level || 0) + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' },
+    footer: { text: '⫏⫏ DARKO BATTLE ⚡' },
     nativeFlowMessage: {
       buttons: [{
         name: 'single_select',
@@ -96,7 +96,7 @@ handler.before = async (m, { conn }) => {
 
     if (id.startsWith('fight_')) {
       if (peleas[who]) {
-        return conn.sendMessage(m.chat, { text: '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Ya estás en combate\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' }, { quoted: m })
+        return conn.sendMessage(m.chat, { text: '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Ya estás en combate\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' }, { quoted: m })
       }
 
       let tipo = id.replace('fight_', '')
@@ -122,12 +122,12 @@ handler.before = async (m, { conn }) => {
         oponente = bestias[Math.floor(Math.random() * bestias.length)]
       } else if (tipo === 'boss') {
         if ((user.level || 0) < 5) {
-          return conn.sendMessage(m.chat, { text: '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Necesitas nivel 5 para BOSS\n⭐ » Tu nivel: ' + (user.level || 0) + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' }, { quoted: m })
+          return conn.sendMessage(m.chat, { text: '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Necesitas nivel 5 para BOSS\n⭐ » Tu nivel: ' + (user.level || 0) + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' }, { quoted: m })
         }
         oponente = bosses[Math.floor(Math.random() * bosses.length)]
       } else if (tipo === 'finalboss') {
         if ((user.level || 0) < 10) {
-          return conn.sendMessage(m.chat, { text: '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Necesitas nivel 10 para FINAL BOSS\n⭐ » Tu nivel: ' + (user.level || 0) + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' }, { quoted: m })
+          return conn.sendMessage(m.chat, { text: '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Necesitas nivel 10 para FINAL BOSS\n⭐ » Tu nivel: ' + (user.level || 0) + '\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' }, { quoted: m })
         }
         oponente = { name: 'DIOS DE LA DESTRUCCIÓN', attack: 60, health: 500, recompensa: 100, exp: 500 }
       }
@@ -148,8 +148,8 @@ handler.before = async (m, { conn }) => {
 
       const interactiveMessage = proto.Message.InteractiveMessage.create({
         header: { title: '⚔️ HINATA BATTLE ⚔️', subtitle: oponente.name, hasMediaAttachment: false },
-        body: { text: '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » ¡' + oponente.name + ' aparece!\n\n👹 » ' + oponente.name + '\n❤️ » Vida: ' + oponente.health + '/' + oponente.health + '\n⚔️ » Ataque: ' + oponente.attack + '\n\n👤 » Tú\n❤️ » Vida: ' + (user.health || 100) + '/' + (user.maxHealth || 100) + '\n⚔️ » Ataque: ' + (user.attack || 10) + '\n\n🏆 » Recompensa: ' + oponente.recompensa + ' 💎 | ' + oponente.exp + ' exp\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' },
-        footer: { text: '⫏⫏ HINATA BATTLE ✿' },
+        body: { text: '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » ¡' + oponente.name + ' aparece!\n\n👹 » ' + oponente.name + '\n❤️ » Vida: ' + oponente.health + '/' + oponente.health + '\n⚔️ » Ataque: ' + oponente.attack + '\n\n👤 » Tú\n❤️ » Vida: ' + (user.health || 100) + '/' + (user.maxHealth || 100) + '\n⚔️ » Ataque: ' + (user.attack || 10) + '\n\n🏆 » Recompensa: ' + oponente.recompensa + ' 💎 | ' + oponente.exp + ' exp\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' },
+        footer: { text: '⫏⫏ DARKO BATTLE ⚡' },
         nativeFlowMessage: {
           buttons: [{
             name: 'single_select',
@@ -177,7 +177,7 @@ handler.before = async (m, { conn }) => {
       if (accion === 'huir') {
         user.health = pelea.saludUsuario
         delete peleas[who]
-        return conn.sendMessage(m.chat, { text: '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n🏃 » Huiste del combate\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' }, { quoted: m })
+        return conn.sendMessage(m.chat, { text: '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n🏃 » Huiste del combate\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' }, { quoted: m })
       }
 
       if (accion === 'atacar') {
@@ -198,7 +198,7 @@ handler.before = async (m, { conn }) => {
           user.health = pelea.saludUsuario
           delete peleas[who]
 
-          let texto = '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n'
+          let texto = '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n'
           texto += '🏆 » ¡VENCISTE!\n\n'
           texto += '💀 » ' + op.name + ' derrotado\n'
           texto += '💎 » +' + op.recompensa + ' diamantes\n'
@@ -216,7 +216,7 @@ handler.before = async (m, { conn }) => {
           user.health = Math.max(1, Math.floor((user.maxHealth || 100) * 0.3))
           delete peleas[who]
 
-          let texto = '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n'
+          let texto = '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n'
           texto += '💀 » ¡FUISTE DERROTADO!\n\n'
           texto += '👹 » ' + op.name + ' te venció\n'
           texto += '❤️ » Vida restante: ' + user.health + '\n\n'
@@ -236,9 +236,9 @@ handler.before = async (m, { conn }) => {
         }]
 
         const interactiveMessage = proto.Message.InteractiveMessage.create({
-          header: { title: '⚔️ HINATA BATTLE ⚔️', subtitle: pelea.oponente.name, hasMediaAttachment: false },
-          body: { text: '⚔️ 「 HINATA BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n⚡ » Tu golpe: -' + danoUsuario + ' ❤️\n💥 » Su golpe: -' + danoOponente + ' ❤️\n\n👹 » ' + pelea.oponente.name + ': ' + pelea.saludOponente + '/' + pelea.oponente.health + ' ❤️\n👤 » Tú: ' + pelea.saludUsuario + '/' + (user.maxHealth || 100) + ' ❤️\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' },
-          footer: { text: '⫏⫏ HINATA BATTLE ✿' },
+          header: { title: '⚔️ DARKO BATTLE ⚔️', subtitle: pelea.oponente.name, hasMediaAttachment: false },
+          body: { text: '⚔️ 「 DARKO BATTLE 」 ⚔️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n⚡ » Tu golpe: -' + danoUsuario + ' ❤️\n💥 » Su golpe: -' + danoOponente + ' ❤️\n\n👹 » ' + pelea.oponente.name + ': ' + pelea.saludOponente + '/' + pelea.oponente.health + ' ❤️\n👤 » Tú: ' + pelea.saludUsuario + '/' + (user.maxHealth || 100) + ' ❤️\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦' },
+          footer: { text: '⫏⫏ DARKO BATTLE ✿' },
           nativeFlowMessage: {
             buttons: [{
               name: 'single_select',
