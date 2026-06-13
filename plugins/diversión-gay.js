@@ -37,7 +37,7 @@ let handler = async (m, { conn }) => {
     barra += i < completado ? '🏳️‍🌈' : '⬛'
   }
 
-  let texto = '𖣔 「 HINATA GAYMETRO 」 ˚ʚ♡ɞ˚\n\n'
+  let texto = '𖣔 「 DARKO GAYMETRO 」 ˚ʚ♡ɞ˚\n\n'
   texto += '🎯 » ' + name + '\n\n'
   texto += emoji + ' » ' + porcentaje + '%\n'
   texto += '📊 » ' + barra + '\n'
