@@ -1,44 +1,21 @@
 <div align="center">
   <img src="https://files.catbox.moe/yp1tti.png" width="320">
-
-  <h1>𓆩⚝𓆪 HINATA BOT 𓍯 𓆩⚝𓆪</h1>
-  <p>La kunoichi del Clan Hyuga ahora en tu WhatsApp</p>
-
-  ![Version](https://img.shields.io/badge/Version-2.2.0-blue?style=for-the-badge)
-  ![Commands](https://img.shields.io/badge/Commands-113+-purple?style=for-the-badge)
-  ![Node.js](https://img.shields.io/badge/Node.js-21+-green?style=for-the-badge)
-  ![WhatsApp](https://img.shields.io/badge/WhatsApp-Bot-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)
-</div>
-
 ---
 
-## 👨‍💻 CREADORES PRINCIPALES
+## 👨‍💻 CREADOR PRINCIPAL
 
 <div align="center">
 
-**EL VIGILANTE 🇭🇳**
-Creador Principal
-
-**BRAYANRK 🇨🇴**
+**D4RKO**
 Creador Principal
 
 </div>
 
 ---
 
-## 🌐 COMUNIDAD OFICIAL
+## ✦ SOBRE DARKO BOT
 
-<div align="center">
-
-[![Grupo Oficial](https://img.shields.io/badge/Grupo_Oficial-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/EEppolIlNjGDZrmNyDERRr)
-
-</div>
-
----
-
-## ✦ SOBRE HINATA BOT
-
-Hinata Bot es un bot avanzado de WhatsApp inspirado en Hinata Hyuga. Combina sistemas RPG, economía virtual, gacha, juegos interactivos, descargas multimedia e inteligencia artificial conversacional con personalidad propia.
+DARKO Bot es un bot avanzado de WhatsApp que combina sistemas RPG, economía virtual, gacha, juegos interactivos, descargas multimedia e inteligencia artificial conversacional con personalidad propia.
 
 Actualmente cuenta con más de **113 comandos**, organizados en múltiples categorías para brindar una experiencia completa, entretenida y dinámica para grupos y usuarios individuales.
 
@@ -79,7 +56,7 @@ Actualmente cuenta con más de **113 comandos**, organizados en múltiples categ
 
 ## ⚔️ COMANDOS RPG (26)
 
-`work` `work2` `daily` `weekly` `monthly` `fish` `crime` `cazar` `minar` `cofre` `aventura` `slut` `casino` `ruleta` `loteria` `steal` `pelear` `curar` `levelup` `clase` `perfil` `banco` `dep` `ret` `pay` `top`
+`work` `work2` `daily` `weekly` `monthly` `fish` `crimen` `cazar` `minar` `cofre` `aventura` `slut` `casino` `ruleta` `loteria` `steal` `pelear` `curar` `levelup` `clase` `perfil` `banco` `dep` `ret` `pay` `top`
 
 ---
 
@@ -175,22 +152,7 @@ npm start
 
 ## ⚠️ LICENCIA
 
-© 2026 EL VIGILANTE & BRAYANRK — Todos los derechos reservados.
-
-**PERMITIDO**
-
-✔️ Uso personal  
-✔️ Modificación conservando créditos  
-✔️ Compartir el proyecto sin fines comerciales  
-✔️ Crear contenido relacionado con el bot  
-
-**PROHIBIDO**
-
-❌ Vender el proyecto  
-❌ Eliminar créditos  
-❌ Reclamar autoría  
-❌ Redistribución comercial sin autorización  
-❌ Venta de versiones modificadas  
+© 2026 D4rko — Todos los derechos reservados. 
 
 ---
 
@@ -198,19 +160,11 @@ npm start
 
 ## ⭐ APOYA EL PROYECTO
 
-Si te gusta HINATA BOT:
+Si te gusta D4rko BOT:
 
 ⭐ Dale una estrella al repositorio  
-💬 Únete a la comunidad oficial  
-🚀 Comparte el proyecto  
 ❤️ Apoya a los desarrolladores  
 
 ---
-
-🌸 *"No me rendiré, porque quiero ser fuerte como Naruto-kun."*
-
-**𓆩⚝𓆪 HINATA BOT 𓍯 𓆩⚝𓆪**
-
-EL VIGILANTE 🇭🇳 • BRAYANRK 🇨🇴
 
 </div>
