@@ -8,15 +8,15 @@ let handler = async (m, { conn }) => {
 
   let mentions = sorted.map(([id]) => id)
 
-  if (!sorted.length) return conn.sendMessage(m.chat, { text: '⚔️ 「 HINATA TOP 」 ⚔️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n📭 » Aún no hay jugadores\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+  if (!sorted.length) return conn.sendMessage(m.chat, { text: '⚔️ 「 DARKO TOP 」 ⚔️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n📭 » Aún no hay jugadores\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
 
-  let texto = '⚔️ 「 HINATA TOP GLOBAL 」 ⚔️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n'
+  let texto = '⚔️ 「 DARKO TOP GLOBAL 」 ⚔️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n'
   let medallas = ['🥇', '🥈', '🥉', '4│', '5│', '6│', '7│', '8│', '9│', '🔟']
 
   for (let i = 0; i < sorted.length; i++) {
     let [id, u] = sorted[i]
     let total = (u.diamantes || 0) + (u.bank || 0)
-    texto += medallas[i] + ' » @' + id.split('@')[0] + '\n   💎 ' + total + ' | 💰 ' + (u.diamantes || 0) + ' | 🏦 ' + (u.bank || 0) + '\n\n'
+    texto += medallas[i] + ' » @' + id.split('@')[0] + '\n   💵 ' + total + ' | 💰 ' + (u.darkcoins || 0) + ' | 🏦 ' + (u.bank || 0) + '\n\n'
   }
 
   texto += '▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n'
@@ -25,7 +25,7 @@ let handler = async (m, { conn }) => {
   let myPosition = allSorted.findIndex(([id]) => id === who)
   let myUser = users[who]
   let myTotal = (myUser?.diamantes || 0) + (myUser?.bank || 0)
-  texto += '\n🎯 » Tu posición: #' + (myPosition + 1 || '?') + ' | 💎 ' + myTotal + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔'
+  texto += '\n🎯 » Tu posición: #' + (myPosition + 1 || '?') + ' | 💵 ' + myTotal + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔'
 
   await conn.sendMessage(m.chat, { text: texto, mentions }, { quoted: m })
 }
@@ -33,6 +33,6 @@ let handler = async (m, { conn }) => {
 handler.help = ['rank']
 handler.tags = ['rpg']
 handler.command = /^(toprank|topglobal|rank)$/i
-handler.desc = 'Top global de diamantes'
+handler.desc = 'Top global de darkcoins'
 
 export default handler
