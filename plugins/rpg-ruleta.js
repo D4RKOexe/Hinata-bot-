@@ -2,7 +2,7 @@ let handler = async (m, { conn, args }) => {
   let who = m.sender
   let user = global.db.data.users[who]
   if (!user) {
-    global.db.data.users[who] = { diamantes: 0, bank: 0, exp: 0, level: 0 }
+    global.db.data.users[who] = { darkcoins: 0, bank: 0, exp: 0, level: 0 }
     user = global.db.data.users[who]
   }
 
