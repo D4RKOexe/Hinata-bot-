@@ -18,14 +18,14 @@ let handler = async (m, { conn }) => {
     let dias = Math.floor(restante / 86400000)
     let horas = Math.floor((restante % 86400000) / 3600000)
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 DARKO WEEKLY 」 ˚ʚ♡ɞ˚\n\n💫 » Ya reclamaste\n⏳ » Vuelve en ' + dias + 'd ' + horas + 'h'
+      text: '⚡ 「 DARKO WEEKLY 」 ˚⚡˚\n\n💫 » Ya reclamaste\n⏳ » Vuelve en ' + dias + 'd ' + horas + 'h'
     }, { quoted: m })
   }
 
   user.darkcoins = (user.darkcoins || 0) + 500
   user.lastWeekly = now
 
-  let texto = '𖣔 「 DARKO WEEKLY 」 ˚ʚ♡ɞ˚\n\n'
+  let texto = '⚡ 「 DARKO WEEKLY 」 ˚⚡˚\n\n'
   texto += '🎁 » Recompensa semanal\n'
   texto += '💵 » +500 darkcoins\n'
   texto += '💰 » Total: ' + user.darkcoins + ' 💵\n\n'
