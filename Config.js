@@ -3,37 +3,34 @@ import chalk from 'chalk'
 import { fileURLToPath } from 'url'
 
 global.owner = [
-  ['59177474230', 'El Vigilante', true],
-  ['573223090406', 'BrayanRK', true],
-  ['51913454004', 'GR', true]
+  ['51937012839', 'Bryce', true],
+  ['51913454004', 'Darko', true]
 ]
 
 global.mods = []
 global.prems = []
 
-global.namebot = 'Hinata-Bot'
-global.packname = 'Hinata Bot 🌸'
-global.author = 'El vigilante & Brayan RK| © 𝟸𝟶𝟸𝟼 '
-global.moneda = 'Hinata'
+global.namebot = 'DARKO BOT'
+global.packname = 'DARKO BOT⚡'
+global.author = 'D4rko| © 𝟸𝟶𝟸𝟼 '
+global.moneda = 'Darkcoins'
 
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.16'
 global.vs = '2.2.0'
 global.sessions = 'sessions'
-global.jadi = 'subHinata'
-global.yukiJadibts = true
 
-global.namecanal = '❇️'
-global.idcanal = '120363404707199986@newsletter'
-global.idcanal2 = '120363404707199986@newsletter'
-global.canal = 'pronto'
-global.canalreg = '120363404707199986@newsletter'
+global.namecanal = ''
+global.idcanal = ''
+global.idcanal2 = ''
+global.canal = ''
+global.canalreg = ''
 
 global.ch = {
-  ch1: '120363404707199986@newsletter'
+  ch1: ''
 }
 
-global.multiplier = 69
+global.multiplier = 30
 global.maxwarn = 2
 
 global.lastRoll = {}
@@ -54,6 +51,6 @@ global.APIs = {
 let file = fileURLToPath(import.meta.url)
 watchFile(file, () => {
   unwatchFile(file)
-  console.log(chalk.redBright("🌸 Se actualizó 'config.js'"))
+  console.log(chalk.redBright("⌛Se actualizó 'config.js'"))
   import(`file://${file}?update=${Date.now()}`)
 })
