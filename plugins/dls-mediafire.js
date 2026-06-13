@@ -131,7 +131,7 @@ async function downloadFromStream(streamUrl, outputPath) {
 let handler = async (m, { conn, text }) => {
   if (!text || !text.includes('mediafire.com')) {
     return conn.sendMessage(m.chat, {
-      text: '📥 「 HINATA MEDIAFIRE 」 📥\n\n💫 » Descarga archivos de MediaFire\n\n> #mediafire <link>\n> #mf <link>'
+      text: '📥 「 DARKO MEDIAFIRE 」 📥\n\n💫 » Descarga archivos de MediaFire\n\n> #mediafire <link>\n> #mf <link>'
     }, { quoted: m })
   }
 
@@ -150,7 +150,7 @@ let handler = async (m, { conn, text }) => {
 
     await conn.sendMessage(m.chat, {
       text: [
-        '📥 「 HINATA MEDIAFIRE 」 📥',
+        '📥 「 DARKO MEDIAFIRE 」 📥',
         '',
         `📁 » *${info.title}*`,
         `📦 » Tamaño: ${info.fileSize || 'Calculando...'}`,
@@ -163,7 +163,7 @@ let handler = async (m, { conn, text }) => {
     const size = await downloadFromStream(info.streamUrl, tempPath)
 
     await conn.sendMessage(m.chat, {
-      text: '📥 「 HINATA MEDIAFIRE 」 📥\n\n💫 » Enviando a WhatsApp...'
+      text: '📥 「 DARKO MEDIAFIRE 」 📥\n\n💫 » Enviando a WhatsApp...'
     }, { quoted: m })
 
     const fileName = normalizeFileName(info.fileName)
@@ -189,7 +189,7 @@ let handler = async (m, { conn, text }) => {
     console.error('[MF ERROR]', e?.message || e)
     await m.react('❌')
     await conn.sendMessage(m.chat, {
-      text: `📥 「 HINATA MEDIAFIRE 」 📥\n\n❌ » Error al descargar\n\n> ${e.message}`
+      text: `📥 「 DARKO MEDIAFIRE 」 📥\n\n❌ » Error al descargar\n\n> ${e.message}`
     }, { quoted: m })
   } finally {
     deleteFileSafe(tempPath)
