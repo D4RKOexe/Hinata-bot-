@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://files.catbox.moe/yp1tti.png" width="320">
+  <img src="https://files.catbox.moe/7ktyoa.jpg" width="320">
 ---
 
 ## 👨‍💻 CREADOR PRINCIPAL
