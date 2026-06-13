@@ -18,17 +18,17 @@ let handler = async (m, { conn }) => {
     let dias = Math.floor(restante / 86400000)
     let horas = Math.floor((restante % 86400000) / 3600000)
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA WEEKLY 」 ˚ʚ♡ɞ˚\n\n💫 » Ya reclamaste\n⏳ » Vuelve en ' + dias + 'd ' + horas + 'h'
+      text: '𖣔 「 DARKO WEEKLY 」 ˚ʚ♡ɞ˚\n\n💫 » Ya reclamaste\n⏳ » Vuelve en ' + dias + 'd ' + horas + 'h'
     }, { quoted: m })
   }
 
-  user.diamantes = (user.diamantes || 0) + 500
+  user.darkcoins = (user.darkcoins || 0) + 500
   user.lastWeekly = now
 
-  let texto = '𖣔 「 HINATA WEEKLY 」 ˚ʚ♡ɞ˚\n\n'
+  let texto = '𖣔 「 DARKO WEEKLY 」 ˚ʚ♡ɞ˚\n\n'
   texto += '🎁 » Recompensa semanal\n'
-  texto += '💎 » +500 diamantes\n'
-  texto += '💰 » Total: ' + user.diamantes + ' 💎\n\n'
+  texto += '💵 » +500 darkcoins\n'
+  texto += '💰 » Total: ' + user.darkcoins + ' 💵\n\n'
   texto += '> Vuelve en 7 días'
 
   await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
@@ -37,6 +37,6 @@ let handler = async (m, { conn }) => {
 handler.help = ['weekly']
 handler.tags = ['rpg']
 handler.command = /^(weekly|semanal|don)$/i
-handler.desc = 'Recompensa semanal de 500 💎'
+handler.desc = 'Recompensa semanal de 500 💵'
 
 export default handler
