@@ -11,7 +11,7 @@ let handler = async (m, { conn }) => {
 
   if (!global.lastRoll || !global.lastRoll[who]) {
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA CLAIM 」 ˚ʚ♡ɞ˚\n\n💫 » No tienes personaje pendiente\n\n> Usa #rw primero'
+      text: '🎁 「 DARKO CLAIM 」 🎁\n\n💫 » No tienes personaje pendiente\n\n> Usa #rw primero'
     }, { quoted: m })
   }
 
@@ -23,22 +23,22 @@ let handler = async (m, { conn }) => {
 
   user.inventory.push(char.name)
 
-  if (user.diamantes !== undefined) {
-    user.diamantes = (user.diamantes || 0) + (rarityGemas[char.rarity] || 0)
+  if (user.darkcoins !== undefined) {
+    user.darkcoins = (user.darkcoins || 0) + (rarityGemas[char.rarity] || 0)
   } else {
-    user.diamond = (user.diamond || 0) + (rarityGemas[char.rarity] || 0)
+    user.darkcoin = (user.darkcoin || 0) + (rarityGemas[char.rarity] || 0)
   }
 
-  let total = user.diamantes !== undefined ? user.diamantes : (user.diamond || 0)
+  let total = user.darkcoins !== undefined ? user.darkcoins : (user.darkcoin || 0)
   let rarityEmojis = { 'SSR': '🌟', 'SR': '⭐', 'R': '✨' }
 
-  let texto = '𖣔 「 HINATA CLAIM 」 ˚ʚ♡ɞ˚\n\n'
+  let texto = '⛩ 「 DARKO CLAIM 」 ⛩\n\n'
   texto += '  💫 Personaje reclamado\n\n'
   texto += '  ✦ ' + char.name + ' ✦\n'
   texto += '  ' + rarityEmojis[char.rarity] + ' Rareza: ' + char.rarity + '\n'
   texto += '  ⚔️ ' + char.attack + ' | 🛡️ ' + char.defense + ' | ❤️ ' + char.health + '\n'
-  texto += '  💎 +' + (rarityGemas[char.rarity] || 0) + ' diamantes\n'
-  texto += '  💰 Total: ' + total + ' 💎\n'
+  texto += '  💵 +' + (rarityGemas[char.rarity] || 0) + ' diamantes\n'
+  texto += '  💰 Total: ' + total + ' 💵\n'
   texto += '  🎒 Guardado en inventario'
 
   delete global.lastRoll[who]
