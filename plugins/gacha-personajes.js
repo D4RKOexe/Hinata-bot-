@@ -13,7 +13,7 @@ let handler = async (m, { conn }) => {
 
   if (!fs.existsSync(gachaPath)) {
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA COLECCIÓN 」 ˚ʚ♡ɞ˚\n\n💫 » No hay personajes disponibles'
+      text: '🎴 「 DARKO COLECCIÓN 」 🎴\n\n💫 » No hay personajes disponibles'
     }, { quoted: m })
   }
 
@@ -44,7 +44,7 @@ let handler = async (m, { conn }) => {
 
   let rarityEmojis = { 'SSR': '🌟', 'SR': '⭐', 'R': '✨' }
 
-  let texto = '𖣔 「 HINATA COLECCIÓN 」 ˚ʚ♡ɞ˚\n\n'
+  let texto = '🎴「 DARKO COLECCIÓN 」 🎴\n\n'
   texto += '📊 » ' + tengo + '/' + total + ' (' + porcentaje + '%)\n'
   texto += '📈 » ' + barra + '\n\n'
 
