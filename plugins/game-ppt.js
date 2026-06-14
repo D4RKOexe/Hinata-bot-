@@ -15,16 +15,16 @@ let handler = async (m, { conn, args }) => {
     let sections = [{
       title: '✊ ELIGE TU JUGADA',
       rows: [
-        { header: '🪨', title: 'Piedra', description: 'Gana a tijera | Apuesta 💎', id: 'ppt_piedra_' + (parseInt(args[0]) || 10) },
-        { header: '📄', title: 'Papel', description: 'Gana a piedra | Apuesta 💎', id: 'ppt_papel_' + (parseInt(args[0]) || 10) },
-        { header: '✂️', title: 'Tijera', description: 'Gana a papel | Apuesta 💎', id: 'ppt_tijera_' + (parseInt(args[0]) || 10) }
+        { header: '🪨', title: 'Piedra', description: 'Gana a tijera | Apuesta 💵', id: 'ppt_piedra_' + (parseInt(args[0]) || 10) },
+        { header: '📄', title: 'Papel', description: 'Gana a piedra | Apuesta 💵', id: 'ppt_papel_' + (parseInt(args[0]) || 10) },
+        { header: '✂️', title: 'Tijera', description: 'Gana a papel | Apuesta 💵', id: 'ppt_tijera_' + (parseInt(args[0]) || 10) }
       ]
     }]
 
     const interactiveMessage = proto.Message.InteractiveMessage.create({
-      header: { title: '✊ HINATA PPT ✊', subtitle: 'Piedra, Papel o Tijera | x2', hasMediaAttachment: false },
-      body: { text: '✊ 「 HINATA PPT 」 ✊\n\n💫 » Elige tu jugada\n\n> #ppt <jugada> <apuesta>\n> #ppt piedra 10' },
-      footer: { text: '⫏⫏ HINATA GAMES ✿' },
+      header: { title: '✊ DARKO PPT ✊', subtitle: 'Piedra, Papel o Tijera | x2', hasMediaAttachment: false },
+      body: { text: '✊ 「 DARKO PPT 」 ✊\n\n💫 » Elige tu jugada\n\n> #ppt <jugada> <apuesta>\n> #ppt piedra 10' },
+      footer: { text: '⫏⫏ DARKO GAMES ✿' },
       nativeFlowMessage: {
         buttons: [{
           name: 'single_select',
@@ -49,20 +49,20 @@ let handler = async (m, { conn, args }) => {
 
   if (!['piedra', 'papel', 'tijera'].includes(jugada)) {
     return conn.sendMessage(m.chat, {
-      text: '✊ 「 HINATA PPT 」 ✊\n\n💫 » Jugada inválida\n\n> piedra | papel | tijera'
+      text: '✊ 「 DARKO PPT 」 ✊\n\n💫 » Jugada inválida\n\n> piedra | papel | tijera'
     }, { quoted: m })
   }
 
   if (isNaN(apuesta) || apuesta <= 0) {
     return conn.sendMessage(m.chat, {
-      text: '✊ 「 HINATA PPT 」 ✊\n\n💫 » Apuesta inválida\n\n> #ppt piedra 10'
+      text: '✊ 「 DARKO PPT 」 ✊\n\n💫 » Apuesta inválida\n\n> #ppt piedra 10'
     }, { quoted: m })
   }
 
-  let misDiamantes = user.diamantes || user.diamond || 0
-  if (misDiamantes < apuesta) {
+  let misDarkcoins = user.darkcoins || user.darkcoin || 0
+  if (misDarkcoins < apuesta) {
     return conn.sendMessage(m.chat, {
-      text: '✊ 「 HINATA PPT 」 ✊\n\n💫 » No tienes tantos 💎\n💰 » Tienes: ' + misDiamantes
+      text: '✊ 「 DARKO PPT 」 ✊\n\n💫 » No tienes tantos 💵\n💰 » Tienes: ' + misDiamantes
     }, { quoted: m })
   }
 
@@ -85,20 +85,20 @@ let handler = async (m, { conn, args }) => {
   let emojis = { piedra: '🪨', papel: '📄', tijera: '✂️' }
 
   if (resultado === 'ganaste') {
-    if (user.diamantes !== undefined) {
-      user.diamantes = misDiamantes + apuesta
+    if (user.darkcoins !== undefined) {
+      user.darkcoins = misDarkcoins + apuesta
     } else {
-      user.diamond = misDiamantes + apuesta
+      user.darkcoins = misDarkcoins + apuesta
     }
   } else if (resultado === 'perdiste') {
-    if (user.diamantes !== undefined) {
-      user.diamantes = misDiamantes - apuesta
+    if (user.darkcoins !== undefined) {
+      user.darkcoins = misDarkcoins - apuesta
     } else {
-      user.diamond = misDiamantes - apuesta
+      user.darkcoin = misDarkcoins - apuesta
     }
   }
 
-  let total = user.diamantes || user.diamond || 0
+  let total = user.darkcoins || user.diamond || 0
 
   let texto = '✊ 「 HINATA PPT 」 ✊\n\n'
   texto += '👤 » Tú: ' + emojis[jugada] + '\n'
