@@ -4,7 +4,7 @@ let handler = async (m, { conn, args }) => {
 
   if (!owners.includes(who)) {
     return conn.sendMessage(m.chat, {
-      text: '✨ 「 HINATA DAR XP 」 ✨\n\n💫 » Solo los creadores pueden usar esto'
+      text: '✨ 「 DARKO DAR XP 」 ✨\n\n💫 » Solo los creadores pueden usar esto'
     }, { quoted: m })
   }
 
@@ -13,7 +13,7 @@ let handler = async (m, { conn, args }) => {
 
   if (isNaN(cantidad) || cantidad <= 0) {
     return conn.sendMessage(m.chat, {
-      text: '✨ 「 HINATA DAR XP 」 ✨\n\n💫 » Cantidad inválida\n\n> #darxp 500\n> #darxp @usuario 500'
+      text: '✨ 「 DARKO DAR XP 」 ✨\n\n💫 » Cantidad inválida\n\n> #darxp 500\n> #darxp @usuario 500'
     }, { quoted: m })
   }
 
@@ -25,7 +25,7 @@ let handler = async (m, { conn, args }) => {
 
   user.exp = (user.exp || 0) + cantidad
 
-  let texto = '✨ 「 HINATA DAR XP 」 ✨\n\n'
+  let texto = '✨ 「 DARKO DAR XP 」 ✨\n\n'
   texto += '✅ » Experiencia entregada\n\n'
   texto += '👤 » @' + target.split('@')[0] + '\n'
   texto += '✨ » +' + cantidad + ' exp\n'
