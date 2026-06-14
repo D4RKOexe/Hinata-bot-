@@ -7,7 +7,7 @@ let handler = async (m, { conn }) => {
   let who = m.sender
   let user = global.db.data.users[who]
   if (!user) {
-    global.db.data.users[who] = { diamantes: 0, diamond: 0, exp: 0, level: 0, inventory: [] }
+    global.db.data.users[who] = { dakcoins: 0, darkcoin: 0, exp: 0, level: 0, inventory: [] }
     user = global.db.data.users[who]
   }
 
@@ -19,7 +19,7 @@ let handler = async (m, { conn }) => {
     let minutos = Math.floor(tiempoRestante / 60)
     let segundos = tiempoRestante % 60
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA RW 」 ˚ʚ♡ɞ˚\n\n💫 » Espera ' + minutos + 'm ' + segundos + 's\n\n> Usa #claim para reclamar tu último personaje'
+      text: '🎴 「 DARKO RW 」 🎴\n\n💫 » Espera ' + minutos + 'm ' + segundos + 's\n\n> Usa #claim para reclamar tu último personaje'
     }, { quoted: m })
   }
 
@@ -27,7 +27,7 @@ let handler = async (m, { conn }) => {
 
   if (!fs.existsSync(gachaPath)) {
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA RW 」 ˚ʚ♡ɞ˚\n\n💫 » No hay personajes'
+      text: '🎴 「 DARKO RW 」 🎴\n\n💫 » No hay personajes'
     }, { quoted: m })
   }
 
@@ -60,7 +60,7 @@ let handler = async (m, { conn }) => {
 
   let rarityEmojis = { 'SSR': '🌟', 'SR': '⭐', 'R': '✨' }
 
-  let texto = '𖣔 「 HINATA RW 」 ˚ʚ♡ɞ˚\n\n'
+  let texto = '🎴 「 DARKO RW 」 🎴\n\n'
   texto += '  💫 Personaje obtenido\n\n'
   texto += '  ✦ ' + char.name + ' ✦\n'
   texto += '  ' + rarityEmojis[rarity] + ' Rareza: ' + rarity + '\n'
