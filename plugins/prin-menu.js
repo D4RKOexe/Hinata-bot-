@@ -18,23 +18,23 @@ const tags = {
 }
 
 const bannerCategory = {
-  main: 'https://files.catbox.moe/r60c8l.jpg',
-  group: 'https://files.catbox.moe/3tlaq0.png',
-  rpg: 'https://files.catbox.moe/e858ul.png',
-  game: 'https://i.ibb.co/r2wQ4gBD/play.png',
-  gacha: 'https://files.catbox.moe/rlnc3s.png',
-  serbot: 'https://files.catbox.moe/r60c8l.jpg',
-  owner: 'https://files.catbox.moe/52nm0t.png',
-  downloader: 'https://files.catbox.moe/ow6st7.png',
-  info: 'https://files.catbox.moe/42tsa2.png',
-  diversion: 'https://files.catbox.moe/2t7d69.png',
-  anime: 'https://files.catbox.moe/2t7d69.png'
+  main: 'https://files.catbox.moe/j2n2tl.jpg',
+  group: 'https://files.catbox.moe/2j21dh.jpg',
+  rpg: 'https://files.catbox.moe/zbxqn5.jpg',
+  game: 'https://files.catbox.moe/p4ar5n.jpg',
+  gacha: 'https://files.catbox.moe/tbso8i.jpg',
+  serbot: 'https://files.catbox.moe/oslrh2.jpg',
+  owner: 'https://files.catbox.moe/szjq0p.jpg',
+  downloader: 'https://files.catbox.moe/0zvxcd.jpg',
+  info: 'https://files.catbox.moe/e2g9y7.jpg',
+  diversion: 'https://files.catbox.moe/hg66k3.jpg',
+  anime: 'https://files.catbox.moe/n5a81t.jpg'
 }
 
 const defaultMenu = {
   before: `
 ࿇ ══━━━✥◈✥━━━══ ࿇
-    𝕳𝖎𝖓𝖆𝖙𝖆 𝕭𝖔𝖙
+   DARKO BOT
 ࿇ ══━━━✥◈✥━━━══ ࿇
  ✦%totalreg ᴜꜱᴇʀꜱ ✦ %totalcmd ᴄᴍᴅꜱ ✦
 
@@ -43,14 +43,14 @@ const defaultMenu = {
 
 %readmore
 `,
-  header: '\n𖣔 %category ˚ʚ♡ɞ˚ (%count cmd)\n',
+  header: '\n⚡ %category ˚⚡˚ (%count cmd)\n',
   body: '❧ %cmd',
   desc: '\n> ↆ %desc',
   footer: '',
   after: `
 
 ࿇ ══━━━✥◈✥━━━══ ࿇
-ᵉˡ ᵛⁱᵍⁱˡᵃⁿᵗᵉ ✦ ᵇʳᵃʸᵃⁿʳᵏ
+           GR
 ࿇ ══━━━✥◈✥━━━══ ࿇`
 }
 
@@ -92,7 +92,7 @@ let handler = async (m, { conn, usedPrefix: _p, command }) => {
       .replace(/%user/g, who.split('@')[0])
 
     if (tagSeleccionada) {
-      textoMenu = textoMenu.replace('𝕳𝖎𝖓𝖆𝖙𝖆 𝕭𝖔𝖙', '𝕳𝖎𝖓𝖆𝖙𝖆 𝕭𝖔𝖙 ✦ ' + tags[tagSeleccionada].replace(/[⭐👥⚔️🎮🎰🤖👑📥ℹ️]/g, '').trim())
+      textoMenu = textoMenu.replace('DARKO BOT', 'DARKO BOT ✦ ' + tags[tagSeleccionada].replace(/[⭐👥⚔️🎮🎰🤖👑📥ℹ️]/g, '').trim())
     }
 
     for (let tag of Object.keys(tags)) {
