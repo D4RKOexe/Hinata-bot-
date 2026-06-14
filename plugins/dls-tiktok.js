@@ -14,19 +14,19 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   }
 
   if (!text) {
-    let media = await prepareWAMessageMedia({ image: { url: 'https://files.catbox.moe/r60c8l.jpg' } }, { upload: conn.waUploadToServer })
+    let media = await prepareWAMessageMedia({ image: { url: 'https://files.catbox.moe/odufxl.jpg' } }, { upload: conn.waUploadToServer })
 
     const interactiveMessage = proto.Message.InteractiveMessage.create({
       header: {
-        title: 'HINATA BOT - TIKTOK',
+        title: 'DARKO - TIKTOK',
         subtitle: 'Busca y descarga videos',
         hasMediaAttachment: true,
         imageMessage: media.imageMessage
       },
       body: {
-        text: '🎵 「 HINATA TIKTOK 」 🎵\n\n💫 » Busca videos en TikTok\n\n> ' + usedPrefix + command + ' <búsqueda>\n> Ejemplo: ' + usedPrefix + command + ' Chaewon\n> 💎 Cuesta 1 diamante por descarga'
+        text: '🎵 「 DARKO TIKTOK 」 🎵\n\n💫 » Busca videos en TikTok\n\n> ' + usedPrefix + command + ' <búsqueda>\n> Ejemplo: ' + usedPrefix + command + ' Chaewon\n> 💵 Cuesta 1 darkcoin por descarga'
       },
-      footer: { text: '⫏⫏ HINATA BOT ✿' },
+      footer: { text: '⫏⫏ DARKO BOT ⚡' },
       nativeFlowMessage: {
         buttons: [{
           name: 'single_select',
@@ -37,7 +37,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
               rows: [{
                 header: '🎬 VIDEO',
                 title: 'Buscar video',
-                description: '💎 1 diamante | Ejemplo: Chaewon',
+                description: '💵 1 darkcoin | Ejemplo: Chaewon',
                 id: 'tt '
               }]
             }]
@@ -56,7 +56,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   if ((user.diamantes || user.diamond || 0) < 1) {
     return conn.sendMessage(m.chat, {
-      text: '🎵 「 HINATA TIKTOK 」 🎵\n\n💫 » No tienes suficientes diamantes\n\n💎 Necesitas: 1 diamante\n💰 Tienes: ' + (user.diamantes || user.diamond || 0) + ' diamantes\n\n> Usa #work para ganar'
+      text: '🎵 「 DARKO TIKTOK 」 🎵\n\n💫 » No tienes suficientes darkcoinss\n\n💵 Necesitas: 1 darkcoin\n💰 Tienes: ' + (user.darkcoins || user.darkcoin || 0) + ' darkcoins\n\n> Usa #work para ganar'
     }, { quoted: m })
   }
 
@@ -86,7 +86,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
       await conn.sendMessage(m.chat, {
         video: { url: videoUrl },
-        caption: '🎵 「 HINATA TIKTOK 」 🎵\n\n💫 » Descarga completada\n\n🎬 » ' + (json.data.title || '') + '\n👤 » ' + (json.data.author?.nickname || '') + '\n⏱️ » ' + (json.data.duration || '') + 's\n💎 » Restantes: ' + total
+        caption: '🎵 「 DARKCOIN TIKTOK 」 🎵\n\n💫 » Descarga completada\n\n🎬 » ' + (json.data.title || '') + '\n👤 » ' + (json.data.author?.nickname || '') + '\n⏱️ » ' + (json.data.duration || '') + 's\n💵 » Restantes: ' + total
       }, { quoted: m })
 
       await m.react('✅')
@@ -127,15 +127,15 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     const interactiveMessage = proto.Message.InteractiveMessage.create({
       header: {
-        title: 'HINATA BOT - TIKTOK',
+        title: 'DARKO BOT - TIKTOK',
         subtitle: 'Selecciona un video',
         hasMediaAttachment: !!media,
         imageMessage: media ? media.imageMessage : undefined
       },
       body: {
-        text: '🎵 「 HINATA TIKTOK 」 🎵\n\n💫 » Búsqueda: ' + query + '\n\n> Elige un video\n> 💎 1 diamante al descargar'
+        text: '🎵 「 DARKO TIKTOK 」 🎵\n\n💫 » Búsqueda: ' + query + '\n\n> Elige un video\n> 💵 1 darkcoins al descargar'
       },
-      footer: { text: '⫏⫏ HINATA BOT ✿' },
+      footer: { text: '⫏⫏ DARK BOT 💡' },
       nativeFlowMessage: {
         buttons: [{
           name: 'single_select',
@@ -172,13 +172,13 @@ handler.before = async (m, { conn }) => {
     let who = m.sender
     let user = global.db.data.users[who]
     if (!user) {
-      global.db.data.users[who] = { diamantes: 0, diamond: 0 }
+      global.db.data.users[who] = { darkcoins: 0, darkcoin: 0 }
       user = global.db.data.users[who]
     }
 
-    let misDiamantes = user.diamantes || user.diamond || 0
-    if (misDiamantes < 1) {
-      await conn.sendMessage(m.chat, { text: '🎵 「 HINATA TIKTOK 」 🎵\n\n💫 » No tienes 1 diamante\n\n> Usa #work para ganar' }, { quoted: m })
+    let misDarkcoins = user.darkcoins || user.darkcoin || 0
+    if (misDarkcoins < 1) {
+      await conn.sendMessage(m.chat, { text: '🎵 「 DARKO TIKTOK 」 🎵\n\n💫 » No tienes 1 darkcoin\n\n> Usa #work para ganar' }, { quoted: m })
       return true
     }
 
@@ -189,33 +189,33 @@ handler.before = async (m, { conn }) => {
     let titulo = Buffer.from(titleBase64, 'base64').toString()
 
     if (user.diamantes !== undefined) {
-      user.diamantes = misDiamantes - 1
+      user.diamantes = misDarkcoins - 1
     } else {
-      user.diamond = misDiamantes - 1
+      user.diamond = misDarkcoins - 1
     }
 
     await m.react('⏳')
-    await conn.sendMessage(m.chat, { text: '⏳ Descargando...\n💎 -1 diamante' }, { quoted: m })
+    await conn.sendMessage(m.chat, { text: '⏳ Descargando...\n💵 -1 darkcoin' }, { quoted: m })
 
     let downloadUrl = `https://api.delirius.store/download/tiktok?url=${encodeURIComponent(videoUrl)}`
     let res = await fetch(downloadUrl)
     let json = await res.json()
 
     if (!json.status || !json.data?.meta?.media?.[0]?.org) {
-      if (user.diamantes !== undefined) {
-        user.diamantes = misDiamantes
+      if (user.darkcoins !== undefined) {
+        user.darkcoins = misDarkcoins
       } else {
-        user.diamond = misDiamantes
+        user.darkcoin = misDarkcoins
       }
       throw new Error('No se pudo descargar, diamantes devueltos')
     }
 
-    let total = user.diamantes !== undefined ? user.diamantes : (user.diamond || 0)
+    let total = user.darkcoins !== undefined ? user.darkcoin : (user.darkcoin || 0)
     let videoDownloadUrl = json.data.meta.media[0].org
 
     await conn.sendMessage(m.chat, {
       video: { url: videoDownloadUrl },
-      caption: '🎵 「 HINATA TIKTOK 」 🎵\n\n💫 » Descarga completada\n\n🎬 » ' + (json.data.title || titulo) + '\n👤 » ' + (json.data.author?.nickname || '') + '\n⏱️ » ' + (json.data.duration || '') + 's\n💎 » Restantes: ' + total
+      caption: '🎵 「 DARKO TIKTOK 」 🎵\n\n💫 » Descarga completada\n\n🎬 » ' + (json.data.title || titulo) + '\n👤 » ' + (json.data.author?.nickname || '') + '\n⏱️ » ' + (json.data.duration || '') + 's\n💵 » Restantes: ' + total
     }, { quoted: m })
 
     await m.react('✅')
@@ -232,6 +232,6 @@ handler.before = async (m, { conn }) => {
 handler.help = ['tiktok']
 handler.tags = ['downloader']
 handler.command = /^(tiktok|tt)$/i
-handler.desc = 'Busca y descarga videos de TikTok 💎1'
+handler.desc = 'Busca y descarga videos de TikTok 💵1'
 
 export default handler
