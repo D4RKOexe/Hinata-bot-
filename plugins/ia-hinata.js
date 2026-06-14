@@ -121,7 +121,7 @@ async function preguntarHinata(pregunta, senderJid) {
         ...historial,
         { role: 'user', content: pregunta }
       ],
-      max_tokens: 350,
+      max_tokens: 3500,
       temperature: darko ? 0.97 : 0.88
     })
   })
