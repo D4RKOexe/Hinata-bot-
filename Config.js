@@ -13,7 +13,7 @@ global.prems = []
 global.namebot = 'DARKO BOT'
 global.packname = 'DARKO BOT⚡'
 global.author = 'D4rko| © 𝟸𝟶𝟸𝟼 '
-global.moneda = 'Darkcoins'
+global.moneda = 'darkcoins'
 
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.16'
