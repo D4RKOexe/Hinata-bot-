@@ -52,13 +52,13 @@ async function readStreamToText(stream) {
   })
 }
 
-function getDiamantes(user) { return user?.diamantes ?? user?.diamond ?? 0 }
-function restarDiamante(user) {
-  if (user.diamantes !== undefined) user.diamantes = (user.diamantes || 0) - 1
-  else user.diamond = (user.diamond || 0) - 1
+function getDarkcoins(user) { return user?.darkcoins ?? user?.darkcoin ?? 0 }
+function restarDarkcoim(user) {
+  if (user.darkcoins !== undefined) user.darkcoins = (user.darkcoins || 0) - 1
+  else user.darkcoin = (user.darkcoin || 0) - 1
 }
-function devolverDiamante(user, anterior) {
-  if (user.diamantes !== undefined) user.diamantes = anterior
+function devolverDarkcoin(user, anterior) {
+  if (user.darkcoin !== undefined) user.diamantes = anterior
   else user.diamond = anterior
 }
 
@@ -168,7 +168,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   setTimeout(() => _processing.delete(msgKey), 15000)
 
   let user = global.db.data.users[m.sender]
-  if (!user) { global.db.data.users[m.sender] = { diamantes: 0, diamond: 0 }; user = global.db.data.users[m.sender] }
+  if (!user) { global.db.data.users[m.sender] = { darkcoins: 0, darkcoin: 0 }; user = global.db.data.users[m.sender] }
 
   const input = text?.trim()
 
@@ -177,9 +177,9 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     try { media = await prepareWAMessageMedia({ image: { url: 'https://files.catbox.moe/r60c8l.jpg' } }, { upload: conn.waUploadToServer }) } catch {}
 
     const interactiveMessage = proto.Message.InteractiveMessage.create({
-      header: { title: 'HINATA BOT - YOUTUBE', subtitle: 'Descarga música y videos', hasMediaAttachment: !!media, imageMessage: media?.imageMessage },
-      body: { text: `🎬 「 HINATA YOUTUBE 」 🎵\n\n💫 » Descarga audio o video de YouTube\n\n> ${usedPrefix}${command} <nombre o link>\n> Ejemplo: ${usedPrefix}${command} Naruto Opening 1\n> 💎 Cuesta 1 diamante por descarga` },
-      footer: { text: '⫏⫏ HINATA BOT ✿' },
+      header: { title: 'DARKO BOT - YOUTUBE', subtitle: 'Descarga música y videos', hasMediaAttachment: !!media, imageMessage: media?.imageMessage },
+      body: { text: `🎬 「 DARKCOIN YOUTUBE 」 🎵\n\n💫 » Descarga audio o video de YouTube\n\n> ${usedPrefix}${command} <nombre o link>\n> Ejemplo: ${usedPrefix}${command} Naruto Opening 1\n> 💵 Cuesta 1 darkcoin por descarga` },
+      footer: { text: '⫏⫏ DARK BOT ✿' },
       nativeFlowMessage: { buttons: [{ name: 'single_select', buttonParamsJson: JSON.stringify({ title: '🎬 YOUTUBE', sections: [{ title: '¿Qué deseas hacer?', rows: [{ header: '🔍 BUSCAR', title: 'Buscar música o video', description: 'Escribe el nombre después del comando', id: 'ytinfo' }] }] }) }] }
     })
     const msg = generateWAMessageFromContent(m.chat, { viewOnceMessage: { message: { messageContextInfo: {}, interactiveMessage } } }, { quoted: m })
