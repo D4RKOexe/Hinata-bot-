@@ -1,4 +1,4 @@
-// © 2026 EL VIGILANTE & BRAYANRK - HINATA BOT
+// © 2026 EL VIGILANTE & BRAYANRK & D4RKO
 // No quitar créditos
 
 import fetch from 'node-fetch'
@@ -38,7 +38,7 @@ async function buscarYEnviar(conn, m, query) {
   if (!json.status || !json.data?.length) {
     await m.react('❌')
     return conn.sendMessage(m.chat, {
-      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Sin resultados para *${query}*\n\n> Intenta con otro término`
+      text: `🥀 ⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Sin resultados para *${query}*\n\n> Intenta con otro término`
     }, { quoted: m })
   }
 
@@ -46,7 +46,7 @@ async function buscarYEnviar(conn, m, query) {
 
   await m.react('⏳')
   await conn.sendMessage(m.chat, {
-    text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Pack: *${pack.name}*\n❀ Autor: *${pack.author}*\n\n> Descargando stickers...`
+    text: `⌛⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n⌛ Pack: *${pack.name}*\n💬 Autor: *${pack.author}*\n\n> Descargando stickers...`
   }, { quoted: m })
 
   const res2 = await fetch(`https://api.delirius.store/download/stickerly?url=${encodeURIComponent(pack.url)}`)
@@ -55,7 +55,7 @@ async function buscarYEnviar(conn, m, query) {
   if (!json2.status || !json2.data?.stickers?.length) {
     await m.react('❌')
     return conn.sendMessage(m.chat, {
-      text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error al descargar stickers'
+      text: '🥀⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error al descargar stickers'
     }, { quoted: m })
   }
 
@@ -71,7 +71,7 @@ async function buscarYEnviar(conn, m, query) {
   }
 
   await conn.sendMessage(m.chat, {
-    text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n✅ ${enviados}/${stickers.length} stickers enviados\n❀ Pack: *${pack.name}*\n❀ Autor: *${pack.author}*`
+    text: `✅ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n✅ ${enviados}/${stickers.length} stickers enviados\n❀ Pack: *${pack.name}*\n❀ Autor: *${pack.author}*`
   }, { quoted: m })
 
   await m.react('✅')
@@ -90,9 +90,9 @@ let handler = async (m, { conn, text }) => {
     }]
 
     const interactiveMessage = proto.Message.InteractiveMessage.create({
-      header: { title: '𑁍ࠬܓ HINATA STICKERLY 𑁍ࠬܓ', subtitle: 'Busca y descarga stickers', hasMediaAttachment: false },
-      body: { text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Busca stickers en Stickerly\n\n> .stickerly <búsqueda>\n> .stickerly Goku' },
-      footer: { text: '⫏⫏ HINATA BOT ✿' },
+      header: { title: '🎭 DARKO STICKERLY 🎭', subtitle: 'Busca y descarga stickers', hasMediaAttachment: false },
+      body: { text: '🎭⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n🎭 Busca stickers en Stickerly\n\n> .stickerly <búsqueda>\n> .stickerly Goku' },
+      footer: { text: '⫏⫏ DARKO BOT 🔰' },
       nativeFlowMessage: {
         buttons: [{
           name: 'single_select',
@@ -115,7 +115,7 @@ let handler = async (m, { conn, text }) => {
     console.error(e)
     await m.react('❌')
     conn.sendMessage(m.chat, {
-      text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error\n\n> ' + e.message
+      text: '🥀 ⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error\n\n> ' + e.message
     }, { quoted: m })
   }
 }
