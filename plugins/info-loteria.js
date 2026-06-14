@@ -19,11 +19,11 @@ let handler = async (m, { conn }) => {
   let probabilidad = misBoletos > 0 ? ((misBoletos / 200) * 100).toFixed(2) : 0
   let estado = loteria.activa ? '✅ Abierta' : '❌ Cerrada'
 
-  let texto = '🎫 「 HINATA LOTERÍA 」 🎫\n\n'
+  let texto = '🎫 「 DARKO LOTERÍA 」 🎫\n\n'
   texto += '📊 » Estado: ' + estado + '\n'
   texto += '🎟️ » Boletos: ' + vendidos + '/200\n'
-  texto += '💰 » Premio: ' + loteria.totalRecaudado + ' 💎\n'
-  texto += '💎 » Precio: 1000 💎 por boleto\n\n'
+  texto += '💰 » Premio: ' + loteria.totalRecaudado + ' 💵\n'
+  texto += '💵 » Precio: 1000 💵 por boleto\n\n'
   texto += '👤 » Tus boletos: ' + misBoletos + '\n'
   texto += '📊 » Tu probabilidad: ' + probabilidad + '%\n\n'
   texto += '> #loteria comprar <cantidad>\n> #rankloteria'
