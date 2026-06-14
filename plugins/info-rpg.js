@@ -1,5 +1,5 @@
 let handler = async (m, { conn }) => {
-  let texto = '❀ HINATA INFO RPG ❀\n\n'
+  let texto = 'ℹ DARKO INFO RPG ℹ\n\n'
   texto += 'El sistema RPG de Darko te permite vivir una aventura ninja completa.\n\n'
   texto += 'COMANDOS DISPONIBLES:\n\n'
   texto += '❀ work, work2 - Trabaja para ganar 💵\n'
