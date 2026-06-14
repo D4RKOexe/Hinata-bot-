@@ -8,7 +8,7 @@ let handler = async (m, { conn }) => {
 
   if (!user.inventory2 || user.inventory2.length === 0) {
     return conn.sendMessage(m.chat, {
-      text: '🎒 「 DARKO INVENTARIO 2 」 ˚ʚ♡ɞ˚\n\n💫 » Tu inventario está vacío\n\n> Usa #rw2 para conseguir personajes'
+      text: '🎒 「 DARKO INVENTARIO 2 」 🎒\n\n💫 » Tu inventario está vacío\n\n> Usa #rw2 para conseguir personajes'
     }, { quoted: m })
   }
 
