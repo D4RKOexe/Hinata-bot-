@@ -1,6 +1,6 @@
 let handler = async (m, { conn }) => {
   let texto = 'ℹ DARKO INFO RPG ℹ\n\n'
-  texto += 'El sistema RPG de Darko te permite vivir una aventura ninja completa.\n\n'
+  texto += 'El sistema RPG de Darko te permite vivir una aventura de pekeas completa.\n\n'
   texto += 'COMANDOS DISPONIBLES:\n\n'
   texto += '❀ work, work2 - Trabaja para ganar 💵\n'
   texto += '❀ daily - Recompensa diaria\n'
