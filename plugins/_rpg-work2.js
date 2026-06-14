@@ -4,7 +4,7 @@ let handler = async (m, { conn, text }) => {
   let who = m.mentionedJid?.[0] || m.quoted?.sender || m.sender
   let user = global.db.data.users[who]
   if (!user) {
-    global.db.data.users[who] = { diamantes: 0, diamond: 0, exp: 0, level: 0 }
+    global.db.data.users[who] = { darkcoins: 0, darkcoin: 0, exp: 0, level: 0 }
     user = global.db.data.users[who]
   }
 
@@ -16,15 +16,15 @@ let handler = async (m, { conn, text }) => {
     let minutos = Math.floor(tiempoRestante / 60)
     let segundos = tiempoRestante % 60
     return conn.sendMessage(m.chat, {
-      text: `𖣔 「 HINATA WORK 2 」 ˚ʚ♡ɞ˚\n\n💫 » Espera ${minutos}m ${segundos}s`
+      text: `⚡ 「 DARKO WORK 2 」 ⚡\n\n💫 » Espera ${minutos}m ${segundos}s`
     }, { quoted: m })
   }
 
   let random = Math.random()
-  let diamantes, exp, escena, emoji
+  let darkcoins, exp, escena, emoji
 
   if (random < 0.03) {
-    diamantes = Math.floor(Math.random() * 51) + 30
+    darkcoins = Math.floor(Math.random() * 51) + 30
     exp = Math.floor(Math.random() * 101) + 50
     emoji = '🌟'
     escena = [
@@ -42,7 +42,7 @@ let handler = async (m, { conn, text }) => {
       'Un streamer famoso te donó dinero por error. Le escribiste para devolvérselo y te dijo "quédatelo, me sobra".'
     ]
   } else if (random < 0.25) {
-    diamantes = Math.floor(Math.random() * 11) + 5
+    darkcoins = Math.floor(Math.random() * 11) + 5
     exp = Math.floor(Math.random() * 31) + 15
     emoji = '✨'
     escena = [
@@ -51,7 +51,7 @@ let handler = async (m, { conn, text }) => {
       'Vendiste limonada en la esquina. Un señor te pagó con un billete grande y te dijo "quédese el cambio".'
     ]
   } else if (random < 0.50) {
-    diamantes = Math.floor(Math.random() * 5) + 2
+    darckcoins = Math.floor(Math.random() * 5) + 2
     exp = Math.floor(Math.random() * 16) + 5
     emoji = '👍'
     escena = [
@@ -60,7 +60,7 @@ let handler = async (m, { conn, text }) => {
       'Ayudaste a un vecino a mover muebles. Te dio las gracias y un billete que tenía doblado en el bolsillo.'
     ]
   } else if (random < 0.75) {
-    diamantes = Math.floor(Math.random() * 3) + 1
+    darkcoins = Math.floor(Math.random() * 3) + 1
     exp = Math.floor(Math.random() * 8) + 3
     emoji = '👌'
     escena = [
@@ -69,7 +69,7 @@ let handler = async (m, { conn, text }) => {
       'Buscaste monedas entre los cojines del sofá. Encontraste algunas y un chicle viejo.'
     ]
   } else if (random < 0.90) {
-    diamantes = -Math.floor(Math.random() * 4) - 1
+    darkcoins = -Math.floor(Math.random() * 4) - 1
     exp = Math.floor(Math.random() * 4) + 1
     emoji = '💀'
     escena = [
@@ -78,7 +78,7 @@ let handler = async (m, { conn, text }) => {
       'Se te cayó la billetera en el bus. Cuando te diste cuenta ya alguien se había comprado zapatos nuevos con tu dinero.'
     ]
   } else {
-    diamantes = -Math.floor(Math.random() * 8) - 3
+    darkcoins = -Math.floor(Math.random() * 8) - 3
     exp = Math.floor(Math.random() * 3) + 1
     emoji = '☠️'
     escena = [
@@ -90,21 +90,21 @@ let handler = async (m, { conn, text }) => {
 
   let mensaje = escena[Math.floor(Math.random() * escena.length)]
 
-  if (user.diamantes !== undefined) {
-    user.diamantes = Math.max(0, (user.diamantes || 0) + diamantes)
+  if (user.darkcoins !== undefined) {
+    user.darkcoins = Math.max(0, (user.darkcoins || 0) + darkcoins)
   } else {
-    user.diamond = Math.max(0, (user.diamond || 0) + diamantes)
+    user.diamond = Math.max(0, (user.darkcoin || 0) + darkcoins)
   }
   user.exp = (user.exp || 0) + exp
   cooldownsWork2[who] = now + 120000
 
-  let total = user.diamantes !== undefined ? user.diamantes : (user.diamond || 0)
+  let total = user.darkcoins !== undefined ? user.darkcoins : (user.darkcoin || 0)
   let name = '@' + who.split('@')[0]
 
-  let texto = `𖣔 「 HINATA WORK 2 」 ˚ʚ♡ɞ˚\n\n`
+  let texto = `⚡ 「 DARKO WORK 2 」 ⚡\n\n`
   texto += `${emoji} » ${name}\n`
   texto += `📋 ${mensaje}\n`
-  texto += `💎 ${diamantes > 0 ? '+' : ''}${diamantes} diamantes\n`
+  texto += `💎 ${darkcoins > 0 ? '+' : ''}${diamantes} darkcoins\n`
   texto += `✨ +${exp} exp\n`
   texto += `💰 Total: ${total} 💎`
 
