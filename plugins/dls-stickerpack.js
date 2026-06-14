@@ -1,4 +1,4 @@
-// © 2026 EL VIGILANTE & BRAYANRK - HINATA BOT
+// © 2026 EL VIGILANTE & BRAYANRK & D4RKO
 // No quitar créditos
 
 import fetch from 'node-fetch'
@@ -36,7 +36,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   const query = text?.trim()
 
   if (!query) return conn.sendMessage(m.chat, {
-    text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Descarga packs de stickers\n\n> ${usedPrefix}${command} <tema>\n> Ejemplo: ${usedPrefix}${command} anime`
+    text: `🎭⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n🎭 Descarga packs de stickers\n\n> ${usedPrefix}${command} <tema>\n> Ejemplo: ${usedPrefix}${command} anime`
   }, { quoted: m })
 
   await m.react('🔍')
@@ -48,14 +48,14 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!json.status || !json.data) {
       await m.react('❌')
       return conn.sendMessage(m.chat, {
-        text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se encontraron stickers\n\n> Intenta con otro tema`
+        text: `🥀⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se encontraron stickers\n\n> Intenta con otro tema`
       }, { quoted: m })
     }
 
     const { title, username, total, stickers } = json.data
 
     await conn.sendMessage(m.chat, {
-      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Pack: *${title}*\n❀ Autor: *${username}*\n❀ Total: *${total} stickers*\n\n> Enviando 10 stickers...`
+      text: `⌛ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n⌛ Pack: *${title}*\n💬 Autor: *${username}*\n💬 Total: *${total} stickers*\n\n> Enviando 10 stickers...`
     }, { quoted: m })
 
     await m.react('⏳')
@@ -72,7 +72,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   } catch (e) {
     await m.react('❌')
     await conn.sendMessage(m.chat, {
-      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error al obtener stickers\n\n> ${e.message}`
+      text: `🥀 ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error al obtener stickers\n\n> ${e.message}`
     }, { quoted: m })
   }
 }
