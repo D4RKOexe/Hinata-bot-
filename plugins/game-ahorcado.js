@@ -59,9 +59,9 @@ async function mostrarTablero(conn, m, who) {
   }))
 
   const interactiveMessage = proto.Message.InteractiveMessage.create({
-    header: { title: '🎮 HINATA GAMES 🎮', subtitle: 'Ahorcado | 🏆 3 💎', hasMediaAttachment: false },
-    body: { text: '🎮 「 HINATA AHORCADO 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n🎯 » Vidas: ' + juego.intentos + '/6\n📝 » Palabra: ' + juego.oculta + '\n🔤 » Usadas: ' + (juego.usadas.length ? juego.usadas.join(', ') : 'Ninguna') + '\n\n' + muñecos[idx] + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n> Toca una letra' },
-    footer: { text: '⫏⫏ HINATA GAMES ✿' },
+    header: { title: '🎮 DARKO GAMES 🎮', subtitle: 'Ahorcado | 🏆 3 💎', hasMediaAttachment: false },
+    body: { text: '🎮 「 GAME AHORCADO 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n🎯 » Vidas: ' + juego.intentos + '/6\n📝 » Palabra: ' + juego.oculta + '\n🔤 » Usadas: ' + (juego.usadas.length ? juego.usadas.join(', ') : 'Ninguna') + '\n\n' + muñecos[idx] + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n> Toca una letra' },
+    footer: { text: '⫏⫏ DARKO GAMES 🎮' },
     nativeFlowMessage: {
       buttons: [{
         name: 'single_select',
@@ -114,9 +114,9 @@ handler.before = async (m, { conn }) => {
         let user = global.db.data.users[who]
         if (!user) global.db.data.users[who] = { diamantes: 0 }
         user = global.db.data.users[who]
-        user.diamantes = (user.diamantes || 0) + 3
+        user.darkcoins = (user.darkcoins || 0) + 3
         delete juegos[who]
-        await conn.sendMessage(m.chat, { text: '🎮 「 HINATA AHORCADO 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n🏆 » ¡GANASTE!\n📝 » Palabra: ' + juego.palabra.toUpperCase() + '\n💎 » +3 diamantes\n💰 » Total: ' + user.diamantes + ' 💎\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+        await conn.sendMessage(m.chat, { text: '🎮 「 GAME AHORCADO 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n🏆 » ¡GANASTE!\n📝 » Palabra: ' + juego.palabra.toUpperCase() + '\n💵 » +3 darkcoins\n💰 » Total: ' + user.darkcoins + ' 💵\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
         return true
       }
 
@@ -127,7 +127,7 @@ handler.before = async (m, { conn }) => {
 
       if (juego.intentos <= 0) {
         delete juegos[who]
-        await conn.sendMessage(m.chat, { text: '🎮 「 HINATA AHORCADO 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n💀 » PERDISTE\n📝 » Era: ' + juego.palabra.toUpperCase() + '\n😵 » Fuiste ahorcado\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+        await conn.sendMessage(m.chat, { text: '🎮 「 DARKO AHORCADO 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n💀 » PERDISTE\n📝 » Era: ' + juego.palabra.toUpperCase() + '\n😵 » Fuiste ahorcado\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
         return true
       }
 
@@ -143,6 +143,6 @@ handler.before = async (m, { conn }) => {
 handler.help = ['ahorcado']
 handler.tags = ['game']
 handler.command = /^(ahorcado|ahorcado)$/i
-handler.desc = 'Juego de ahorcado | 🏆 3 💎'
+handler.desc = 'Juego de ahorcado | 🏆 3 💵'
 
 export default handler
