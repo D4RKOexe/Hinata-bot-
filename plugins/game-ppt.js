@@ -98,21 +98,21 @@ let handler = async (m, { conn, args }) => {
     }
   }
 
-  let total = user.darkcoins || user.diamond || 0
+  let total = user.darkcoins || user.darkcoin || 0
 
-  let texto = '✊ 「 HINATA PPT 」 ✊\n\n'
+  let texto = '✊ 「 DARKO PPT 」 ✊\n\n'
   texto += '👤 » Tú: ' + emojis[jugada] + '\n'
   texto += '🤖 » La bot: ' + emojis[botJugada] + '\n\n'
 
   if (resultado === 'ganaste') {
-    texto += '🏆 » ¡GANASTE!\n💎 » +' + apuesta + ' diamantes\n'
+    texto += '🏆 » ¡GANASTE!\n💵 » +' + apuesta + ' diamantes\n'
   } else if (resultado === 'perdiste') {
-    texto += '💀 » PERDISTE\n💎 » -' + apuesta + ' diamantes\n'
+    texto += '💀 » PERDISTE\n💵 » -' + apuesta + ' diamantes\n'
   } else {
-    texto += '🤝 » EMPATE\n💎 » Recuperas tus ' + apuesta + ' 💎\n'
+    texto += '🤝 » EMPATE\n💵 » Recuperas tus ' + apuesta + ' 💵\n'
   }
 
-  texto += '💰 » Total: ' + total + ' 💎'
+  texto += '💰 » Total: ' + total + ' 💵'
 
   await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
 }
@@ -140,7 +140,7 @@ handler.before = async (m, { conn }) => {
     let misDiamantes = user.diamantes || user.diamond || 0
     if (misDiamantes < apuesta) {
       await conn.sendMessage(m.chat, {
-        text: '✊ 「 HINATA PPT 」 ✊\n\n💫 » No tienes tantos 💎\n💰 » Tienes: ' + misDiamantes
+        text: '✊ 「 DARKO PPT 」 ✊\n\n💫 » No tienes tantos 💵\n💰 » Tienes: ' + misDarkcoins
       }, { quoted: m })
       return true
     }
@@ -164,34 +164,34 @@ handler.before = async (m, { conn }) => {
     let emojis = { piedra: '🪨', papel: '📄', tijera: '✂️' }
 
     if (resultado === 'ganaste') {
-      if (user.diamantes !== undefined) {
-        user.diamantes = misDiamantes + apuesta
+      if (user.darkcoins !== undefined) {
+        user.darkcoins = misDarkcoins + apuesta
       } else {
-        user.diamond = misDiamantes + apuesta
+        user.darkcoin = misDarkcoins + apuesta
       }
     } else if (resultado === 'perdiste') {
       if (user.diamantes !== undefined) {
-        user.diamantes = misDiamantes - apuesta
+        user.diamantes = misDarkcoins - apuesta
       } else {
-        user.diamond = misDiamantes - apuesta
+        user.darkcoin = misDarkcoins - apuesta
       }
     }
 
-    let total = user.diamantes || user.diamond || 0
+    let total = user.darkcoins || user.darkcoin || 0
 
-    let texto = '✊ 「 HINATA PPT 」 ✊\n\n'
+    let texto = '✊ 「 DARKO PPT 」 ✊\n\n'
     texto += '👤 » Tú: ' + emojis[jugada] + '\n'
     texto += '🤖 » La bot: ' + emojis[botJugada] + '\n\n'
 
     if (resultado === 'ganaste') {
-      texto += '🏆 » ¡GANASTE!\n💎 » +' + apuesta + ' diamantes\n'
+      texto += '🏆 » ¡GANASTE!\n💵 » +' + apuesta + ' darkcoins\n'
     } else if (resultado === 'perdiste') {
-      texto += '💀 » PERDISTE\n💎 » -' + apuesta + ' diamantes\n'
+      texto += '💀 » PERDISTE\n💵 » -' + apuesta + ' darkcoins\n'
     } else {
-      texto += '🤝 » EMPATE\n💎 » Recuperas tus ' + apuesta + ' 💎\n'
+      texto += '🤝 » EMPATE\n💵 » Recuperas tus ' + apuesta + ' 💵\n'
     }
 
-    texto += '💰 » Total: ' + total + ' 💎'
+    texto += '💰 » Total: ' + total + ' 💵'
 
     await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
     return true
