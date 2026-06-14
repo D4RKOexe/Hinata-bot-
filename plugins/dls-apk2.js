@@ -1,4 +1,4 @@
-// © 2026 EL VIGILANTE & BRAYANRK - HINATA BOT
+// © 2026 EL VIGILANTE , BRAYANRK & D4RKO
 // Scraper adaptado por El Vigilante - No quitar créditos
 
 import { search, download } from 'aptoide-scraper'
@@ -21,7 +21,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   const query = text?.trim()
 
   if (!query) return conn.sendMessage(m.chat, {
-    text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Busca y descarga APKs de Aptoide\n\n> ${usedPrefix}${command} <nombre de la app>\n> Ejemplo: ${usedPrefix}${command} facebook`
+    text: `🔍 ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n🔍 Busca y descarga APKs de Aptoide\n\n> ${usedPrefix}${command} <nombre de la app>\n> Ejemplo: ${usedPrefix}${command} facebook`
   }, { quoted: m })
 
   await m.react('🔍')
@@ -31,7 +31,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!searchA || searchA.length === 0) {
       await m.react('❌')
       return conn.sendMessage(m.chat, {
-        text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se encontraron resultados\n\n> No hay resultados para *${query}*`
+        text: ` ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se encontraron resultados\n\n> No hay resultados para *${query}*`
       }, { quoted: m })
     }
 
@@ -39,7 +39,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!apkInfo) {
       await m.react('❌')
       return conn.sendMessage(m.chat, {
-        text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se pudo obtener la información\n\n> Intenta con otro nombre'
+        text: ' ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se pudo obtener la información\n\n> Intenta con otro nombre'
       }, { quoted: m })
     }
 
@@ -49,7 +49,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (sizeBytes > 524288000) {
       await m.react('❌')
       return conn.sendMessage(m.chat, {
-        text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Archivo demasiado grande *(${size})*\n\n> Descárgalo directamente:\n${downloadUrl}`
+        text: ` ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Archivo demasiado grande *(${size})*\n\n> Descárgalo directamente:\n${downloadUrl}`
       }, { quoted: m })
     }
 
@@ -61,7 +61,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       } catch {}
     }
 
-    const caption = `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Nombre: *${name}*\n❀ Paquete: *${id}*\n❀ Actualización: *${lastup}*\n❀ Tamaño: *${size}*\n\n> Scraper por *GOTENKS V1*`
+    const caption = `🔰 ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n🔰 Nombre: *${name}*\n🔰 Paquete: *${id}*\n🔰 Actualización: *${lastup}*\n🔰 Tamaño: *${size}*\n\n> Scraper por *GOTENKS V1*`
 
     await conn.sendMessage(m.chat, {
       document: { url: downloadUrl },
@@ -77,7 +77,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     console.error(e)
     await m.react('❌')
     await conn.sendMessage(m.chat, {
-      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error al descargar\n\n> ${e.message}`
+      text: ` ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error al descargar\n\n> ${e.message}`
     }, { quoted: m })
   }
 }
