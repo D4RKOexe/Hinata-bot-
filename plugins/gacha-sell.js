@@ -8,7 +8,7 @@ let handler = async (m, { conn, args }) => {
 
   if (!args[0]) {
     return conn.sendMessage(m.chat, {
-      text: '💎 「 DARKO VENDER 」 💎\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Vende tus personajes\n\n> #vender <nombre>\n> #vender all\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
+      text: '🏷️ 「 DARKO VENDER 」 🏷️\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦\n\n💫 » Vende tus personajes\n\n> #vender <nombre>\n> #vender all\n\n✦•┈๑⋅⋯ ⋯⋅๑┈•✦'
     }, { quoted: m })
   }
 
