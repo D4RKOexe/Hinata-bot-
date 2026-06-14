@@ -6,14 +6,14 @@ let handler = async (m, { conn }) => {
 
     await conn.sendMessage(m.chat, {
       image: { url: ppUrl },
-      caption: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❀ Foto del grupo`
+      caption: `🤝 ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n🎴 Foto del grupo`
     }, { quoted: m })
 
     await m.react('✅')
   } catch (e) {
     await m.react('❌')
     await conn.sendMessage(m.chat, {
-      text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Este grupo no tiene foto'
+      text: '🥀 ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Este grupo no tiene foto'
     }, { quoted: m })
   }
 }
