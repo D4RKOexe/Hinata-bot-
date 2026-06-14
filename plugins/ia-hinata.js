@@ -87,7 +87,7 @@ Contigo hablo serio, con respeto y lealtad. Te tengo aprecio real. No te troléo
 
 function esVigilante(senderJid) {
   const num = senderJid.split('@')[0].split(':')[0]
-  return num === VIGILANTE_NUM
+  return num === D4RKO_NUM
 }
 
 function esBrayanRK(senderJid) {
