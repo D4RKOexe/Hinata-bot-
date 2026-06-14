@@ -3,11 +3,11 @@ let handler = async (m, { conn, text }) => {
 
   if (!text) {
     return conn.sendMessage(m.chat, {
-      text: '🤫 「 HINATA CONFESAR 」 🤫\n\n💫 » Envía una confesión anónima\n\n> #confesar <texto>\n> #confesar Me gusta alguien del grupo pero no me atrevo a decirle'
+      text: '🤫 「 DARKO CONFESAR 」 🤫\n\n💫 » Envía una confesión anónima\n\n> #confesar <texto>\n> #confesar Me gusta alguien del grupo pero no me atrevo a decirle'
     }, { quoted: m })
   }
 
-  let texto = '🤫 「 HINATA CONFESAR 」 🤫\n\n'
+  let texto = '🤫 「 DARKO CONFESAR 」 🤫\n\n'
   texto += '💬 » Alguien confesó:\n\n'
   texto += '"' + text + '"\n\n'
   texto += '> Confesión anónima'
