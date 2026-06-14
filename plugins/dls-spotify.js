@@ -14,19 +14,19 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   }
 
   if (!text) {
-    let media = await prepareWAMessageMedia({ image: { url: 'https://files.catbox.moe/r60c8l.jpg' } }, { upload: conn.waUploadToServer })
+    let media = await prepareWAMessageMedia({ image: { url: 'https://files.catbox.moe/n53gvy.jpg' } }, { upload: conn.waUploadToServer })
 
     const interactiveMessage = proto.Message.InteractiveMessage.create({
       header: {
-        title: 'HINATA BOT - SPOTIFY',
+        title: 'DARKO BOT - SPOTIFY',
         subtitle: 'Busca y descarga música',
         hasMediaAttachment: true,
         imageMessage: media.imageMessage
       },
       body: {
-        text: '🟢 「 HINATA SPOTIFY 」 🟢\n\n💫 » Busca música en Spotify\n\n> ' + usedPrefix + command + ' <nombre>\n> Ejemplo: ' + usedPrefix + command + ' Twice\n> 💎 Cuesta 1 diamante por descarga'
+        text: '🟢 「 DARKO SPOTIFY 」 🟢\n\n💫 » Busca música en Spotify\n\n> ' + usedPrefix + command + ' <nombre>\n> Ejemplo: ' + usedPrefix + command + ' Twice\n> 💎 Cuesta 1 diamante por descarga'
       },
-      footer: { text: '⫏⫏ HINATA BOT ✿' },
+      footer: { text: '⫏⫏ DARKO BOT ✿' },
       nativeFlowMessage: {
         buttons: [{
           name: 'single_select',
@@ -37,7 +37,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
               rows: [{
                 header: '🎧 MÚSICA',
                 title: 'Buscar canción',
-                description: '💎 1 diamante | Ejemplo: Twice',
+                description: '💵 1 darkcoin | Ejemplo: Twice',
                 id: 'sp '
               }]
             }]
@@ -82,15 +82,15 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     const interactiveMessage = proto.Message.InteractiveMessage.create({
       header: {
-        title: 'HINATA BOT - SPOTIFY',
+        title: 'DARKO BOT - SPOTIFY',
         subtitle: 'Selecciona una canción',
         hasMediaAttachment: !!media,
         imageMessage: media ? media.imageMessage : undefined
       },
       body: {
-        text: '🟢 「 HINATA SPOTIFY 」 🟢\n\n💫 » Búsqueda: ' + text + '\n\n> Elige una canción\n> 💎 1 diamante al descargar'
+        text: '🟢 「 DARKO SPOTIFY 」 🟢\n\n💫 » Búsqueda: ' + text + '\n\n> Elige una canción\n> 💎 1 diamante al descargar'
       },
-      footer: { text: '⫏⫏ HINATA BOT ✿' },
+      footer: { text: '⫏⫏ DARKO BOT ✿' },
       nativeFlowMessage: {
         buttons: [{
           name: 'single_select',
@@ -133,7 +133,7 @@ handler.before = async (m, { conn }) => {
 
     let misDiamantes = user.diamantes || user.diamond || 0
     if (misDiamantes < 1) {
-      await conn.sendMessage(m.chat, { text: '🟢 「 HINATA SPOTIFY 」 🟢\n\n💫 » No tienes 1 diamante\n\n> Usa #work para ganar' }, { quoted: m })
+      await conn.sendMessage(m.chat, { text: '🟢 「 DARKO SPOTIFY 」 🟢\n\n💫 » No tienes 1 diamante\n\n> Usa #work para ganar' }, { quoted: m })
       return true
     }
 
@@ -143,29 +143,29 @@ handler.before = async (m, { conn }) => {
     let spotifyUrl = Buffer.from(urlBase64, 'base64').toString()
     let titulo = Buffer.from(titleBase64, 'base64').toString()
 
-    if (user.diamantes !== undefined) {
-      user.diamantes = misDiamantes - 1
+    if (user.darkoins !== undefined) {
+      user.darkcoin = misDarkcoins - 1
     } else {
-      user.diamond = misDiamantes - 1
+      user.darkcoin = misDarkcoins - 1
     }
 
     await m.react('⏳')
-    await conn.sendMessage(m.chat, { text: '⏳ Descargando...\n💎 -1 diamante' }, { quoted: m })
+    await conn.sendMessage(m.chat, { text: '⏳ Descargando...\n💵 -1 darkcoin' }, { quoted: m })
 
     let downloadUrl = `https://api.delirius.store/download/spotifydl?url=${encodeURIComponent(spotifyUrl)}`
     let res = await fetch(downloadUrl)
     let json = await res.json()
 
     if (!json.status || !json.data?.download) {
-      if (user.diamantes !== undefined) {
-        user.diamantes = misDiamantes
+      if (user.darkcoins !== undefined) {
+        user.diamantes = misDarkcoins
       } else {
-        user.diamond = misDiamantes
+        user.darkcoin = misDarkcoins
       }
       throw new Error('No se pudo descargar, diamantes devueltos')
     }
 
-    let total = user.diamantes !== undefined ? user.diamantes : (user.diamond || 0)
+    let total = user.darkcoins !== undefined ? user.diamantes : (user.darkcoins || 0)
 
     await conn.sendMessage(m.chat, {
       audio: { url: json.data.download },
@@ -175,7 +175,7 @@ handler.before = async (m, { conn }) => {
 
     await conn.sendMessage(m.chat, {
       image: { url: json.data.image || 'https://files.catbox.moe/r60c8l.jpg' },
-      caption: '🟢 「 HINATA SPOTIFY 」 🟢\n\n💫 » Descarga completada\n\n🎧 » ' + (json.data.title || titulo) + '\n👤 » ' + (json.data.author || '') + '\n💎 » Restantes: ' + total
+      caption: '🟢 「 DARK SPOTIFY 」 🟢\n\n💫 » Descarga completada\n\n🎧 » ' + (json.data.title || titulo) + '\n👤 » ' + (json.data.author || '') + '\n💎 » Restantes: ' + total
     }, { quoted: m })
 
     await m.react('✅')
@@ -192,6 +192,6 @@ handler.before = async (m, { conn }) => {
 handler.help = ['spotify']
 handler.tags = ['downloader']
 handler.command = /^(spotify|sp)$/i
-handler.desc = 'Busca y descarga música de Spotify 💎1'
+handler.desc = 'Busca y descarga música de Spotify 💵1
 
 export default handler
