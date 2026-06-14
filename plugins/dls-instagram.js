@@ -3,13 +3,13 @@ import fetch from 'node-fetch'
 let handler = async (m, { conn, text }) => {
   if (!text) {
     return conn.sendMessage(m.chat, {
-      text: '📸 「 HINATA INSTAGRAM 」 📸\n\n💫 » Descarga videos de Instagram\n\n> #ig <link>\n> #instagram <link>'
+      text: '📸 「 DARKO INSTAGRAM 」 📸\n\n💫 » Descarga videos de Instagram\n\n> #ig <link>\n> #instagram <link>'
     }, { quoted: m })
   }
 
   if (!text.includes('instagram.com')) {
     return conn.sendMessage(m.chat, {
-      text: '📸 「 HINATA INSTAGRAM 」 📸\n\n💫 » Solo links de Instagram'
+      text: '📸 「 DARKO INSTAGRAM 」 📸\n\n💫 » Solo links de Instagram'
     }, { quoted: m })
   }
 
@@ -28,12 +28,12 @@ let handler = async (m, { conn, text }) => {
       if (item.type === 'video') {
         await conn.sendMessage(m.chat, {
           video: { url: item.url },
-          caption: '📸 「 HINATA INSTAGRAM 」 📸\n\n💫 » Descarga completada'
+          caption: '📸 「 DARKO INSTAGRAM 」 📸\n\n💫 » Descarga completada'
         }, { quoted: m })
       } else if (item.type === 'image') {
         await conn.sendMessage(m.chat, {
           image: { url: item.url },
-          caption: '📸 「 HINATA INSTAGRAM 」 📸\n\n💫 » Descarga completada'
+          caption: '📸 「 DARKO INSTAGRAM 」 📸\n\n💫 » Descarga completada'
         }, { quoted: m })
       }
     }
