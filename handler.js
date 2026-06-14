@@ -41,8 +41,8 @@ if (!isNumber(user.coin))
 user.coin = 10
 if (!isNumber(user.joincount))
 user.joincount = 1
-if (!isNumber(user.diamond))
-user.diamond = 3
+if (!isNumber(user.darkcoin))
+user.darkcoins = 3
 if (!isNumber(user.lastadventure))
 user.lastadventure = 0
 if (!isNumber(user.lastclaim))
@@ -65,8 +65,8 @@ if (!isNumber(user.lastduel))
 user.lastduel = 0
 if (!isNumber(user.lastmining))
 user.lastmining = 0
-if (!isNumber(user.diamantes))
-user.diamantes = 0
+if (!isNumber(user.darkcoins))
+user.darkcoinss = 0
 if (!('muto' in user))
 user.muto = false
 if (!('premium' in user))
@@ -114,8 +114,8 @@ global.db.data.users[m.sender] = {
 exp: 0,
 coin: 10,
 joincount: 1,
-diamond: 3,
-diamantes: 0,
+darckcoin: 3,
+darkcoins: 0,
 lastadventure: 0,
 health: 100,
 lastclaim: 0,
