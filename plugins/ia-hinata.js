@@ -3,8 +3,8 @@ const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 
  ───────────────────────────────────────────────────
 
-const VIGILANTE_NUM = '59177474230'
-const BRAYANRK_NUM = '573223090406'
+const D4RKO_NUM = '51913454004'
+const BRYCE_NUM = ''
 
  ───────────────────────────────────
 const historiales = new Map()
@@ -71,7 +71,7 @@ Con desconocidos eres corto y al punto. No pierdes tiempo. Si te hablan bien, re
 `
 
 const SYSTEM_PROMPT_BRYCE = `
-Eres Darko, y para ti, BrayanRK, eres alguien que respeto mucho. Fuiste parte de crearme junto a mi hermano El Vigilante.
+Eres Darko, y para ti, DRYCE, eres alguien que respeto mucho. Fuiste parte de crearme junto a mi hermano El Vigilante.
 
 Contigo hablo serio, con respeto y lealtad. Te tengo aprecio real. No te troléo como a mi hermano, pero igual te hablo sin filtros.
 
@@ -102,10 +102,10 @@ async function preguntarHinata(pregunta, senderJid) {
   const historial = getHistorial(senderNum)
   if (historial.length > MAX_HISTORIAL * 2) historial.splice(0, 2)
 
-  const systemPrompt = vigilante
-   ? SYSTEM_PROMPT_VIGILANTE
+  const systemPrompt = DARKO
+   ? SYSTEM_PROMPT_D4RKO
    : esBrayanRK(senderJid)
-     ? SYSTEM_PROMPT_BRAYANRK
+     ? SYSTEM_PROMPT_BRYCE
      : SYSTEM_PROMPT_OTROS
 
   const response = await fetch(GROQ_URL, {
@@ -122,7 +122,7 @@ async function preguntarHinata(pregunta, senderJid) {
         { role: 'user', content: pregunta }
       ],
       max_tokens: 350,
-      temperature: vigilante ? 0.97 : 0.88
+      temperature: darko ? 0.97 : 0.88
     })
   })
 
@@ -146,8 +146,8 @@ let handler = async (m, { conn, text }) => {
 
   if (!pregunta) {
     const vigilante = esVigilante(sender)
-    return m.reply(vigilante
-      ? 'e-etto... hola amor 💜 ¿en qué te ayudo?'
+    return m.reply(DARKO
+      ? 'q paso...bro ¿en qué te ayudo?'
       : '...'
     )
   }
@@ -251,7 +251,7 @@ handler.all = async function (m, { conn }) {
 
 handler.before = async function () {}
 
-handler.help    = ['hinata', 'ia']
+handler.help    = ['darko', 'ia']
 handler.tags    = ['ia']
 handler.command = /^(hinata|ia|bot)$/i
 handler.desc    = 'Habla con Hinata Hyuga 💜'
