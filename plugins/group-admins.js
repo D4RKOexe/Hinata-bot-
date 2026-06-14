@@ -1,10 +1,10 @@
 let handler = async (m, { conn, participants, groupMetadata }) => {
-  if (!m.isGroup) return conn.sendMessage(m.chat, { text: '𖣔 」 ˚ʚ♡ɞ˚\n\n💫 » Solo para grupos' }, { quoted: m })
+  if (!m.isGroup) return conn.sendMessage(m.chat, { text: '👤 」 👤\n\n💫 » Solo para grupos' }, { quoted: m })
 
   let admins = participants.filter(p => p.admin)
   let owner = groupMetadata.owner
 
-  let texto = '𖣔 「 HINATA ADMINS 」 ˚ʚ♡ɞ˚\n\n'
+  let texto = '👤 「 DARKO ADMINS 」 👤\n\n'
   texto += 'Creador » @' + owner.split('@')[0] + '\n\n'
 
   for (let admin of admins) {
