@@ -22,7 +22,7 @@ const sanitizeFileName = (name = 'video') =>
 
 async function fetchJson(url, options = {}) {
   const res = await fetch(url, options)
-  const json = await res.json().catch(() => null)
+  const json = await res.json().catch(() => null)a
   if (!res.ok) throw new Error(json?.message || json?.error || `HTTP ${res.status}`)
   return json
 }
@@ -69,7 +69,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   if (!input_text) {
     return conn.sendMessage(m.chat, {
-      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n🌸 Descarga videos de YouTube\n\n> ${usedPrefix}${command} <nombre o link>\n> Ejemplo: ${usedPrefix}${command} Naruto Opening 1`
+      text: `🔍 ⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n🔍 Descarga videos de YouTube\n\n> ${usedPrefix}${command} <nombre o link>\n> Ejemplo: ${usedPrefix}${command} Naruto Opening 1`
     }, { quoted: m })
   }
 
@@ -92,7 +92,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       const views = (video_info.views || 0).toLocaleString()
       const channel = video_info.author?.name || video_info.author || 'Desconocido'
 
-      const info_message = `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n🌸 Descargando video...\n\n❀ Título: *${title}*\n❀ Canal: *${channel}*\n❀ Duración: *${video_info.timestamp || 'Desconocido'}*\n❀ Vistas: *${views}*\n❀ Calidad: *${ryze_format}*\n\n> Espera un momento...`
+      const info_message = `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n🌸 Descargando video...\n\n❀ Título: *${title}*\n❀ Canal: *${channel}*\n❀ Duración: *${video_info.timestamp || 'Desconocido'}*\n❀ Vistas: *${views}*\n❀ Calidad: *${ryze_format}*\n\n> Espera un momento...`
 
       if (thumbnail) {
         await conn.sendMessage(m.chat, { image: { url: thumbnail }, caption: info_message }, { quoted: m })
@@ -105,7 +105,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!isYTUrl(url)) {
     await m.react('❌')
     return conn.sendMessage(m.chat, {
-      text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No encontré un video válido de YouTube\n\n> Intenta con otro nombre o link'
+      text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No encontré un video válido de YouTube\n\n> Intenta con otro nombre o link'
     }, { quoted: m })
   }
 
@@ -115,7 +115,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!video?.url) {
       await m.react('❌')
       return conn.sendMessage(m.chat, {
-        text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se pudo descargar el video\n\n> Intenta más tarde'
+        text: '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ No se pudo descargar el video\n\n> Intenta más tarde'
       }, { quoted: m })
     }
 
@@ -123,7 +123,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       video: { url: video.url },
       fileName: `${sanitizeFileName(video.title || title)}.mp4`,
       mimetype: 'video/mp4',
-      caption: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n🌸 Video descargado\n\n❀ ${video.title || title}\n❀ Calidad: *${video.quality}*\n❀ Tamaño: *${video.size || 'Desconocido'}*`
+      caption: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n🌸 Video descargado\n\n❀ ${video.title || title}\n❀ Calidad: *${video.quality}*\n❀ Tamaño: *${video.size || 'Desconocido'}*`
     }, { quoted: m })
 
     await m.react('✅')
@@ -131,7 +131,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   } catch (e) {
     await m.react('❌')
     await conn.sendMessage(m.chat, {
-      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error al descargar\n\n> ${e.message}`
+      text: `𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ DARKO BOT ㅤ֢ㅤׄㅤׅ\n\n❌ Error al descargar\n\n> ${e.message}`
     }, { quoted: m })
   }
 }
