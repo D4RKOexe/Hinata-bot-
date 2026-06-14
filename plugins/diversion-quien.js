@@ -1,9 +1,9 @@
 let handler = async (m, { conn, text, participants }) => {
-  if (!m.isGroup) return conn.sendMessage(m.chat, { text: '🎲 「 HINATA QUIÉN 」 🎲\n\n💫 » Solo para grupos' }, { quoted: m })
+  if (!m.isGroup) return conn.sendMessage(m.chat, { text: '🎲 「 DARKO QUIÉN 」 🎲\n\n💫 » Solo para grupos' }, { quoted: m })
 
   if (!text) {
     return conn.sendMessage(m.chat, {
-      text: '🎲 「 HINATA QUIÉN 」 🎲\n\n💫 » La bot elige quién es...\n\n> #quien <descripción>\n> #quien es el más guapo\n> #quien es prostituta\n> #quien se comió la comida'
+      text: '🎲 「 DARKO QUIÉN 」 🎲\n\n💫 » La bot elige quién es...\n\n> #quien <descripción>\n> #quien es el más guapo\n> #quien es prostituta\n> #quien se comió la comida'
     }, { quoted: m })
   }
 
@@ -11,7 +11,7 @@ let handler = async (m, { conn, text, participants }) => {
   let name = '@' + elegido.id.split('@')[0]
 
   let respuestas = [
-    '🎲 La bot ha hablado...\n\n' + name + ' es ' + text,
+    '🎲 EL bot decide que...\n\n' + name + ' es ' + text,
     '🔮 El destino dice que...\n\n' + name + ' es ' + text,
     '🎯 Sin duda alguna...\n\n' + name + ' es ' + text,
     '💀 No hay debate...\n\n' + name + ' es ' + text,
@@ -19,7 +19,7 @@ let handler = async (m, { conn, text, participants }) => {
     '📊 Las estadísticas confirman...\n\n' + name + ' es ' + text
   ]
 
-  let texto = '🎲 「 HINATA QUIÉN 」 🎲\n\n' + respuestas[Math.floor(Math.random() * respuestas.length)]
+  let texto = '🎲 「 DARKO QUIÉN 」 🎲\n\n' + respuestas[Math.floor(Math.random() * respuestas.length)]
 
   await conn.sendMessage(m.chat, { text: texto, mentions: [elegido.id] }, { quoted: m })
 }
@@ -27,7 +27,7 @@ let handler = async (m, { conn, text, participants }) => {
 handler.help = ['quien']
 handler.tags = ['diversion']
 handler.command = /^(quien|quién)$/i
-handler.desc = 'La bot elige quién es...'
+handler.desc = 'darko elige quién es...'
 handler.group = true
 
 export default handler
