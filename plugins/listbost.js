@@ -35,7 +35,7 @@ let handler = async (m, { conn }) => {
   const uptimeTotal = clockString(process.uptime() * 1000)
   const totalUsers = uniqueUsers.size
 
-  let txt = `╭━━━〔 🌸 SUBBOTS HINATA 🌸 〕━━⬣\n`
+  let txt = `╭━━━〔 🌸 SUBBOTS DARKO 🌸 〕━━⬣\n`
   txt += `┃ 🤖 Bot activo: ${uptimeTotal}\n`
   txt += `┃ 👥 Subbots conectados: ${totalUsers}\n`
   txt += `╰━━━━━━━━━━━━━━━━⬣\n`
@@ -46,7 +46,7 @@ let handler = async (m, { conn }) => {
     let i = 1
     for (const [jid, { nombre, uptime, numero }] of uniqueUsers) {
       txt += `┌─⊷ ${i++}\n`
-      txt += `│ 🌸 Nombre: ${nombre}\n`
+      txt += `│ 💬 Nombre: ${nombre}\n`
       txt += `│ ⏱️ Tiempo activo: ${uptime}\n`
       txt += `│ 👑 wa.me/${numero}\n`
       txt += `└──────────────⊷\n\n`
