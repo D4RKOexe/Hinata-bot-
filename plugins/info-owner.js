@@ -2,25 +2,27 @@ let handler = async (m, { conn }) => {
   let texto = '𑁍ࠬܓ ⁾ ㅤׄㅤׅㅤׄ HINATA OWNER ㅤ֢ㅤׄㅤׅ\n\n'
   
   texto += '👑 » *EL VIGILANTE*\n'
-  texto += '   📱 » +591 77474230\n'
+  texto += ''
   texto += '   💎 » Desarrollador Principal\n'
-  texto += '   🇭🇳 » Hola soy de Honduras, creador de HINATA BOT. Me apasiona la tecnología y el anime. Hinata es mi waifu favorita y por eso creamos esta bot con temática de ella. Si tienes sugerencias o problemas, no dudes en contactarnos.\n'
+  texto += '   🇭🇳 '
+  texto += '📦 » *REPOSITORIO*\n'
   texto += '   🐙 » https://github.com/ElvigilanteDv\n\n'
   
   texto += '👑 » *BRAYANRK*\n'
   texto += '   📱 » +57 3223090406\n'
   texto += '   💎 » Desarrollador Principal\n'
-  texto += '   🇨🇴 » Estudiante de Ingeniería de Software, aprendiendo cada día sobre programación, desarrollo y nuevas tecnologías. Creador de HINATA BOT.\n'
-  texto += '   🐙 » https://github.com/BrayanRK\n\n'
-  
-  texto += '🌸 » *GRUPO OFICIAL*\n'
-  texto += '   💬 » Únete a nuestra comunidad\n'
-  texto += '   📲 » https://chat.whatsapp.com/TU_LINK\n\n'
-  
+  texto += '   🇨🇴 '
   texto += '📦 » *REPOSITORIO*\n'
-  texto += '   🐙 » https://github.com/ElvigilanteDv/Hinata-Bot\n\n'
+  texto += '   🐙 » https://github.com/BrayanRK\n\n' 
+
+texto += '👑 » *D4RKO*\n'
+  texto += ''
+  texto += '   💎 » MODIFICADOR
+  texto += '   🇵🇪 '
+  texto += '📦 » *REPOSITORIO*\n'
+  texto += '   🐙 » PRIVADO
   
-  texto += '⫏⫏ HINATA BOT ✿\n\n'
+  texto += '⫏⫏ DARKO BOT ✿\n\n'
   texto += '> Contáctanos si tienes dudas ♡'
 
   await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
