@@ -23,7 +23,7 @@ let handler = async (m, { conn }) => {
     disk = 'N/A'
   }
 
-  let texto = '🤖 「 HINATA BOTINFO 」 🤖\n\n'
+  let texto = '🤖 「 DARKO BOTINFO 」 🤖\n\n'
   texto += '👤 » *Usuarios:* ' + totalUsers + '\n'
   texto += '👥 » *Grupos:* ' + totalGroups + '\n'
   texto += '⚡ » *Comandos:* ' + totalCmds + '\n'
@@ -33,7 +33,7 @@ let handler = async (m, { conn }) => {
   texto += '🖥️ » *CPU:* ' + cpu + '\n'
   texto += '💻 » *Sistema:* ' + sistema + '\n'
   texto += '📦 » *Node:* ' + node + '\n\n'
-  texto += '⫏⫏ HINATA BOT ✿'
+  texto += '⫏⫏ DARKO BOT ✿'
 
   await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
 }
