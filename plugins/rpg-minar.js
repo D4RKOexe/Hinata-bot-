@@ -26,12 +26,12 @@ let handler = async (m, { conn }) => {
   if (random < 0.05) {
     diamantes = Math.floor(Math.random() * 11) + 10
     exp = Math.floor(Math.random() * 30) + 20
-    rareza = '💵 Diamante'
+    rareza = '💎 Diamante'
     mensaje = [
-      '💵 ¡Encontraste una veta de diamantes puros! Los extrajiste con cuidado.',
-      '💵 El pico golpeó una roca y apareció un diamante enorme. ¡Increíble!',
-      '💵 Excavaste profundo y encontraste un cofre con diamantes en bruto.',
-      '💵 La mina se iluminó. Era un diamante legendario incrustado en la pared.'
+      '💎 ¡Encontraste una veta de diamantes puros! Los extrajiste con cuidado.',
+      '💎 El pico golpeó una roca y apareció un diamante enorme. ¡Increíble!',
+      '💎 Excavaste profundo y encontraste un cofre con diamantes en bruto.',
+      '💎 La mina se iluminó. Era un diamante legendario incrustado en la pared.'
     ]
   } else if (random < 0.15) {
     diamantes = Math.floor(Math.random() * 6) + 4
