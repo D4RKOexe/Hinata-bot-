@@ -12,7 +12,7 @@ let handler = async (m, { conn }) => {
   }
 
   if (global.triviaUsers && global.triviaUsers[who]) {
-    return conn.sendMessage(m.chat, { text: '🎮 「 HINATA TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n⏳ » Ya tienes una trivia activa\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+    return conn.sendMessage(m.chat, { text: '🎮 「 DARKO TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n⏳ » Ya tienes una trivia activa\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
   }
 
   let preguntas = [
@@ -84,9 +84,9 @@ let handler = async (m, { conn }) => {
   }))
 
   const interactiveMessage = proto.Message.InteractiveMessage.create({
-    header: { title: '🎮 HINATA TRIVIA 🎮', subtitle: 'Responde correctamente | 🏆 2 💎', hasMediaAttachment: false },
-    body: { text: '🎮 「 HINATA TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n❓ » ' + trivia.pregunta + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n> ⏰ 30 segundos' },
-    footer: { text: '⫏⫏ HINATA GAMES ✿' },
+    header: { title: '🎮 DARKO TRIVIA 🎮', subtitle: 'Responde correctamente | 🏆 2 💵', hasMediaAttachment: false },
+    body: { text: '🎮 「 DARKO TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n❓ » ' + trivia.pregunta + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n> ⏰ 30 segundos' },
+    footer: { text: '⫏⫏ DARKO GAMES ✿' },
     nativeFlowMessage: {
       buttons: [{
         name: 'single_select',
@@ -107,7 +107,7 @@ let handler = async (m, { conn }) => {
   setTimeout(() => {
     if (global.triviaUsers && global.triviaUsers[who]) {
       delete global.triviaUsers[who]
-      conn.sendMessage(m.chat, { text: '🎮 「 HINATA TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n⏰ » ¡Se acabó el tiempo!\n📝 » Era: ' + ['A', 'B', 'C', 'D'][trivia.respuesta] + '. ' + trivia.opciones[trivia.respuesta] + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+      conn.sendMessage(m.chat, { text: '🎮 「 DARKO TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n⏰ » ¡Se acabó el tiempo!\n📝 » Era: ' + ['A', 'B', 'C', 'D'][trivia.respuesta] + '. ' + trivia.opciones[trivia.respuesta] + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
     }
   }, 30000)
 }
@@ -132,13 +132,13 @@ handler.before = async (m, { conn }) => {
       let user = global.db.data.users[who]
       if (!user) global.db.data.users[who] = { diamantes: 0, exp: 0, triviaWins: 0 }
       user = global.db.data.users[who]
-      user.diamantes = (user.diamantes || 0) + 2
+      user.darkcoins = (user.darkcoins || 0) + 2
       user.exp = (user.exp || 0) + 15
       user.triviaWins = (user.triviaWins || 0) + 1
 
-      await conn.sendMessage(m.chat, { text: '🎮 「 HINATA TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n🏆 » ¡CORRECTO!\n💎 » +2 diamantes\n✨ » +15 exp\n🏅 » Total wins: ' + user.triviaWins + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+      await conn.sendMessage(m.chat, { text: '🎮 「 DARKO TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n🏆 » ¡CORRECTO!\n💵 » +2 darkcoins\n✨ » +15 exp\n🏅 » Total wins: ' + user.triviaWins + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
     } else {
-      await conn.sendMessage(m.chat, { text: '🎮 「 HINATA TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n❌ » Incorrecto\n📝 » Era: ' + ['A', 'B', 'C', 'D'][trivia.respuesta] + '. ' + ['A', 'B', 'C', 'D'][trivia.respuesta] + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
+      await conn.sendMessage(m.chat, { text: '🎮 「 DARKO TRIVIA 」 🎮\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n❌ » Incorrecto\n📝 » Era: ' + ['A', 'B', 'C', 'D'][trivia.respuesta] + '. ' + ['A', 'B', 'C', 'D'][trivia.respuesta] + '\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔' }, { quoted: m })
     }
     return true
   } catch (e) {
@@ -150,6 +150,6 @@ handler.before = async (m, { conn }) => {
 handler.help = ['trivia']
 handler.tags = ['game']
 handler.command = /^(trivia|pregunta)$/i
-handler.desc = 'Trivia | 🏆 2 💎'
+handler.desc = 'Trivia | 🏆 2 💵'
 
 export default handler
