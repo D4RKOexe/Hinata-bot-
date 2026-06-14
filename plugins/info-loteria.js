@@ -10,7 +10,7 @@ let handler = async (m, { conn }) => {
     loteria = JSON.parse(fs.readFileSync(lotoPath, 'utf8'))
   } else {
     return conn.sendMessage(m.chat, {
-      text: '🎫 「 HINATA LOTERÍA 」 🎫\n\n💫 » No hay lotería activa\n\n> #loteria comprar <cantidad>\n> 200 boletos | 1000 💎 c/u'
+      text: '🎫 「 DARKO LOTERÍA 」 🎫\n\n💫 » No hay lotería activa\n\n> #loteria comprar <cantidad>\n> 200 boletos | 1000 💎 c/u'
     }, { quoted: m })
   }
 
