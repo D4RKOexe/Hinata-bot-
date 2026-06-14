@@ -10,13 +10,13 @@ let handler = async (m, { conn, args }) => {
 
   if (!target || !args[1]) {
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA REGALAR 」 ˚ʚ♡ɞ˚\n\n💫 » Regala un personaje\n\n> #regalar @usuario <personaje>'
+      text: '🤝 「 DARKO REGALAR 」 🤝\n\n💫 » Regala un personaje\n\n> #regalar @usuario <personaje>'
     }, { quoted: m })
   }
 
   if (target === who) {
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA REGALAR 」 ˚ʚ♡ɞ˚\n\n💫 » No te puedes regalar a ti mismo'
+      text: '🤝 「 DARKO REGALAR 」 🤝\n\n💫 » No te puedes regalar a ti mismo'
     }, { quoted: m })
   }
 
@@ -24,7 +24,7 @@ let handler = async (m, { conn, args }) => {
 
   if (!user.inventory || user.inventory.length === 0) {
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA REGALAR 」 ˚ʚ♡ɞ˚\n\n💫 » No tienes personajes'
+      text: '🤝 「 DARKO REGALAR 」 🤝\n\n💫 » No tienes personajes'
     }, { quoted: m })
   }
 
@@ -32,7 +32,7 @@ let handler = async (m, { conn, args }) => {
 
   if (index === -1) {
     return conn.sendMessage(m.chat, {
-      text: '𖣔 「 HINATA REGALAR 」 ˚ʚ♡ɞ˚\n\n💫 » No tienes ese personaje\n📝 » ' + personaje
+      text: '🤝 「 DARKO REGALAR 」 🤝\n\n💫 » No tienes ese personaje\n📝 » ' + personaje
     }, { quoted: m })
   }
 
@@ -47,7 +47,7 @@ let handler = async (m, { conn, args }) => {
   if (!targetUser.inventory) targetUser.inventory = []
   targetUser.inventory.push(regalo)
 
-  let texto = '𖣔 「 HINATA REGALAR 」 ˚ʚ♡ɞ˚\n\n'
+  let texto = '🤝 「 HINATA REGALAR 」 🤝\n\n'
   texto += '🎁 » Personaje regalado\n\n'
   texto += '📤 » De: @' + who.split('@')[0] + '\n'
   texto += '📥 » Para: @' + target.split('@')[0] + '\n'
