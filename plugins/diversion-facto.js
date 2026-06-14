@@ -48,7 +48,7 @@ let handler = async (m, { conn }) => {
 
   let dato = datos[Math.floor(Math.random() * datos.length)]
 
-  let texto = '💀 「 HINATA FACTO 」 💀\n\n'
+  let texto = '💀 「 DARKO FACTO 」 💀\n\n'
   texto += dato + '\n\n'
   texto += '> Facto del día'
 
