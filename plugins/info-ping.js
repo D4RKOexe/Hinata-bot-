@@ -12,27 +12,27 @@ let handler = async (m, { conn }) => {
 
   if (vel < 80) {
     emoji = '⚡'
-    frase = '¡Byakugan activado! Hinata está en modo bestia'
+    frase = '¡DARKO ACTIVO/LIBERANDO POTENCIAL'
     color = '#00FF00'
   } else if (vel < 200) {
     emoji = '🌸'
-    frase = 'Hinata está entrenando con Neji, va muy bien'
+    frase = 'DARKO ENTRENANDO,DEMOSTRTANDO POTENCIAL'
     color = '#7FFF00'
   } else if (vel < 400) {
     emoji = '🍥'
-    frase = 'Hinata está comiendo ramen con Naruto, velocidad normal'
+    frase = 'darko está cansado, velocidad normal'
     color = '#FFD700'
   } else if (vel < 700) {
     emoji = '😤'
-    frase = 'Hinata tropezó en el camino ninja, va lento'
+    frase = 'Darko con mucho sueño, va lento'
     color = '#FF8C00'
   } else {
     emoji = '💤'
-    frase = 'Hinata se desmayó... Kiba la está llevando al hospital'
+    frase = 'Darko se desmayó... soporte lo está llevando al hospital'
     color = '#FF0000'
   }
 
-  let texto = emoji + ' 「 HINATA PING 」 ' + emoji + '\n'
+  let texto = emoji + ' 「 DARKO PING 」 ' + emoji + '\n'
   texto += '▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n'
   texto += frase + '\n\n'
   texto += '📊 Velocidad: ' + vel + ' ms\n'
