@@ -145,7 +145,7 @@ let handler = async (m, { conn, text }) => {
   const sender = m.sender || m.key?.participant || m.key?.remoteJid || ''
 
   if (!pregunta) {
-    const vigilante = esVigilante(sender)
+    const D4RKO = D4RKO(sender)
     return m.reply(DARKO
       ? 'q paso...bro ¿en qué te ayudo?'
       : '...'
@@ -240,11 +240,11 @@ handler.all = async function (m, { conn }) {
 
   try {
     await connRef.sendPresenceUpdate('composing', m.chat)
-    const respuesta = await preguntarHinata(pregunta, sender)
+    const respuesta = await preguntarDarko(pregunta, sender)
     await connRef.sendPresenceUpdate('paused', m.chat)
     await m.reply(respuesta)
   } catch (e) {
-    console.error('[HINATA ALL ERROR]', e.message)
+    console.error('[DARKO ALL ERROR]', e.message)
     await connRef.sendPresenceUpdate('paused', m.chat).catch(() => {})
   }
 }
@@ -254,6 +254,6 @@ handler.before = async function () {}
 handler.help    = ['darko', 'ia']
 handler.tags    = ['ia']
 handler.command = /^(hinata|ia|bot)$/i
-handler.desc    = 'Habla con Hinata Hyuga 💜'
+handler.desc    = 'Habla con DARKO👻'
 
 export default handler
