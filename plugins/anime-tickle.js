@@ -15,7 +15,7 @@ let handler = async (m, { conn }) => {
 
     await conn.sendMessage(m.chat, {
       video: { url: json.data.url },
-      caption: name + ' está haciendo cosquillas 🦶',
+      caption: name + ' está haciendo cosquillas 😁',
       gifPlayback: true,
       mentions: [who]
     }, { quoted: m })
