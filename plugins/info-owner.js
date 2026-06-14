@@ -22,8 +22,7 @@ texto += '👑 » *D4RKO*\n'
   texto += '📦 » *REPOSITORIO*\n'
   texto += '   🐙 » PRIVADO
   
-  texto += '⫏⫏ DARKO BOT ✿\n\n'
-  texto += '> Contáctanos si tienes dudas ♡'
+  texto += '⫏⫏ DARKO BOT ⚡\n\n'
 
   await conn.sendMessage(m.chat, { text: texto }, { quoted: m })
 }
